@@ -77,13 +77,6 @@ class State(object):
         return State(self.lhs, self.rhs, self.pos + 1, self.origin)
 
 
-def scan(state, grammar):
-    out = set([])
-    lhs = state.next_elem()
-    for rhs in grammar[lhs]:
-        out.add(State(lhs, rhs))
-    return out
-
 def parse(grammar, words):
     # Create chart.
     chart = [StateSet() for _ in range(len(words))]
