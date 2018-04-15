@@ -90,12 +90,6 @@ grammar parse_grammar(ifstream &file) {
     string lhs = rule[0];
     rule.erase(rule.begin());
 
-    cerr << "Debug: Inserting grammar rule: " << lhs << "\t";
-    for (string sym : rule) {
-      cerr << sym << " ";
-    }
-    cerr << endl;
-
     grammar.insert(pair <string, vector<string> > (lhs, rule));
   }
 

@@ -19,7 +19,6 @@ inline void insert(int k, state new_state, chart &chart, vector<worklist> &workl
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {
     worklist[k].push_back(new_state);
-    cerr << "Debug: " << k << " " << new_state << endl;
   }
 }
 
@@ -40,8 +39,6 @@ bool parse(const grammar &grammar, const vector<string> &words) {
 
       if (!finished(state)) {
         if (grammar.find(next_elem(state)) != grammar.end()) {
-          cerr << "Debug: Running predictor." << endl;
-
           auto search = grammar.equal_range(next_elem(state));
           for (auto it = search.first; it != search.second; ++it) {
             struct state new_state (it);
@@ -50,16 +47,12 @@ bool parse(const grammar &grammar, const vector<string> &words) {
           }
         } else {
           if (k + 1 < chart.size()) {
-            cerr << "Debug: Running scanner." << endl;
-
             if (words[k] == next_elem(state)) {
               insert(k+1, incr_pos(state), chart, worklist);
             }
           }
         }
       } else {
-        cerr << "Debug: Running completer." << endl;
-
         for (auto s = chart[state.origin].begin();
              s != chart[state.origin].end(); ++s) {
           if (s->rhs()[s->pos] == state.lhs()) {
