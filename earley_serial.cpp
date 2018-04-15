@@ -15,17 +15,17 @@
 typedef vector<unordered_set<state> > chart;
 typedef deque<state> worklist;
 
-inline void insert(int k, state &new_state, chart &chart, worklist &worklist) {
+inline void insert(int k, state new_state, chart &chart, vector<worklist> &worklist) {
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {
-    worklist.push_back(new_state);
-    cerr << "Debug: " << new_state << endl;
+    worklist[k].push_back(new_state);
+    cerr << "Debug: " << k << " " << new_state << endl;
   }
 }
 
 bool parse(const grammar &grammar, const vector<string> &words) {
   chart chart (words.size());
-  worklist worklist;
+  vector<worklist> worklist(words.size());
 
   auto search = grammar.equal_range("START");
   for (auto it = search.first; it != search.second; ++it) {
@@ -34,9 +34,9 @@ bool parse(const grammar &grammar, const vector<string> &words) {
   }
 
   for (int k = 0; k < words.size(); k++) {
-    while (worklist.size() > 0) {
-      state state = *worklist.begin();
-      worklist.pop_front();
+    while (worklist[k].size() > 0) {
+      state state = *worklist[k].begin();
+      worklist[k].pop_front();
 
       if (!finished(state)) {
         if (grammar.find(next_elem(state)) != grammar.end()) {
@@ -53,21 +53,17 @@ bool parse(const grammar &grammar, const vector<string> &words) {
             cerr << "Debug: Running scanner." << endl;
 
             if (words[k] == next_elem(state)) {
-              struct state new_state (state);
-              new_state = incr_pos(state);
-              insert(k+1, new_state, chart, worklist);
+              insert(k+1, incr_pos(state), chart, worklist);
             }
           }
         }
       } else {
         cerr << "Debug: Running completer." << endl;
 
-        for (auto it = chart[state.origin].begin();
-             it != chart[state.origin].end(); ++it) {
-          if (it->rhs()[it->pos] == state.lhs()) {
-            struct state new_state (state);
-            new_state = incr_pos(state);
-            insert(k, new_state, chart, worklist);
+        for (auto s = chart[state.origin].begin();
+             s != chart[state.origin].end(); ++s) {
+          if (s->rhs()[s->pos] == state.lhs()) {
+            insert(k, incr_pos(*s), chart, worklist);
           }
         }
       }

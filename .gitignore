@@ -102,3 +102,4 @@ ENV/
 
 /earley_serial
 *.dSYM
+/earley_parallel

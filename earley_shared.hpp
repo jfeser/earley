@@ -57,7 +57,7 @@ inline const string& next_elem(state &state) {
   return state.rhs()[state.pos];
 }
 
-inline state incr_pos(state &state) {
+inline state incr_pos(const state &state) {
   struct state new_state = state;
   new_state.pos++;
   return new_state;
