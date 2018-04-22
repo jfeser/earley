@@ -234,6 +234,10 @@ int grammar::next_state(int state){
   return state_state_codes[state];
 }
 
+bool grammar::is_finished(int state){
+  return next_state(state) == -1;
+}
+
 bool grammar::is_start(int symbol){
   return symbol == 0;
 }

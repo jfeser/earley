@@ -43,6 +43,7 @@ struct grammar {
     int state_rule(int state);
     int state_pos(int state);
     int next_state(int state);
+    bool is_finished(int state);
     bool is_start(int symbol);
     bool is_terminal(int symbol);
     bool is_nonterminal(int symbol);
