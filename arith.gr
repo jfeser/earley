@@ -5,7 +5,7 @@ SUM       SUM - PROD
 PROD      PROD * FACTOR
 PROD      PROD / FACTOR
 PROD      FACTOR
-FACTOR    ( SUM )
+FACTOR    [ SUM ]
 FACTOR    0
 FACTOR    1
 FACTOR    2
