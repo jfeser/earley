@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 from pprint import pprint
+from collections import defaultdict
 import sys
+from random import randint
 
 def parse_grammar(grammar_file):
     grammar = {}
@@ -21,29 +23,6 @@ def parse_grammar(grammar_file):
             grammar[lhs] = []
         grammar[lhs].append(rhs)
     return grammar
-
-
-class StateSet(object):
-    def __init__(self, states=[]):
-        self._states = set(states)
-        self._work = list(self._states)
-
-    def __str__(self):
-        return '{%s}' % ', '.join([str(s) for s in self._states])
-
-    __repr__ = __str__
-
-    def add(self, s):
-        if s not in self._states:
-            self._states.add(s)
-            self._work.append(s)
-
-    def has_next(self):
-        return self._work != []
-
-    def next(self):
-        return self._work.pop(0)
-
 
 class State(object):
     def __init__(self, lhs, rhs, pos=0, origin=0):
@@ -76,42 +55,75 @@ class State(object):
     def incr_pos(self):
         return State(self.lhs, self.rhs, self.pos + 1, self.origin)
 
+class StateSet(object):
+    def __init__(self, work, states=[]):
+        self._states = set(states)
+        self._work = work
+
+    def __str__(self):
+        return '{%s}' % ', '.join([str(s) for s in self._states])
+
+    __repr__ = __str__
+
+    def add(self, s):
+        if s not in self._states:
+            self._states.add(s)
+            self._work.append(s)
 
 def parse(grammar, words):
     # Create chart.
-    chart = [StateSet() for _ in range(len(words))]
+    work = []
+    chart = [set() for _ in range(len(words))]
+    requested = [dict() for _ in range(len(words))]
+    completed = [dict() for _ in range(len(words))]
+
+    def queue(state, k):
+      if state not in chart[k]:
+        work.append((state, k))
+      chart[k].add(state)
 
     def predictor(state, k):
         lhs = state.next_elem()
-        for rhs in grammar[lhs]:
-            chart[k].add(State(lhs, rhs, origin=k))
+        if lhs in requested[k]:
+            requested[k][lhs].append(state)
+        else:
+            requested[k][lhs] = [state]
+            for rhs in grammar[lhs]:
+                queue(State(lhs, rhs, origin=k), k)
+        if lhs in completed[k]:
+            for dest in completed[k][lhs]:
+                queue(state.incr_pos(), dest)
 
     def scanner(state, k):
         if k + 1 >= len(chart):
             return
         if words[k] == state.next_elem():
-            chart[k+1].add(state.incr_pos())
+            queue(state.incr_pos(), k + 1)
 
     def completer(state, k):
         assert state.origin != k
-        for s in chart[state.origin]._states:
-            if s.rhs[s.pos] == state.lhs:
-                chart[k].add(s.incr_pos())
-
-    # Initialize.
-    for rhs in grammar['START']:
-        chart[0].add(State('START', rhs))
-
-    for k in range(len(words)):
-        while chart[k].has_next():
-            state = chart[k].next()
-            if not state.finished():
-                if state.next_elem() in grammar:
-                    predictor(state, k)
-                else:
-                    scanner(state, k)
+        if state.lhs in completed[state.origin]:
+            if k in completed[state.origin][state.lhs]:
+                return # This is a little overdramatic. It would be okay to continue, it would just repeat work. It might be interesting to instead store a list of completed rules instead of a set of destination locations, but that would of course mate the predictor step harder.
             else:
-                completer(state, k)
+                completed[state.origin][state.lhs].add(k)
+        else:
+            completed[state.origin][state.lhs] = set([k])
+        for requester in requested[state.origin][state.lhs]:
+            queue(requester.incr_pos(), k)
+
+    # Initialize. (more complicated than I thought)
+    predictor(State('START', ['START']), 0)
+
+    while work != []:
+        (state, k) = work.pop(randint(0, len(work) - 1))
+        if not state.finished():
+            if state.next_elem() in grammar:
+                predictor(state, k)
+            else:
+                scanner(state, k)
+        else:
+            completer(state, k)
     return chart
 
 def main(grammar_file, in_file):
@@ -119,7 +131,7 @@ def main(grammar_file, in_file):
     words = in_file.read().split()
     chart = parse(grammar, words)
     for (k, states) in enumerate(chart):
-      for state in states._states:
+      for state in states:
         print("SET: {} STATE: {}".format(k, state))
 
 if __name__ == '__main__':
