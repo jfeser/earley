@@ -56,7 +56,7 @@ class State(object):
         rhs_dot = list(self.rhs)
         rhs_dot.insert(self.pos, '•')
         rhs_str = ' '.join(rhs_dot)
-        return '(%s -> %s, %d)' % (self.lhs, rhs_str, self.origin)
+        return '%s -> %s' % (self.lhs, rhs_str)
 
     __repr__ = __str__
 
@@ -79,7 +79,7 @@ class State(object):
 
 def parse(grammar, words):
     # Create chart.
-    chart = [StateSet() for _ in range(len(words))]
+    chart = [StateSet() for _ in range(len(words) + 1)]
 
     def predictor(state, k):
         lhs = state.next_elem()
@@ -87,7 +87,7 @@ def parse(grammar, words):
             chart[k].add(State(lhs, rhs, origin=k))
 
     def scanner(state, k):
-        if k + 1 >= len(chart):
+        if k >= len(words):
             return
         if words[k] == state.next_elem():
             chart[k+1].add(state.incr_pos())
@@ -102,7 +102,7 @@ def parse(grammar, words):
     for rhs in grammar['START']:
         chart[0].add(State('START', rhs))
 
-    for k in range(len(words)):
+    for k in range(len(words) + 1):
         while chart[k].has_next():
             state = chart[k].next()
             if not state.finished():
@@ -120,7 +120,7 @@ def main(grammar_file, in_file):
     chart = parse(grammar, words)
     for (k, states) in enumerate(chart):
       for state in states._states:
-        print("SET: {} STATE: {}".format(k, state))
+        print("(0, ({}, {}, {}))".format(k, state, state.origin))
 
 if __name__ == '__main__':
     if len(sys.argv) > 3 or len(sys.argv) < 2:

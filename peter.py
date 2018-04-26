@@ -102,7 +102,7 @@ def parse(grammar, words):
 
     def completer(state, k):
         assert state.origin != k
-        if state.lhs in completed[state.origin]:
+        if state.lhs in completed[state.origin]: # TODO completed should just be a set of symbol destination pairs where you check if someone in your set has already completed this symbol in this location before. Then we have a separate dict between symbols and destination lists
             if k in completed[state.origin][state.lhs]:
                 return # This is a little overdramatic. It would be okay to continue, it would just repeat work. It might be interesting to instead store a list of completed rules instead of a set of destination locations, but that would of course mate the predictor step harder.
             else:
