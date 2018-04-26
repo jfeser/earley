@@ -9,7 +9,7 @@ def main(parse):
     # Parse arguments.
     parser = argparse.ArgumentParser()
     parser.add_argument("grammar", help="path to grammar file")
-    parser.add_argument("sentences", help="path to sentence file", default = "")
+    parser.add_argument("corpus", help="path to corpus file", default = "")
     parser.add_argument("--seed", type=int, default=0, help="RNG seed")
     args = parser.parse_args()
 
@@ -32,13 +32,13 @@ def main(parse):
         else:
           raise ValueError("Invalid syntax on line: " + error_endl)
 
-    if args.sentences == "":
-        sentences = sys.stdin
+    if args.corpus == "":
+        corpus = sys.stdin
     else:
-        sentences = open(args.sentences, 'r')
+        corpus = open(args.corpus, 'r')
 
     num = 0
-    for line in sentences:
+    for line in corpus:
         sentence = line.split("#")[0].split()
         if sentence:
             chart = parse(grammar, sentence)
@@ -46,8 +46,8 @@ def main(parse):
                 print("(%d, %s)" % (num, item))
             num += 1
 
-    if args.sentences != "":
-        sentences.close()
+    if args.corpus != "":
+        corpus.close()
 
 class State(object):
     def __init__(self, lhs, rhs, loc, origin=None, pos=0):
@@ -83,7 +83,7 @@ class State(object):
     def finished(self):
         return self.pos == len(self.rhs)
 
-    def next_elem(self):
+    def next_word(self):
         return self.rhs[self.pos]
 
     def incr_pos(self, loc):

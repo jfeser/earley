@@ -14,15 +14,15 @@ def parse(grammar, sentence):
       chart.add(s)
 
     def predict(s):
-        for rhs in grammar[s.next_elem()]:
-            enqueue(State(s.next_elem(), rhs, s.loc))
+        for rhs in grammar[s.next_word()]:
+            enqueue(State(s.next_word(), rhs, s.loc))
 
     def scan(s):
-        if s.loc + 1 <= len(sentence) and sentence[s.loc] == s.next_elem():
+        if s.loc + 1 <= len(sentence) and sentence[s.loc] == s.next_word():
             enqueue(s.incr_pos(s.loc + 1))
 
     def complete(s):
-        for c in [c for c in chart if (not c.finished()) and c.next_elem() == s.lhs and c.loc == s.origin]:
+        for c in [c for c in chart if (not c.finished()) and c.next_word() == s.lhs and c.loc == s.origin]:
             enqueue(c.incr_pos(s.loc))
 
     for rhs in grammar['START']:
@@ -31,7 +31,7 @@ def parse(grammar, sentence):
     while not work.empty():
         (loc, s) = work.get()
         if not s.finished():
-            if s.next_elem() in grammar:
+            if s.next_word() in grammar:
                 predict(s)
             else:
                 scan(s)
