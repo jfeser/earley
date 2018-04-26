@@ -16,19 +16,23 @@ def parse(grammar, sentence):
 
     def predict(s):
         completed.add(s)
-        for rhs in grammar[s.next_word()]: #can be avoided if we know which symbols were requested at this location
+        #can be avoided if we know which symbols were requested at this location
+        for rhs in grammar[s.next_word()]:
             enqueue(State(s.next_word(), rhs, s.loc))
-        for c in [c for c in completed if c.finished() and c.lhs == s.next_word() and c.origin == s.loc]: #can be avoided if we know all the locations where this symbol was parsed originating at this location
-            enqueue(s.incr_pos(c.loc))
+        #can be avoided if we know all the locations where this symbol was parsed originating at this location
+        for loc in set([c.loc for c in completed if c.finished() and c.lhs == s.next_word() and c.origin == s.loc]):
+            enqueue(s.incr_pos(loc))
 
     def scan(s):
         completed.add(s)
         if s.loc + 1 <= len(sentence) and sentence[s.loc] == s.next_word():
             enqueue(s.incr_pos(s.loc + 1))
 
-    def complete(s): #can be avoided if we know this symbol was already parsed originating and ending at the same origin and location
+    #can be avoided if we know this symbol was already parsed originating and ending at the same origin and location
+    def complete(s):
         completed.add(s)
-        for c in [c for c in completed if (not c.finished()) and c.next_word() == s.lhs and c.loc == s.origin]: #can be avoided if we know all the rules at this origin that requested this symbol
+        #can be avoided if we know all the rules at this origin that requested this symbol
+        for c in [c for c in completed if (not c.finished()) and c.next_word() == s.lhs and c.loc == s.origin]:
             enqueue(c.incr_pos(s.loc))
 
     for rhs in grammar['START']:
