@@ -1,0 +1,553 @@
+Identifier:
+    IDENTIFIER
+
+QualifiedIdentifier:
+    Identifier  {  . Identifier  } 
+
+QualifiedIdentifierList: 
+    QualifiedIdentifier  {  , QualifiedIdentifier  } 
+
+CompilationUnit: 
+     [  [ Annotations ]  package QualifiedIdentifier ; ] 
+                                 { ImportDeclaration }   { TypeDeclaration } 
+
+ImportDeclaration: 
+    import  [ static ]  Identifier  {  . Identifier  }   [ . * ]  ;
+
+TypeDeclaration: 
+    ClassOrInterfaceDeclaration
+    ;
+
+ClassOrInterfaceDeclaration: 
+     { Modifier }   ClassDeclaration
+     { Modifier }   InterfaceDeclaration 
+
+ClassDeclaration: 
+    NormalClassDeclaration
+    EnumDeclaration
+
+InterfaceDeclaration: 
+    NormalInterfaceDeclaration
+    AnnotationTypeDeclaration
+
+
+
+NormalClassDeclaration: 
+    class Identifier  [ TypeParameters ] 
+                                 [ extends Type ]   [ implements TypeList ]  ClassBody
+
+EnumDeclaration:
+    enum Identifier  [ implements TypeList ]  EnumBody
+
+NormalInterfaceDeclaration: 
+    interface Identifier  [ TypeParameters ]   [ extends TypeList ]  InterfaceBody
+
+AnnotationTypeDeclaration:
+    @ interface Identifier AnnotationTypeBody
+
+Type:
+    BasicType  { OPEN_BRACKET CLOSE_BRACKET } 
+    ReferenceType   { OPEN_BRACKET CLOSE_BRACKET } 
+
+BasicType: 
+    byte
+    short
+    char
+    int
+    long
+    float
+    double
+    boolean
+
+ReferenceType:
+    Identifier  [ TypeArguments ]   {  . Identifier  [ TypeArguments ]   } 
+
+TypeArguments: 
+    < TypeArgument  {  , TypeArgument  }  >
+
+TypeArgument:  
+    ReferenceType
+    ?  [   ExtendsSuper  ReferenceType  ] 
+
+ExtendsSuper:
+    extends
+    super
+
+NonWildcardTypeArguments:
+    < TypeList >
+
+TypeList:  
+    ReferenceType  {  , ReferenceType  } 
+
+
+
+TypeArgumentsOrDiamond:
+    < > 
+    TypeArguments
+
+NonWildcardTypeArgumentsOrDiamond:
+    < >
+    NonWildcardTypeArguments
+
+
+
+TypeParameters:
+    < TypeParameter  {  , TypeParameter  }  >
+
+TypeParameter:
+    Identifier  [ extends Bound ] 
+
+Bound:  
+    ReferenceType  {  & ReferenceType  } 
+
+Modifier: 
+    Annotation
+    public
+    protected
+    private
+    static 
+    abstract
+    final
+    native
+    synchronized
+    transient
+    volatile
+    strictfp
+
+Annotations:
+    Annotation  { Annotation } 
+
+Annotation:
+    @ QualifiedIdentifier  [  OPEN_PAREN  [ AnnotationElement ]  CLOSE_PAREN  ] 
+
+AnnotationElement:
+    ElementValuePairs
+    ElementValue
+
+ElementValuePairs:
+    ElementValuePair  {  , ElementValuePair  } 
+
+ElementValuePair:
+    Identifier = ElementValue
+    
+ElementValue:
+    Annotation
+    Expression1 
+    ElementValueArrayInitializer
+
+ElementValueArrayInitializer:
+     {   [ ElementValues ]   [ , ]   } 
+
+ElementValues:
+    ElementValue  {  , ElementValue  } 
+
+ClassBody: 
+     {  OPEN_BRACE ClassBodyDeclaration CLOSE_BRACE  } 
+
+ClassBodyDeclaration:
+    ; 
+     { Modifier }  MemberDecl
+     [ static ]  Block
+
+MemberDecl:
+    MethodOrFieldDecl
+    void Identifier VoidMethodDeclaratorRest
+    Identifier ConstructorDeclaratorRest
+    GenericMethodOrConstructorDecl
+    ClassDeclaration
+    InterfaceDeclaration
+
+MethodOrFieldDecl:
+    Type Identifier MethodOrFieldRest
+
+MethodOrFieldRest:  
+    FieldDeclaratorsRest ;
+    MethodDeclaratorRest
+
+FieldDeclaratorsRest:  
+    VariableDeclaratorRest  {  , VariableDeclarator  } 
+
+MethodDeclaratorRest:
+    FormalParameters  { OPEN_BRACKET CLOSE_BRACKET }   [ throws QualifiedIdentifierList ]   BlockSemi
+
+BlockSemi:
+    Block
+    ;
+
+VoidMethodDeclaratorRest:
+    FormalParameters  [ throws QualifiedIdentifierList ]   BlockSemi
+
+ConstructorDeclaratorRest:
+    FormalParameters  [ throws QualifiedIdentifierList ]  Block
+
+GenericMethodOrConstructorDecl:
+    TypeParameters GenericMethodOrConstructorRest
+
+GenericMethodOrConstructorRest:
+     TypeVoid  Identifier MethodDeclaratorRest
+    Identifier ConstructorDeclaratorRest
+
+InterfaceBody: 
+     {  OPEN_BRACE InterfaceBodyDeclaration CLOSE_BRACE  } 
+
+InterfaceBodyDeclaration:
+    ; 
+     { Modifier }  InterfaceMemberDecl
+
+InterfaceMemberDecl:
+    InterfaceMethodOrFieldDecl
+    void Identifier VoidInterfaceMethodDeclaratorRest
+    InterfaceGenericMethodDecl
+    ClassDeclaration
+    InterfaceDeclaration
+
+InterfaceMethodOrFieldDecl:
+    Type Identifier InterfaceMethodOrFieldRest
+
+InterfaceMethodOrFieldRest:
+    ConstantDeclaratorsRest ;
+    InterfaceMethodDeclaratorRest
+
+ConstantDeclaratorsRest: 
+    ConstantDeclaratorRest  {  , ConstantDeclarator  } 
+
+ConstantDeclaratorRest: 
+     { OPEN_BRACKET CLOSE_BRACKET }  = VariableInitializer
+
+ConstantDeclarator: 
+    Identifier ConstantDeclaratorRest
+
+InterfaceMethodDeclaratorRest:
+    FormalParameters  { OPEN_BRACKET CLOSE_BRACKET }   [ throws QualifiedIdentifierList ]  ; 
+
+VoidInterfaceMethodDeclaratorRest:
+    FormalParameters  [ throws QualifiedIdentifierList ]  ;  
+
+InterfaceGenericMethodDecl:
+    TypeParameters  TypeVoid  Identifier InterfaceMethodDeclaratorRest
+
+TypeVoid:
+    Type
+    void
+
+FormalParameters: 
+    OPEN_PAREN  [ FormalParameterDecls ]  CLOSE_PAREN
+
+FormalParameterDecls: 
+     { VariableModifier }   Type FormalParameterDeclsRest
+
+VariableModifier:
+    final
+    Annotation
+
+FormalParameterDeclsRest: 
+    VariableDeclaratorId  [ , FormalParameterDecls ] 
+    ... VariableDeclaratorId
+
+
+
+VariableDeclaratorId:
+    Identifier  { OPEN_BRACKET CLOSE_BRACKET } 
+
+
+
+VariableDeclarators:
+    VariableDeclarator  {  , VariableDeclarator  } 
+
+VariableDeclarator:
+    Identifier VariableDeclaratorRest
+
+VariableDeclaratorRest:
+     { OPEN_BRACKET CLOSE_BRACKET }   [  = VariableInitializer  ] 
+
+VariableInitializer:
+    ArrayInitializer
+    Expression
+
+ArrayInitializer:
+    OPEN_BRACE  [  VariableInitializer  {  , VariableInitializer  }   [ , ]   ]  CLOSE_BRACE
+
+Block: 
+    OPEN_BRACE BlockStatements CLOSE_BRACE
+
+BlockStatements: 
+     {  BlockStatement  } 
+
+BlockStatement:
+    LocalVariableDeclarationStatement
+    ClassOrInterfaceDeclaration
+     [ Identifier : ]  Statement
+
+LocalVariableDeclarationStatement:
+     {  VariableModifier  }   Type VariableDeclarators ;
+
+Statement:
+    Block
+    ;
+    Identifier : Statement
+    StatementExpression ;
+    if ParExpression Statement  [ else Statement ]  
+    assert Expression  [ : Expression ]  ;
+    switch ParExpression OPEN_BRACE SwitchBlockStatementGroups CLOSE_BRACE
+    while ParExpression Statement
+    do Statement while ParExpression ;
+    for OPEN_PAREN ForControl CLOSE_PAREN Statement
+    break  [ Identifier ]  ;
+    continue  [ Identifier ]  ;
+    return  [ Expression ]  ;
+    throw Expression ;
+    synchronized ParExpression Block
+    try Block  Catches 
+    try Block   [ Catches ]  Finally
+    try ResourceSpecification Block  [ Catches ]   [ Finally ] 
+
+StatementExpression: 
+    Expression
+
+Catches:
+    CatchClause  {  CatchClause  } 
+
+CatchClause:  
+    catch OPEN_PAREN  { VariableModifier }  CatchType Identifier CLOSE_PAREN Block
+
+CatchType:
+    QualifiedIdentifier  {  | QualifiedIdentifier  } 
+
+Finally:
+    finally Block
+
+ResourceSpecification:
+    OPEN_PAREN Resources  [ ; ]  CLOSE_PAREN
+
+Resources:
+    Resource  {  ; Resource  } 
+
+Resource:
+     { VariableModifier }  ReferenceType VariableDeclaratorId = Expression 
+
+SwitchBlockStatementGroups: 
+     {  SwitchBlockStatementGroup  } 
+
+SwitchBlockStatementGroup: 
+    SwitchLabels BlockStatements
+
+SwitchLabels:
+    SwitchLabel  {  SwitchLabel  } 
+
+SwitchLabel: 
+    case Expression :
+    case EnumConstantName :
+    default :
+
+EnumConstantName:
+    Identifier
+
+
+
+ForControl:
+    ForVarControl
+    ForInit ;  [ Expression ]  ;  [ ForUpdate ] 
+
+ForVarControl:
+     { VariableModifier }  Type VariableDeclaratorId  ForVarControlRest
+
+ForVarControlRest:
+    ForVariableDeclaratorsRest ;  [ Expression ]  ;  [ ForUpdate ] 
+    : Expression
+
+ForVariableDeclaratorsRest:
+     [ = VariableInitializer ]   {  , VariableDeclarator  } 
+
+ForInit: 
+ForUpdate:
+    StatementExpression  {  , StatementExpression  }     
+
+Expression: 
+    Expression1  [ AssignmentOperator Expression1 ] 
+
+AssignmentOperator: 
+    = 
+    +=
+    -= 
+    *=
+    /=
+    &=
+    |=
+    ^=
+    %=
+    <<=
+    >>=
+    >>>=
+
+Expression1: 
+    Expression2  [ Expression1Rest ] 
+
+Expression1Rest: 
+    ? Expression : Expression1
+
+Expression2:
+    Expression3  [ Expression2Rest ] 
+
+Expression2Rest:
+     {  InfixOp Expression3  } 
+    instanceof Type
+
+InfixOp: 
+    || 
+    &&
+    |
+    ^
+    &
+    ==
+    !=
+    <
+    >
+    <=
+    >=
+    <<
+    >>
+    >>>
+    +
+    -
+    *
+    /
+    %
+
+Expression3: 
+    PrefixOp Expression3
+    OPEN_PAREN  ExpressionType  CLOSE_PAREN Expression3
+    Primary  {  Selector  }   {  PostfixOp  } 
+
+ExpressionType:
+    Expression
+    Type
+
+PrefixOp: 
+    ++
+    --
+    !
+    ~
+    +
+    -
+
+PostfixOp: 
+    ++
+    --
+
+Primary: 
+    Literal
+    ParExpression
+    this  [ Arguments ] 
+    super SuperSuffix
+    new Creator
+    NonWildcardTypeArguments  ExplicitGenericInvocationSuffix
+    NonWildcardTypeArguments  this Arguments
+    Identifier  {  . Identifier  }   [ IdentifierSuffix ] 
+    BasicType  { OPEN_BRACKET CLOSE_BRACKET }  . class
+    void . class
+
+
+
+Literal:
+    IntegerLiteral
+    FloatingPointLiteral
+    CharacterLiteral    
+    StringLiteral
+    BooleanLiteral
+    NullLiteral
+
+ParExpression: 
+    OPEN_PAREN Expression CLOSE_PAREN
+
+Arguments:
+    OPEN_PAREN  [  Expression  {  , Expression  }   ]  CLOSE_PAREN
+
+SuperSuffix: 
+    Arguments 
+    . Identifier  [ Arguments ] 
+
+ExplicitGenericInvocationSuffix: 
+    super SuperSuffix
+    Identifier Arguments
+
+Creator:  
+    NonWildcardTypeArguments CreatedName ClassCreatorRest
+    CreatedName  ClassCreatorRest
+    CreatedName ArrayCreatorRest
+
+CreatedName:   
+    Identifier  [ TypeArgumentsOrDiamond ]   {  . Identifier  [ TypeArgumentsOrDiamond ]   } 
+
+ClassCreatorRest: 
+    Arguments  [ ClassBody ] 
+
+ArrayCreatorRest:
+    OPEN_BRACKET  CLOSE_BRACKET  { OPEN_BRACKET CLOSE_BRACKET }  ArrayInitializer  
+    OPEN_BRACKET  Expression CLOSE_BRACKET  { OPEN_BRACKET Expression CLOSE_BRACKET }   { OPEN_BRACKET CLOSE_BRACKET }
+
+
+
+IdentifierSuffix:
+    OPEN_BRACKET  { OPEN_BRACKET CLOSE_BRACKET }  . class
+    OPEN_BRACKET Expression  CLOSE_BRACKET
+    Arguments 
+    .  class
+    . ExplicitGenericInvocation
+    .  this
+    .  super Arguments
+    .  new  [ NonWildcardTypeArguments ]  InnerCreator
+
+ExplicitGenericInvocation:
+    NonWildcardTypeArguments ExplicitGenericInvocationSuffix
+
+InnerCreator:  
+    Identifier  [ NonWildcardTypeArgumentsOrDiamond ]  ClassCreatorRest
+
+
+
+Selector:
+    . Identifier  [ Arguments ] 
+    . ExplicitGenericInvocation
+    . this
+    . super SuperSuffix
+    . new  [ NonWildcardTypeArguments ]  InnerCreator
+    OPEN_BRACKET Expression CLOSE_BRACKET
+
+EnumBody:
+     {   [ EnumConstants ]   [ , ]   [ EnumBodyDeclarations ]   } 
+
+EnumConstants:
+    EnumConstant
+    EnumConstants , EnumConstant
+
+EnumConstant:
+     [ Annotations ]  Identifier  [ Arguments ]   [ ClassBody ] 
+
+EnumBodyDeclarations:
+    ;  { ClassBodyDeclaration } 
+
+
+
+AnnotationTypeBody:
+     {   [ AnnotationTypeElementDeclarations ]   } 
+
+AnnotationTypeElementDeclarations:
+    AnnotationTypeElementDeclaration
+    AnnotationTypeElementDeclarations AnnotationTypeElementDeclaration
+
+AnnotationTypeElementDeclaration:
+     { Modifier }  AnnotationTypeElementRest
+
+AnnotationTypeElementRest:
+    Type Identifier AnnotationMethodOrConstantRest ;
+    ClassDeclaration
+    InterfaceDeclaration
+    EnumDeclaration  
+    AnnotationTypeDeclaration
+
+AnnotationMethodOrConstantRest:
+    AnnotationMethodRest
+    ConstantDeclaratorsRest  
+
+AnnotationMethodRest:
+    OPEN_PAREN CLOSE_PAREN  [ OPEN_BRACKET CLOSE_BRACKET ]   [ default ElementValue ] 
