@@ -48,3 +48,44 @@ def main(parse):
 
     if args.sentences != "":
         sentences.close()
+
+class State(object):
+    def __init__(self, lhs, rhs, loc, origin=None, pos=0):
+        assert len(rhs) >= pos
+        self.lhs = lhs
+        self.rhs = tuple(rhs)
+        self.pos = pos
+        self.loc = loc
+        if origin == None:
+            self.origin = self.loc
+        else:
+            self.origin = origin
+
+    def __str__(self):
+        rhs_dot = list(self.rhs)
+        rhs_dot.insert(self.pos, '•')
+        rhs_str = ' '.join(rhs_dot)
+        return '(%d, %s -> %s, %d)' % (self.loc, self.lhs, rhs_str, self.origin)
+
+    __repr__ = __str__
+
+    def __eq__(self, other):
+        return (self.loc, self.origin, self.lhs, self.rhs, self.pos) == \
+            (other.loc, other.origin, other.lhs, other.rhs, other.pos)
+
+    def __lt__(self, other):
+        return (self.loc, self.origin, self.lhs, self.rhs, self.pos) < \
+            (other.loc, other.origin, other.lhs, other.rhs, other.pos)
+
+    def __hash__(self):
+        return hash((self.lhs, self.rhs, self.pos, self.origin, self.loc))
+
+    def finished(self):
+        return self.pos == len(self.rhs)
+
+    def next_elem(self):
+        return self.rhs[self.pos]
+
+    def incr_pos(self, loc):
+        return State(self.lhs, self.rhs, loc, self.origin, self.pos + 1)
+
