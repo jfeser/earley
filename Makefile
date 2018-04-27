@@ -20,4 +20,4 @@ earley_parallel: earley_parallel.cpp $(OBJS)
 	$(CPP) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -c $< -o $@
 
 clean:
-	$(RM) *.o *~ earley_serial earley_parallel
+	$(RM) -r *.o *~ earley_serial earley_parallel *.dSYM
