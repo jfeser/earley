@@ -10,79 +10,51 @@
 #include <utility>
 #include <vector>
 
+#include "state.hpp"
 #include "grammar.hpp"
 
-// struct full_state {
-//   state state;
-//   int origin;
+typedef vector<unordered_set<State> > chart;
+typedef deque<State> worklist;
 
-//   full_state(::state s, int o) : state(s), origin(o) {}
-//   full_state(grammar g, rule r, int o=0) : state(g.rule_state_codes[r]), origin(o) {}
-
-//   full_state incr_pos(grammar g) const {
-//     return full_state(g.next_state(state), origin);
-//   }
-
-//   bool operator==(const full_state &other) const {
-//     return (state == other.state
-//             && origin == other.origin);
-
-// };
-
-// template <> struct hash<full_state> {
-//   size_t operator()(const full_state& state) const {
-//     // Compute individual hash values for first, second and third
-//     // http://stackoverflow.com/a/1646913/126995
-//     size_t res = 17;
-//     res = res * 31 + hash<int>()(state.state);
-//     res = res * 31 + hash<int>()(state.origin);
-//     return res;
-//   }
-// };
-
-typedef pair<int, int> full_state;
-typedef vector<unordered_set<full_state> > chart;
-typedef deque<full_state> worklist;
-
-inline void insert(int k, full_state new_state, chart &chart, vector<worklist> &worklist) {
+inline void insert(int k, State new_state, chart &chart, vector<worklist> &worklist) {
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {
     worklist[k].push_back(new_state);
   }
 }
 
-bool parse(struct grammar &grammar, const vector<int> &words) {
+bool parse(const Grammar &grammar, const vector<int> &words) {
   chart chart (words.size());
   vector<worklist> worklist(words.size());
 
   // Insert rules of the form (START -> . a, 0) into C[0].
-  for (rule rule : grammar.rules_by_nonterminal(grammar.start_symbol())) {
-    insert(0, full_state(grammar.rule_state_codes[rule], rule), chart, worklist);
+  for (rule r : grammar[Grammar::START_SYMBOL]) {
+    insert(0, State(r), chart, worklist);
   }
 
   for (int k = 0; k < words.size(); k++) {
     while (worklist[k].size() > 0) {
-      full_state state = *worklist[k].begin();
+      State state = *worklist[k].begin();
       worklist[k].pop_front();
 
-      if (!grammar.is_finished(state.first)) {
-        symbol next_elem = grammar.state_symbol(state.first);
+      if (!state.is_finished()) {
+        symbol next_elem = state.next_symbol();
         if (grammar.is_nonterminal(next_elem)) {
-          for (rule rule : grammar.rules_by_nonterminal(next_elem)) {
-            insert(k, full_state(grammar.rule_state_codes[rule], k), chart, worklist);
+          for (rule r : grammar[next_elem]) {
+            insert(k, State(r, k), chart, worklist);
           }
         } else {
           if (k + 1 < chart.size()) {
             if (words[k] == next_elem) {
-              insert(k+1, full_state(grammar.next_state(state.first), state.second), chart, worklist);
+              insert(k+1, state.incr_pos(), chart, worklist);
             }
           }
         }
       } else {
-        int origin = state.second;
+        int &origin = state.origin;
         for (auto s = chart[origin].begin(); s != chart[origin].end(); ++s) {
-          if (grammar.code_rules[grammar.state_rule(s->first)][grammar.state_pos(s->first)] == grammar.state_symbol(s->first)) {
-            insert(k, full_state(grammar.next_state(s->first), s->second), chart, worklist);
+          if (!s->is_finished() && s->next_symbol() == state.lhs()) {
+            insert(k, s->incr_pos(), chart, worklist);
           }
         }
       }
@@ -101,7 +73,7 @@ int main(int argc, char *argv[]) {
   ifstream grammar_f (argv[1]);
   ifstream words_f (argv[2]);
 
-  struct grammar g (grammar_f);
+  Grammar g (grammar_f);
 
   words_f.seekg(0, std::ios::end);
   size_t size = words_f.tellg();
