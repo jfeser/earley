@@ -64,34 +64,3 @@ void dump_vector(vector<string> &v) {
   }  
   cerr << "]" << endl;
 }
-
-grammar parse_grammar(ifstream &file) {
-  grammar grammar;
-
-  string line;
-  while (getline(file, line)) {
-    // Strip trailing and leading whitespace.
-    trim(line);
-
-    // Strip trailing comments.
-    string::size_type hash_pos = line.find_first_of('#');
-    if (hash_pos != string::npos) {
-      line = line.substr(0, hash_pos);
-    }
-
-    if (line.length() == 0) { continue; }
-
-    vector<string> rule = split(line);
-    if (rule.size() == 1) {
-      cerr << "Error: Rule without RHS." << endl;
-      exit(1);
-    }
-
-    string lhs = rule[0];
-    rule.erase(rule.begin());
-
-    grammar.insert(pair <string, vector<string> > (lhs, rule));
-  }
-
-  return grammar;
-}

@@ -10,53 +10,79 @@
 #include <utility>
 #include <vector>
 
-#include "earley_shared.hpp"
+#include "grammar.hpp"
 
-typedef vector<unordered_set<state> > chart;
-typedef deque<state> worklist;
+// struct full_state {
+//   state state;
+//   int origin;
 
-inline void insert(int k, state new_state, chart &chart, vector<worklist> &worklist) {
+//   full_state(::state s, int o) : state(s), origin(o) {}
+//   full_state(grammar g, rule r, int o=0) : state(g.rule_state_codes[r]), origin(o) {}
+
+//   full_state incr_pos(grammar g) const {
+//     return full_state(g.next_state(state), origin);
+//   }
+
+//   bool operator==(const full_state &other) const {
+//     return (state == other.state
+//             && origin == other.origin);
+
+// };
+
+// template <> struct hash<full_state> {
+//   size_t operator()(const full_state& state) const {
+//     // Compute individual hash values for first, second and third
+//     // http://stackoverflow.com/a/1646913/126995
+//     size_t res = 17;
+//     res = res * 31 + hash<int>()(state.state);
+//     res = res * 31 + hash<int>()(state.origin);
+//     return res;
+//   }
+// };
+
+typedef pair<int, int> full_state;
+typedef vector<unordered_set<full_state> > chart;
+typedef deque<full_state> worklist;
+
+inline void insert(int k, full_state new_state, chart &chart, vector<worklist> &worklist) {
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {
     worklist[k].push_back(new_state);
   }
 }
 
-bool parse(const grammar &grammar, const vector<string> &words) {
+bool parse(struct grammar &grammar, const vector<int> &words) {
   chart chart (words.size());
   vector<worklist> worklist(words.size());
 
-  auto search = grammar.equal_range("START");
-  for (auto it = search.first; it != search.second; ++it) {
-    state new_state (it);
-    insert(0, new_state, chart, worklist);
+  // Insert rules of the form (START -> . a, 0) into C[0].
+  for (rule rule : grammar.rules_by_nonterminal(grammar.start_symbol())) {
+    insert(0, full_state(grammar.rule_state_codes[rule], rule), chart, worklist);
   }
 
   for (int k = 0; k < words.size(); k++) {
     while (worklist[k].size() > 0) {
-      state state = *worklist[k].begin();
+      full_state state = *worklist[k].begin();
       worklist[k].pop_front();
 
-      if (!finished(state)) {
-        if (grammar.find(next_elem(state)) != grammar.end()) {
-          auto search = grammar.equal_range(next_elem(state));
-          for (auto it = search.first; it != search.second; ++it) {
-            struct state new_state (it);
-            new_state.origin = k;
-            insert(k, new_state, chart, worklist);
+      if (!grammar.is_finished(state.first)) {
+        symbol next_elem = grammar.state_symbol(state.first);
+        if (grammar.is_nonterminal(next_elem)) {
+          for (rule rule : grammar.rules_by_nonterminal(next_elem)) {
+            insert(k, full_state(grammar.rule_state_codes[rule], k), chart, worklist);
           }
         } else {
           if (k + 1 < chart.size()) {
-            if (words[k] == next_elem(state)) {
-              insert(k+1, incr_pos(state), chart, worklist);
+            if (words[k] == next_elem) {
+              insert(k+1, full_state(grammar.next_state(state.first), state.second), chart, worklist);
             }
           }
         }
       } else {
-        for (auto s = chart[state.origin].begin();
-             s != chart[state.origin].end(); ++s) {
-          if (s->rhs()[s->pos] == state.lhs()) {
-            insert(k, incr_pos(*s), chart, worklist);
+        int origin = state.second;
+        for (auto s = chart[origin].begin(); s != chart[origin].end(); ++s) {
+          if (grammar.code_rules[grammar.state_rule(s->first)][grammar.state_pos(s->first)] == grammar.state_symbol(s->first)) {
+            insert(k, full_state(grammar.next_state(s->first), s->second), chart, worklist);
           }
         }
       }
@@ -74,12 +100,18 @@ int main(int argc, char *argv[]) {
 
   ifstream grammar_f (argv[1]);
   ifstream words_f (argv[2]);
-  vector<string> words = split(words_f);
 
-  const grammar grammar = parse_grammar(grammar_f);
+  struct grammar g (grammar_f);
+
+  words_f.seekg(0, std::ios::end);
+  size_t size = words_f.tellg();
+  std::string buffer(size, ' ');
+  words_f.seekg(0);
+  words_f.read(&buffer[0], size);
+  vector<int> words = g.tokenize(buffer);
 
   cerr << "Debug: Beginning parse." << endl;
-  parse(grammar, words);
+  parse(g, words);
   cerr << "Debug: Finished parse." << endl;
 
   return 0;

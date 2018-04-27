@@ -250,6 +250,10 @@ bool grammar::is_nonterminal(int symbol){
   return symbol < nonterminal_count;
 }
 
+const vector<int>& grammar::rules_by_nonterminal(int symbol) {
+  return symbol_rule_codes[symbol];
+}
+
 int start_symbol(){
   return 0;
 }

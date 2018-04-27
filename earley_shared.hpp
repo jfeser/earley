@@ -15,8 +15,6 @@
 
 using namespace std;
 
-typedef multimap<string, vector<string> > grammar;
-
 struct state {
   grammar::const_iterator rule;
   int pos, origin;
