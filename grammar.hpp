@@ -1,50 +1,65 @@
+#ifndef GRAMMAR_H
+#define GRAMMAR_H
+
 #include <iostream>
+#include <vector>
+#include <map>
+#include <unordered_map>
 
-using namespace std;
+#include <cassert>
 
-struct grammar {
+typedef int symbol;
+typedef std::vector<symbol> rule;
+
+class Grammar {
+private:
   int symbol_count;
   int nonterminal_count;
   int terminal_count;
-  unordered_map<string, int> symbol_codes;
-  vector<string> code_symbols;
+  std::unordered_map<std::string, symbol> symbol_codes;
+  std::vector<std::string> code_symbols;
+  std::vector<std::vector<std::vector<symbol> > > rules;
 
-  int rule_count;
-  map<vector<int>, int> rule_codes;
-  vector<vector<int> > code_rules;
-  vector<vector<int> > symbol_rule_codes;
+  void init(std::istream& is, std::string start);
 
-  int state_count;
-  vector<int> rule_state_codes;
-  vector<int> state_rule_codes;
-  vector<int> state_pos_codes;
-  vector<int> state_symbol_codes;
-  vector<int> state_state_codes;
-  vector<vector<int> > symbol_state_codes;
+public:
+  Grammar(std::string fname, std::string start="START");
+  Grammar(std::istream& is, std::string start="START");
 
-  private:
-    void init(istream& is, string start);
+  const static symbol START_SYMBOL = 0;
 
-  public:
+  symbol token(std::string symbol) const;
+  std::vector<symbol> tokenize(std::string sentence) const;
+  std::vector<symbol> tokenize(std::vector<std::string> sentence) const;
 
-    grammar(string fname, string start="START");
-    grammar(istream& is, string start="START");
+  std::string symbol_name(symbol symbol) const;
+  std::string rule_name(int rule) const;
 
-    int token(string symbol);
-    vector<int> tokenize(string sentence);
-    vector<int> tokenize(vector<string> sentence);
+  // Returns the rules starting with a nonterminal.
+  const std::vector<rule>& operator [](symbol nonterminal) const {
+    return rules[nonterminal];
+  }
 
-    string symbol_name(int symbol);
-    string rule_name(int rule);
-    string state_name(int state);
+  inline bool is_nonterminal(symbol symbol) const {
+    return symbol < nonterminal_count;
+  }
 
-    int start_symbol();
-    int state_symbol(int state);
-    int state_rule(int state);
-    int state_pos(int state);
-    int next_state(int state);
-    bool is_finished(int state);
-    bool is_start(int symbol);
-    bool is_terminal(int symbol);
-    bool is_nonterminal(int symbol);
+  inline bool is_terminal(symbol symbol) const {
+    return !is_nonterminal(symbol);
+  }
+
+  static inline symbol lhs(const rule &rule) {
+    return rule[0];
+  }
+
+  static inline unsigned long rhs_size(const rule &rule) {
+    return rule.size() - 1;
+  }
+
+  static inline symbol rhs(const rule &rule, int idx) {
+    assert(idx + 1 < rule.size());
+    return rule[idx + 1];
+  }
 };
+
+#endif // GRAMMAR_H
