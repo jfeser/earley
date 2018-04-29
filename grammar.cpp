@@ -14,6 +14,8 @@
 
 #include "grammar.hpp"
 
+using namespace std;
+
 void Grammar::init(istream& is, string start) {
   regex rule_pattern("^\\s*([^\\s#]+)\\s+([^\\s#][^#]*)\\s*(?:#.*)?$");
   regex symbol_pattern("[^\\s]+");
@@ -90,6 +92,9 @@ void Grammar::init(istream& is, string start) {
 
   //create rule codes
   rules = vector<vector<vector<int> > >(nonterminal_count);
+  for (int i = 0; i < nonterminal_count; i++) {
+    rules[i] = vector<vector<int> >();
+  }
   for(auto r = string_rules.begin(); r != string_rules.end(); r++){
     vector<int> compressed_rule;
     for(auto sym = r->begin(); sym != r->end(); sym++){

@@ -6,37 +6,37 @@
 #include <map>
 #include <unordered_map>
 
-using namespace std;
+#include <cassert>
 
 typedef int symbol;
-typedef vector<symbol> rule;
+typedef std::vector<symbol> rule;
 
 class Grammar {
 private:
   int symbol_count;
   int nonterminal_count;
   int terminal_count;
-  unordered_map<string, symbol> symbol_codes;
-  vector<string> code_symbols;
-  vector<vector<vector<symbol> > > rules;
+  std::unordered_map<std::string, symbol> symbol_codes;
+  std::vector<std::string> code_symbols;
+  std::vector<std::vector<std::vector<symbol> > > rules;
 
-  void init(istream& is, string start);
+  void init(std::istream& is, std::string start);
 
 public:
-  Grammar(string fname, string start="START");
-  Grammar(istream& is, string start="START");
+  Grammar(std::string fname, std::string start="START");
+  Grammar(std::istream& is, std::string start="START");
 
   const static symbol START_SYMBOL = 0;
 
-  symbol token(string symbol) const;
-  vector<symbol> tokenize(string sentence) const;
-  vector<symbol> tokenize(vector<string> sentence) const;
+  symbol token(std::string symbol) const;
+  std::vector<symbol> tokenize(std::string sentence) const;
+  std::vector<symbol> tokenize(std::vector<std::string> sentence) const;
 
-  string symbol_name(symbol symbol) const;
-  string rule_name(int rule) const;
+  std::string symbol_name(symbol symbol) const;
+  std::string rule_name(int rule) const;
 
   // Returns the rules starting with a nonterminal.
-  const vector<rule>& operator [](symbol nonterminal) const {
+  const std::vector<rule>& operator [](symbol nonterminal) const {
     return rules[nonterminal];
   }
 
@@ -48,15 +48,16 @@ public:
     return !is_nonterminal(symbol);
   }
 
-  static inline symbol lhs(rule rule) {
+  static inline symbol lhs(const rule &rule) {
     return rule[0];
   }
 
-  static inline unsigned long rhs_size(rule rule) {
+  static inline unsigned long rhs_size(const rule &rule) {
     return rule.size() - 1;
   }
 
-  static inline symbol rhs(rule rule, int idx) {
+  static inline symbol rhs(const rule &rule, int idx) {
+    assert(idx + 1 < rule.size());
     return rule[idx + 1];
   }
 };

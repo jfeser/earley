@@ -13,8 +13,20 @@
 #include "state.hpp"
 #include "grammar.hpp"
 
+using namespace std;
+
 typedef vector<unordered_set<State> > chart;
 typedef deque<State> worklist;
+
+void print_chart(const Grammar &grammar, chart &chart) {
+  for (int i = 0; i < chart.size(); i++) {
+    for (auto s : chart[i]) {
+      cout << "(0, ";
+      s.print(cout, grammar);
+      cout << ")" << endl;
+    }
+  }
+}
 
 inline void insert(int k, State new_state, chart &chart, vector<worklist> &worklist) {
   bool did_insert = chart[k].insert(new_state).second;
@@ -24,15 +36,15 @@ inline void insert(int k, State new_state, chart &chart, vector<worklist> &workl
 }
 
 bool parse(const Grammar &grammar, const vector<int> &words) {
-  chart chart (words.size());
-  vector<worklist> worklist(words.size());
+  chart chart (words.size() + 1);
+  vector<worklist> worklist(words.size() + 1);
 
   // Insert rules of the form (START -> . a, 0) into C[0].
-  for (rule r : grammar[Grammar::START_SYMBOL]) {
-    insert(0, State(r), chart, worklist);
+  for (const rule &r : grammar[Grammar::START_SYMBOL]) {
+    insert(0, State(&r, 0), chart, worklist);
   }
 
-  for (int k = 0; k < words.size(); k++) {
+  for (int k = 0; k < words.size() + 1; k++) {
     while (worklist[k].size() > 0) {
       State state = *worklist[k].begin();
       worklist[k].pop_front();
@@ -40,13 +52,13 @@ bool parse(const Grammar &grammar, const vector<int> &words) {
       if (!state.is_finished()) {
         symbol next_elem = state.next_symbol();
         if (grammar.is_nonterminal(next_elem)) {
-          for (rule r : grammar[next_elem]) {
-            insert(k, State(r, k), chart, worklist);
+          for (const rule &r : grammar[next_elem]) {
+            insert(k, State(&r, k, k), chart, worklist);
           }
         } else {
           if (k + 1 < chart.size()) {
             if (words[k] == next_elem) {
-              insert(k+1, state.incr_pos(), chart, worklist);
+              insert(k+1, state.incr_pos(k+1), chart, worklist);
             }
           }
         }
@@ -54,13 +66,14 @@ bool parse(const Grammar &grammar, const vector<int> &words) {
         int &origin = state.origin;
         for (auto s = chart[origin].begin(); s != chart[origin].end(); ++s) {
           if (!s->is_finished() && s->next_symbol() == state.lhs()) {
-            insert(k, s->incr_pos(), chart, worklist);
+            insert(k, s->incr_pos(k), chart, worklist);
           }
         }
       }
     }
   }
 
+  print_chart(grammar, chart);
   return false;
 }
 
@@ -82,9 +95,7 @@ int main(int argc, char *argv[]) {
   words_f.read(&buffer[0], size);
   vector<int> words = g.tokenize(buffer);
 
-  cerr << "Debug: Beginning parse." << endl;
   parse(g, words);
-  cerr << "Debug: Finished parse." << endl;
 
   return 0;
 }

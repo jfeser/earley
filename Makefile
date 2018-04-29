@@ -1,8 +1,9 @@
+HDRS = state.hpp
 SRCS = grammar.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 CPP = clang++
-CXXFLAGS=-std=c++11 -Wall -Wextra -O2 -g
+CXXFLAGS=-std=c++11 -Wall -Wextra -O2 -g -fsanitize=address
 IFLAGS=-I/usr/local/include
 LDFLAGS=-ltbb
 
@@ -10,7 +11,7 @@ LDFLAGS=-ltbb
 
 all: earley_serial # earley_parallel
 
-earley_serial: earley_serial.cpp $(OBJS)
+earley_serial: earley_serial.cpp $(OBJS) $(HDRS)
 	$(CPP) $(CXXFLAGS) -o earley_serial $(OBJS) earley_serial.cpp
 
 earley_parallel: earley_parallel.cpp $(OBJS)
