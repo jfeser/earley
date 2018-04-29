@@ -19,11 +19,11 @@ def parse(grammar, sentence):
 
     def scan(s):
         if s.loc + 1 <= len(sentence) and sentence[s.loc] == s.next_word():
-            enqueue(s.incr_pos(s.loc + 1))
+            enqueue(s.incr_word(s.loc + 1))
 
     def complete(s):
         for c in [c for c in chart if (not c.finished()) and c.next_word() == s.lhs and c.loc == s.origin]:
-            enqueue(c.incr_pos(s.loc))
+            enqueue(c.incr_word(s.loc))
 
     for rhs in grammar['START']:
         enqueue(State('START', rhs, 0))
