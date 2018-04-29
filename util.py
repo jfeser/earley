@@ -5,6 +5,9 @@ import argparse
 import re
 import random
 
+def multidict():
+  return defaultdict(list)
+
 def main(parse):
     # Parse arguments.
     parser = argparse.ArgumentParser()
@@ -86,6 +89,6 @@ class State(object):
     def next_word(self):
         return self.rhs[self.pos]
 
-    def incr_pos(self, loc):
+    def incr_word(self, loc):
         return State(self.lhs, self.rhs, loc, self.origin, self.pos + 1)
 
