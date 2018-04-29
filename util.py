@@ -5,6 +5,9 @@ import argparse
 import re
 import random
 
+def multidict():
+  return defaultdict(list)
+
 def main(parse):
     # Parse arguments.
     parser = argparse.ArgumentParser()
