@@ -53,7 +53,7 @@ bool parse(const Grammar &grammar, const vector<int> &words) {
         symbol next_elem = state.next_symbol();
         if (grammar.is_nonterminal(next_elem)) {
           for (const rule &r : grammar[next_elem]) {
-            insert(k, State(&r, k, k), chart, worklist);
+            insert(k, State(&r, k), chart, worklist);
           }
         } else {
           if (k + 1 < chart.size()) {

@@ -19,12 +19,14 @@ public:
   // The Earley set containing this state.
   int loc;
 
-  State(const ::rule *rule, int loc, int origin=0, unsigned long pos=0) :
+  State(const ::rule *rule, int loc, int origin, unsigned long pos) :
     rule(rule), pos(pos), origin(origin), loc(loc) {
     assert(pos <= Grammar::rhs_size(*rule));
     assert(origin >= 0);
     assert(loc >= origin);
   }
+
+  State(const ::rule *rule, int loc) : State(rule, loc, loc, 0) {}
 
   // Copy constructor
   State(const State &state) :
@@ -79,6 +81,7 @@ template <> struct std::hash<State> {
     res = res * 31 + hash<void * >()((void *)(state.rule));
     res = res * 31 + hash<int>()(state.pos);
     res = res * 31 + hash<int>()(state.origin);
+    res = res * 31 + hash<int>()(state.loc);
     return res;
   }
 };
