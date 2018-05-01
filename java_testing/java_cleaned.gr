@@ -8,8 +8,7 @@ QualifiedIdentifierList:
     QualifiedIdentifier  {  , QualifiedIdentifier  } 
 
 CompilationUnit: 
-     [  [ Annotations ]  package QualifiedIdentifier ; ] 
-                                 { ImportDeclaration }   { TypeDeclaration } 
+     [  [ Annotations ]  package QualifiedIdentifier ; ] { ImportDeclaration }   { TypeDeclaration } 
 
 ImportDeclaration: 
     import  [ static ]  Identifier  {  . Identifier  }   [ . * ]  ;
@@ -33,8 +32,7 @@ InterfaceDeclaration:
 
 
 NormalClassDeclaration: 
-    class Identifier  [ TypeParameters ] 
-                                 [ extends Type ]   [ implements TypeList ]  ClassBody
+    class Identifier  [ TypeParameters ] [ extends Type ]   [ implements TypeList ]  ClassBody
 
 EnumDeclaration:
     enum Identifier  [ implements TypeList ]  EnumBody
@@ -142,7 +140,7 @@ ElementValues:
     ElementValue  {  , ElementValue  } 
 
 ClassBody: 
-     {  OPEN_BRACE ClassBodyDeclaration CLOSE_BRACE  } 
+     OPEN_BRACE { ClassBodyDeclaration } CLOSE_BRACE
 
 ClassBodyDeclaration:
     ; 
@@ -276,7 +274,7 @@ BlockStatements:
 BlockStatement:
     LocalVariableDeclarationStatement
     ClassOrInterfaceDeclaration
-     [ Identifier : ]  Statement
+     [ Identifier COLON ]  Statement
 
 LocalVariableDeclarationStatement:
      {  VariableModifier  }   Type VariableDeclarators ;
@@ -284,10 +282,10 @@ LocalVariableDeclarationStatement:
 Statement:
     Block
     ;
-    Identifier : Statement
+    Identifier COLON Statement
     StatementExpression ;
     if ParExpression Statement  [ else Statement ]  
-    assert Expression  [ : Expression ]  ;
+    assert Expression  [ COLON Expression ]  ;
     switch ParExpression OPEN_BRACE SwitchBlockStatementGroups CLOSE_BRACE
     while ParExpression Statement
     do Statement while ParExpression ;
@@ -335,9 +333,9 @@ SwitchLabels:
     SwitchLabel  {  SwitchLabel  } 
 
 SwitchLabel: 
-    case Expression :
-    case EnumConstantName :
-    default :
+    case Expression COLON
+    case EnumConstantName COLON
+    default COLON
 
 EnumConstantName:
     Identifier
@@ -353,7 +351,7 @@ ForVarControl:
 
 ForVarControlRest:
     ForVariableDeclaratorsRest ;  [ Expression ]  ;  [ ForUpdate ] 
-    : Expression
+    COLON Expression
 
 ForVariableDeclaratorsRest:
      [ = VariableInitializer ]   {  , VariableDeclarator  } 
@@ -383,7 +381,7 @@ Expression1:
     Expression2  [ Expression1Rest ] 
 
 Expression1Rest: 
-    ? Expression : Expression1
+    ? Expression COLON Expression1
 
 Expression2:
     Expression3  [ Expression2Rest ] 
