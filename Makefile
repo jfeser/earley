@@ -1,4 +1,4 @@
-HDRS = state.hpp
+HDRS = state.hpp late_util.hpp
 SRCS = grammar.cpp
 OBJS = $(SRCS:.cpp=.o)
 

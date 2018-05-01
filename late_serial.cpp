@@ -13,6 +13,7 @@
 
 #include "state.hpp"
 #include "grammar.hpp"
+#include "late_util.hpp"
 
 #define DEBUG(x) do { std::cerr << x << endl; } while (0)
 
@@ -20,49 +21,6 @@ using namespace std;
 
 typedef unordered_set<State> chart;
 typedef deque<State> worklist;
-
-struct word {
-  symbol lhs;
-  int origin, loc;
-
-  word(symbol l, int o, int c) : lhs(l), origin(o), loc(c) {}
-
-  inline bool operator==(const struct word &other) const {
-    return (lhs == other.lhs
-            && origin == other.origin
-            && loc == other.loc);
-  }
-};
-
-struct msg {
-  symbol lhs;
-  int origin;
-
-  msg(symbol l, int o) : lhs(l), origin(o) {}
-
-  inline bool operator==(const struct msg &other) const {
-    return (lhs == other.lhs && origin == other.origin);
-  }
-};
-
-template <> struct std::hash<struct word> {
-  size_t operator()(const struct word& w) const {
-    size_t res = 17;
-    res = res * 31 + hash<symbol>()(w.lhs);
-    res = res * 31 + hash<int>()(w.origin);
-    res = res * 31 + hash<int>()(w.loc);
-    return res;
-  }
-};
-
-template <> struct std::hash<struct msg> {
-  size_t operator()(const struct msg& r) const {
-    size_t res = 17;
-    res = res * 31 + hash<symbol>()(r.lhs);
-    res = res * 31 + hash<int>()(r.origin);
-    return res;
-  }
-};
 
 void print_chart(const Grammar &grammar, chart &chart) {
   for (const State &s : chart) {
