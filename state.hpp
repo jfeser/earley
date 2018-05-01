@@ -71,19 +71,27 @@ public:
     os << ", " << origin << ")";
     return os;
   }
+
+  inline size_t hash() const {
+    // Compute individual hash values for first, second and third
+    // http://stackoverflow.com/a/1646913/126995
+    size_t res = 17;
+    res = res * 31 + std::hash<void * >()((void *)(rule));
+    res = res * 31 + std::hash<int>()(pos);
+    res = res * 31 + std::hash<int>()(origin);
+    res = res * 31 + std::hash<int>()(loc);
+    return res;
+  }
 };
 
 template <> struct std::hash<State> {
   size_t operator()(const State& state) const {
-    // Compute individual hash values for first, second and third
-    // http://stackoverflow.com/a/1646913/126995
-    size_t res = 17;
-    res = res * 31 + hash<void * >()((void *)(state.rule));
-    res = res * 31 + hash<int>()(state.pos);
-    res = res * 31 + hash<int>()(state.origin);
-    res = res * 31 + hash<int>()(state.loc);
-    return res;
+    return state.hash();
   }
 };
+
+size_t tbb_hasher(const State& x) {
+  return x.hash();
+}
 
 #endif // STATE_H

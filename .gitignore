@@ -137,3 +137,4 @@ ENV/
 *.out
 *.app
 /late_serial
+/late_parallel
