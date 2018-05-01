@@ -56,15 +56,16 @@ struct LoopBody {
         // DEBUG("PREDICT");
         // Predict
         struct msg m (state.next_symbol(), state.loc);
-        if (requests.find(m) == requests.end()) {
+        bool did_insert = requests.insert(make_pair(m, state)).second;
+        if (did_insert) {
           for (const rule &r : grammar[state.next_symbol()]) {
-            insert(State(&r, state.loc), feeder);
+            insert(State(&r, state.loc), feeder); // OK
           }
         }
-        requests.insert(make_pair(m, state));
 
         auto range = replies.equal_range(m);
         for (auto it = range.first; it != range.second; ++it) {
+          if (!(it->first == m)) { break; }
           insert(state.incr_pos(it->second), feeder);
         }
       } else {
@@ -86,6 +87,7 @@ struct LoopBody {
 
         auto range = requests.equal_range(m);
         for (auto it = range.first; it != range.second; ++it) {
+          if (!(it->first == m)) { break; }
           insert(it->second.incr_pos(state.loc), feeder);
         }
       }
