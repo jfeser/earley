@@ -2,10 +2,12 @@ HDRS = state.hpp late_util.hpp
 SRCS = grammar.cpp
 OBJS = $(SRCS:.cpp=.o)
 
-CPP = clang++
-CXXFLAGS=-std=c++11 -Wall -Wextra -O2 -g -fsanitize=address
-IFLAGS=-I/usr/local/include
-LDFLAGS=-ltbb
+TBB_PREFIX=/opt/intel/tbb
+
+CPP = icc
+CXXFLAGS=-std=c++11 -Wall -Wextra -O3 -xHost -g
+IFLAGS=-I$(TBB_PREFIX)/include
+LDFLAGS=-L/opt/intel/tbb/lib -ltbb
 
 .PHONY: clean
 
