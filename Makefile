@@ -15,7 +15,7 @@ earley_serial: earley_serial.cpp $(OBJS) $(HDRS)
 	$(CPP) $(CXXFLAGS) -o earley_serial $(OBJS) earley_serial.cpp
 
 late_serial: late_serial.cpp $(OBJS) $(HDRS)
-	$(CPP) $(CXXFLAGS) -o late_serial $(OBJS) late_serial.cpp
+	$(CPP) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -o late_serial $(OBJS) late_serial.cpp
 
 late_parallel: late_parallel.cpp $(OBJS) $(HDRS)
 	$(CPP) $(CXXFLAGS) $(IFLAGS) $(LDFLAGS) -o late_parallel $(OBJS) late_parallel.cpp

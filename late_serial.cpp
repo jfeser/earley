@@ -11,6 +11,8 @@
 #include <utility>
 #include <vector>
 
+#include "tbb/tick_count.h"
+
 #include "state.hpp"
 #include "grammar.hpp"
 #include "late_util.hpp"
@@ -97,7 +99,7 @@ bool parse(const Grammar &grammar, const vector<int> &sentence) {
     }
   }
 
-  print_chart(grammar, chart);
+  // print_chart(grammar, chart);
   return false;
 }
 
@@ -107,11 +109,13 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  cout << "Loading grammar..." << endl;
   ifstream grammar_f (argv[1]);
   ifstream words_f (argv[2]);
 
   Grammar g (grammar_f);
 
+  cout << "Lexing input string..." << endl;
   words_f.seekg(0, std::ios::end);
   size_t size = words_f.tellg();
   std::string buffer(size, ' ');
@@ -119,7 +123,12 @@ int main(int argc, char *argv[]) {
   words_f.read(&buffer[0], size);
   vector<int> words = g.tokenize(buffer);
 
+  cout << "Parsing..." << endl;
+  tbb::tick_count t0 = tbb::tick_count::now();
   parse(g, words);
+  tbb::tick_count t1 = tbb::tick_count::now();
+  double t = (t1 - t0).seconds();
+  std::cout << "time = " << t << " with " << 1 << " threads" << std::endl;
 
   return 0;
 }
