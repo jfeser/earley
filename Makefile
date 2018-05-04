@@ -1,5 +1,5 @@
-HDRS = state.hpp late_util.hpp
-SRCS = grammar.cpp
+HDRS = late_util.hpp iparser.hpp late_parallel.hpp late_serial.hpp state.hpp grammar.hpp
+SRCS = grammar.cpp late_parallel.cpp late_serial.cpp state.cpp late_util.cpp earley_serial.cpp earley_parallel.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 TBB_PREFIX=/opt/intel/tbb
@@ -14,19 +14,10 @@ endif
 
 .PHONY: all clean
 
-all: earley_serial late_serial late_parallel
+all: parse
 
-earley_serial: earley_serial.cpp $(OBJS) $(HDRS)
-	$(CXX) $(CXXFLAGS) -o earley_serial $(OBJS) earley_serial.cpp $(LIBS)
-
-late_serial: late_serial.cpp $(OBJS) $(HDRS)
-	$(CXX) $(CXXFLAGS) -o late_serial $(OBJS) late_serial.cpp $(LIBS)
-
-late_parallel: late_parallel.cpp $(OBJS) $(HDRS)
-	$(CXX) $(CXXFLAGS) -o late_parallel $(OBJS) late_parallel.cpp $(LIBS)
-
-earley_parallel: earley_parallel.cpp $(OBJS) $(HDRS)
-	$(CXX) $(CXXFLAGS) -o earley_parallel $(OBJS) earley_parallel.cpp $(LIBS)
+parse: parse.cpp $(OBJS) $(HDRS)
+	$(CXX) $(CXXFLAGS) -o parse $(OBJS) parse.cpp $(LIBS)
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $< -o $@

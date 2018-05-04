@@ -1,24 +1,16 @@
+#include "earley_serial.hpp"
+
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #include <algorithm>
-
-#include <deque>
-#include <string>
 #include <map>
-#include <unordered_set>
 #include <utility>
-#include <vector>
-
-#include "state.hpp"
-#include "grammar.hpp"
 
 using namespace std;
 
-typedef vector<unordered_set<State> > chart;
-typedef deque<State> worklist;
+typedef vector<unordered_set<State> > chart_t;
+typedef deque<State> worklist_t;
 
-void print_chart(const Grammar &grammar, chart &chart) {
+void EarleySerialParser::print_chart() {
   for (int i = 0; i < chart.size(); i++) {
     for (auto s : chart[i]) {
       cout << "(0, ";
@@ -28,23 +20,23 @@ void print_chart(const Grammar &grammar, chart &chart) {
   }
 }
 
-inline void insert(int k, State new_state, chart &chart, vector<worklist> &worklist) {
+inline void insert(int k, State new_state, chart_t &chart, vector<worklist_t> &worklist) {
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {
     worklist[k].push_back(new_state);
   }
 }
 
-bool parse(const Grammar &grammar, const vector<int> &words) {
-  chart chart (words.size() + 1);
-  vector<worklist> worklist(words.size() + 1);
+void EarleySerialParser::parse() {
+  chart_t chart (sentence.size() + 1);
+  vector<worklist_t> worklist(sentence.size() + 1);
 
   // Insert rules of the form (START -> . a, 0) into C[0].
   for (const rule &r : grammar[Grammar::START_SYMBOL]) {
     insert(0, State(&r, 0), chart, worklist);
   }
 
-  for (int k = 0; k < words.size() + 1; k++) {
+  for (int k = 0; k < sentence.size() + 1; k++) {
     while (worklist[k].size() > 0) {
       State state = *worklist[k].begin();
       worklist[k].pop_front();
@@ -57,7 +49,7 @@ bool parse(const Grammar &grammar, const vector<int> &words) {
           }
         } else {
           if (k + 1 < chart.size()) {
-            if (words[k] == next_elem) {
+            if (sentence[k] == next_elem) {
               insert(k+1, state.incr_pos(k+1), chart, worklist);
             }
           }
@@ -72,30 +64,16 @@ bool parse(const Grammar &grammar, const vector<int> &words) {
       }
     }
   }
+}
 
-  print_chart(grammar, chart);
+string EarleySerialParser::name() {
+  return "earley_serial";
+}
+
+bool EarleySerialParser::is_parallel() {
   return false;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 3) {
-    cout << "Usage: earley GRAMMAR FILE" << endl;
-    return 1;
-  }
-
-  ifstream grammar_f (argv[1]);
-  ifstream words_f (argv[2]);
-
-  Grammar g (grammar_f);
-
-  words_f.seekg(0, std::ios::end);
-  size_t size = words_f.tellg();
-  std::string buffer(size, ' ');
-  words_f.seekg(0);
-  words_f.read(&buffer[0], size);
-  vector<int> words = g.tokenize(buffer);
-
-  parse(g, words);
-
-  return 0;
+void EarleySerialParser::reset() {
+  chart.clear();
 }

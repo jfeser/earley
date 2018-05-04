@@ -1,41 +1,23 @@
+#include "earley_parallel.hpp"
+
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
 
-#include <deque>
-#include <string>
-#include <map>
-#include <utility>
-#include <vector>
-
-#include "tbb/concurrent_unordered_set.h"
 #include "tbb/parallel_do.h"
 
-#include "earley_shared.hpp"
+using namespace std;
 
-size_t tbb_hasher(const state& s) {
-  // Compute individual hash values for first, second and third
-  // http://stackoverflow.com/a/1646913/126995
-  size_t res = 17;
-  res = res * 31 + std::hash<void * >()((void *)(&*s.rule));
-  res = res * 31 + std::hash<int>()(s.pos);
-  res = res * 31 + std::hash<int>()(s.origin);
-  return res;
-}
-
-typedef vector<tbb::concurrent_unordered_set<state> > chart;
+typedef vector<tbb::concurrent_unordered_set<State> > chart_t;
 
 struct EarleyBody {
-  const grammar &grammar;
-  const vector<string> &words;
+  const Grammar &grammar;
+  const vector<int> &sentence;
   const int k;
-  chart &chart;
+  chart_t &chart;
 
-  EarleyBody(const ::grammar &g, ::chart &c, const vector<string> &w, const int k) :
-    grammar(g), words(w), k(k), chart(c) {}
+  EarleyBody(const Grammar &g, chart_t &c, const vector<int> &w, const int k) :
+    grammar(g), sentence(w), k(k), chart(c) {}
 
-  inline void insert(int j, state new_state, tbb::parallel_do_feeder<state>& feeder) const {
+  inline void insert(int j, State new_state, tbb::parallel_do_feeder<State>& feeder) const {
     bool did_insert = chart[j].insert(new_state).second;
     if (did_insert) {
       // Only feed the current loop.
@@ -43,64 +25,60 @@ struct EarleyBody {
     }
   }
 
-  void operator()(state st, tbb::parallel_do_feeder<state>& feeder) const {
-    if (!finished(st)) {
-      if (grammar.find(next_elem(st)) != grammar.end()) {
-        auto search = grammar.equal_range(next_elem(st));
-        for (auto it = search.first; it != search.second; ++it) {
-          struct state new_state (it);
-          new_state.origin = k;
-          insert(k, new_state, feeder);
+  void operator()(State st, tbb::parallel_do_feeder<State>& feeder) const {
+    if (!st.is_finished()) {
+      if (grammar.is_nonterminal(st.next_symbol())) {
+        for (const rule &r : grammar[st.next_symbol()]) {
+          insert(k, State(&r, k), feeder);
         }
       } else {
         if (k + 1 < chart.size()) {
-          if (words[k] == next_elem(st)) {
-            insert(k+1, incr_pos(st), feeder);
+          if (sentence[k] == st.next_symbol()) {
+            insert(k+1, st.incr_pos(k+1), feeder);
           }
         }
       }
     } else {
-      for (auto s = chart[st.origin].begin();
-           s != chart[st.origin].end(); ++s) {
-        if (s->rhs()[s->pos] == st.lhs()) {
-          insert(k, incr_pos(*s), feeder);
+      for (auto s = chart[st.origin].begin(); s != chart[st.origin].end(); ++s) {
+        if (!s->is_finished() && s->next_symbol() == st.lhs()) {
+          insert(k, s->incr_pos(k), feeder);
         }
       }
     }
   }
 };
 
-bool parse(const grammar &grammar, const vector<string> &words) {
-  chart chart (words.size());
+void EarleyParallelParser::parse() {
+  chart_t chart (sentence.size());
 
-  auto search = grammar.equal_range("START");
-  for (auto it = search.first; it != search.second; ++it) {
-    chart[0].insert(it);
+  for (const rule &r : grammar[Grammar::START_SYMBOL]) {
+    chart[0].insert(State(&r, 0));
   }
 
-  for (int k = 0; k < words.size(); k++) {
+  for (int k = 0; k < sentence.size(); k++) {
     tbb::parallel_do(chart[k].begin(), chart[k].end(),
-                     EarleyBody(grammar, chart, words, k));
+                     EarleyBody(grammar, chart, sentence, k));
   }
-
-  return false;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 3) {
-    cout << "Usage: earley GRAMMAR FILE" << endl;
-    return 1;
+string EarleyParallelParser::name() {
+  return "earley_parallel";
+}
+
+bool EarleyParallelParser::is_parallel() {
+  return true;
+}
+
+void EarleyParallelParser::reset() {
+  chart.clear();
+}
+
+void EarleyParallelParser::print_chart() {
+  for (int i = 0; i < chart.size(); i++) {
+    for (auto s : chart[i]) {
+      cout << "(0, ";
+      s.print(cout, grammar);
+      cout << ")" << endl;
+    }
   }
-
-  ifstream grammar_f (argv[1]);
-  ifstream words_f (argv[2]);
-  vector<string> words = split(words_f);
-
-  const grammar grammar = parse_grammar(grammar_f);
-
-  cerr << "Debug: Beginning parse." << endl;
-  parse(grammar, words);
-  cerr << "Debug: Finished parse." << endl;
-
-  return 0;
 }

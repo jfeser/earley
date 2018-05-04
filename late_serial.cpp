@@ -1,12 +1,9 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <algorithm>
+#include "late_serial.hpp"
 
-#include <deque>
+#include <iostream>
+
 #include <string>
 #include <map>
-#include <unordered_set>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -17,14 +14,12 @@
 #include "grammar.hpp"
 #include "late_util.hpp"
 
-#define DEBUG(x) do { std::cerr << x << endl; } while (0)
-
 using namespace std;
 
 typedef unordered_set<State> chart;
 typedef deque<State> worklist;
 
-void print_chart(const Grammar &grammar, chart &chart) {
+void LateSerialParser::print_chart() {
   for (const State &s : chart) {
     cout << "(0, ";
     s.print(cout, grammar);
@@ -37,10 +32,7 @@ inline void insert(State new_state, chart &chart, worklist &worklist) {
   if (did_insert) { worklist.push_back(new_state); }
 }
 
-bool parse(const Grammar &grammar, const vector<int> &sentence) {
-  chart chart;
-  worklist worklist;
-
+void LateSerialParser::parse() {
   unordered_set<struct word> words;
   unordered_multimap<struct msg, int> replies;
   unordered_multimap<struct msg, State> requests;
@@ -98,37 +90,16 @@ bool parse(const Grammar &grammar, const vector<int> &sentence) {
       }
     }
   }
+}
 
-  // print_chart(grammar, chart);
+string LateSerialParser::name() {
+  return "late_serial";
+}
+
+bool LateSerialParser::is_parallel() {
   return false;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 3) {
-    cout << "Usage: earley GRAMMAR FILE" << endl;
-    return 1;
-  }
-
-  cout << "Loading grammar..." << endl;
-  ifstream grammar_f (argv[1]);
-  ifstream words_f (argv[2]);
-
-  Grammar g (grammar_f);
-
-  cout << "Lexing input string..." << endl;
-  words_f.seekg(0, std::ios::end);
-  size_t size = words_f.tellg();
-  std::string buffer(size, ' ');
-  words_f.seekg(0);
-  words_f.read(&buffer[0], size);
-  vector<int> words = g.tokenize(buffer);
-
-  cout << "Parsing..." << endl;
-  tbb::tick_count t0 = tbb::tick_count::now();
-  parse(g, words);
-  tbb::tick_count t1 = tbb::tick_count::now();
-  double t = (t1 - t0).seconds();
-  std::cout << "time = " << t << " with " << 1 << " threads" << std::endl;
-
-  return 0;
+void LateSerialParser::reset() {
+  chart.clear();
 }
