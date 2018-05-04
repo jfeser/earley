@@ -1,10 +1,10 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <iterator>
 
 #include <deque>
 #include <string>
-#include <regex>
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
@@ -16,36 +16,49 @@
 
 using namespace std;
 
+vector<string> split(string &str) {
+  istringstream strm(str);
+  vector<string> words;
+  copy(istream_iterator<string>(strm),
+       istream_iterator<string>(),
+       back_inserter(words));
+  return words;
+}
+
 void Grammar::init(istream& is, string start) {
-  regex rule_pattern("^\\s*([^\\s#]+)\\s+([^\\s#][^#]*)\\s*(?:#.*)?$");
-  regex symbol_pattern("[^\\s]+");
-  regex empty_pattern("^\\s*(?:#.*)?$");
-  smatch line_match;
   set< vector<string> > string_rules;
   set<string> symbols;
 
-  //parse the rules
   int line_count = 0;
   string line;
   while (getline(is, line)) {
     line_count++;
-    if(regex_match(line, line_match, rule_pattern)){
-      string lhs = line_match[1];
-      string rhs = line_match[2];
-      symbols.insert(lhs);
-      vector<string> rule = {lhs};
-      smatch symbol_match;
-      while(regex_search(rhs, symbol_match, symbol_pattern)){
-        string symbol = symbol_match.str();
-        symbols.insert(symbol);
-        rule.push_back(symbol);
-        rhs = symbol_match.suffix().str();
-      }
-      string_rules.insert(rule);
-    } else if(!regex_match(line, line_match, empty_pattern)){
-      cerr << "error: invalid grammar syntax on line: " << line_count << endl;
+
+    // Strip trailing spaces.
+    line.erase(find_if(line.rbegin(), line.rend(), [](int ch) {
+          return !isspace(ch); }).base(), line.end());
+
+    // Strip leading spaces.
+    line.erase(line.begin(), find_if(line.begin(), line.end(), [](int ch) {
+          return !isspace(ch); }));
+
+    // Strip trailing comments.
+    auto hash_pos = find_if(line.rbegin(), line.rend(),
+                            [](int ch) { return ch == '#'; }).base();
+    if (hash_pos != line.begin()) {
+      line.erase(hash_pos, line.end());
+    }
+
+    if (line.length() == 0) { continue; }
+
+    vector<string> rule = split(line);
+    if (rule.size() == 1) {
+      cerr << "Error: Rule without RHS." << endl;
       exit(1);
     }
+
+    for (string sym : rule) { symbols.insert(sym); }
+    string_rules.insert(rule);
   }
 
   //separate nonterminals from terminals
@@ -131,11 +144,8 @@ symbol Grammar::token(string symbol) const {
 
 vector<int> Grammar::tokenize(string sentence) const {
   vector<int> tokens;
-  regex symbol_pattern("[^\\s]+");
-  smatch symbol_match;
-  while(regex_search(sentence, symbol_match, symbol_pattern)){
-    tokens.push_back(token(symbol_match.str()));
-    sentence = symbol_match.suffix().str();
+  for (string tok : split(sentence)) {
+    tokens.push_back(token(tok));
   }
   return tokens;
 }
