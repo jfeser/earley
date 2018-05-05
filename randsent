@@ -1,0 +1,65 @@
+#!/usr/bin/env python2
+
+from __future__ import print_function
+
+import argparse
+from collections import defaultdict, deque
+import random
+import re
+import sys
+
+# Parse arguments.  You should not need to modify this.
+parser = argparse.ArgumentParser()
+parser.add_argument("grammar", help="path to grammar file")
+parser.add_argument("count", type=int, help="number of sentences to generate", nargs='?', default=1)
+parser.add_argument("-t", "--tree", action='store_true', help="pretty-print tree form instead of printing sentence")
+parser.add_argument("--seed", type=int, default=0, help="RNG seed")
+args = parser.parse_args()
+
+# Create a random generator.
+rng = random.Random(args.seed)
+
+def parse_grammar(file_):
+  rules = defaultdict(lambda: set([]))
+
+  pattern = re.compile('^(?P<lhs>[^\s()#]+)\s+(?P<rhs>[^()#\n]*[^()#\n\s])')
+  for line in file_:
+    match = pattern.match(line)
+    if match is None:
+      continue
+    groups = match.groupdict()
+    lhs = groups['lhs']
+    rhs = tuple(groups['rhs'].split())
+    rules[lhs].add(rhs)
+  assert 'START' in rules
+
+  rules = { lhs: list(rhs) for (lhs, rhs) in rules.items() }
+
+  return rules
+
+def generate_sentence(grammar):
+  queue = deque(['START'])
+
+  while len(queue) > 0:
+    sym = queue.popleft()
+
+    # Is nonterminal?
+    if sym in grammar:
+      rhs = rng.choice(grammar[sym])
+      queue.extendleft(reversed(rhs))
+    else:
+      yield sym
+
+# Parse the grammar
+with open(args.grammar, 'r') as grammar_file:
+  grammar = parse_grammar(grammar_file)
+
+for _ in xrange(args.count):
+  if args.tree:
+    print(str(generate_tree(grammar)))
+  else:
+    print(' '.join(generate_sentence(grammar)))
+
+# Local Variables:
+# mode: python
+# End:
