@@ -1,4 +1,4 @@
-HDRS = late_util.hpp iparser.hpp late_parallel.hpp late_serial.hpp state.hpp grammar.hpp
+HDRS = late_util.hpp iparser.hpp late_parallel.hpp late_serial.hpp state.hpp grammar.hpp earley_serial.hpp earley_parallel.hpp
 SRCS = grammar.cpp late_parallel.cpp late_serial.cpp state.cpp late_util.cpp earley_serial.cpp earley_parallel.cpp
 OBJS = $(SRCS:.cpp=.o)
 
@@ -23,4 +23,4 @@ parse: parse.cpp $(OBJS) $(HDRS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -r *.o *~ earley_serial earley_parallel late_serial late_parallel *.dSYM
+	$(RM) -r *.o *~ parse *.dSYM

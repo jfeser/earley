@@ -19,11 +19,11 @@ using namespace std;
 typedef unordered_set<State> chart;
 typedef deque<State> worklist;
 
-void LateSerialParser::print_chart() {
+void LateSerialParser::print_chart(std::ostream &strm) {
   for (const State &s : chart) {
-    cout << "(0, ";
-    s.print(cout, grammar);
-    cout << ")" << endl;
+    strm << "(0, ";
+    s.print(strm, grammar);
+    strm << ")" << endl;
   }
 }
 

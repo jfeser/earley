@@ -49,13 +49,11 @@ struct EarleyBody {
 };
 
 void EarleyParallelParser::parse() {
-  chart_t chart (sentence.size());
-
   for (const rule &r : grammar[Grammar::START_SYMBOL]) {
     chart[0].insert(State(&r, 0));
   }
 
-  for (int k = 0; k < sentence.size(); k++) {
+  for (int k = 0; k <= sentence.size(); k++) {
     tbb::parallel_do(chart[k].begin(), chart[k].end(),
                      EarleyBody(grammar, chart, sentence, k));
   }
@@ -71,14 +69,17 @@ bool EarleyParallelParser::is_parallel() {
 
 void EarleyParallelParser::reset() {
   chart.clear();
+  for (int i = 0; i < sentence.size() + 1; i++) {
+    chart.push_back(tbb::concurrent_unordered_set<State>());
+  }
 }
 
-void EarleyParallelParser::print_chart() {
+void EarleyParallelParser::print_chart(ostream &strm) {
   for (int i = 0; i < chart.size(); i++) {
-    for (auto s : chart[i]) {
-      cout << "(0, ";
-      s.print(cout, grammar);
-      cout << ")" << endl;
+    for (State &s : chart[i]) {
+      strm << "(0, ";
+      s.print(strm, grammar);
+      strm << ")" << endl;
     }
   }
 }

@@ -24,7 +24,7 @@ public:
   std::string name() override;
   void reset() override;
   void parse() override;
-  void print_chart() override;
+  void print_chart(std::ostream &strm) override;
 };
 
 #endif // LATE_SERIAL_H

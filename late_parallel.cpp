@@ -107,11 +107,11 @@ void LateParallelParser::parse() {
   tbb::parallel_do(init.begin(), init.end(), LoopBody(grammar, sentence, chart));
 }
 
-void LateParallelParser::print_chart() {
+void LateParallelParser::print_chart(std::ostream &strm) {
   for (const State &s : chart) {
-    cout << "(0, ";
-    s.print(cout, grammar);
-    cout << ")" << endl;
+    strm << "(0, ";
+    s.print(strm, grammar);
+    strm << ")" << endl;
   }
 }
 

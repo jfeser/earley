@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 
 #include "tbb/task_scheduler_init.h"
@@ -41,7 +42,6 @@ int main(int argc, char *argv[]) {
     new EarleyParallelParser(g, words),
   };
 
-
   cout << "name,time,threads" << endl;
   for (IParser *parser : parsers) {
     parser->reset();
@@ -57,6 +57,12 @@ int main(int argc, char *argv[]) {
       tbb::tick_count t1 = tbb::tick_count::now();
       double t = (t1 - t0).seconds();
       cout << parser->name() << "," << t << "," << p  << endl;
+
+      ostringstream out_fn;
+      out_fn << parser->name() << "-" << p << ".txt";
+      ofstream out_f (out_fn.str());
+      parser->print_chart(out_f);
+      out_f.flush();
     }
   }
 
