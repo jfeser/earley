@@ -14,6 +14,9 @@
 
 using namespace std;
 
+const int max_repeats = 100;
+const double max_time = 30.0;
+
 int main(int argc, char *argv[]) {
   if (argc != 3) {
     cout << "Usage: parse GRAMMAR FILE" << endl;
@@ -37,26 +40,32 @@ int main(int argc, char *argv[]) {
   cerr << "Parsing..." << endl;
   vector<IParser*> parsers = {
     new LateParallelParser(g, words),
-    new LateSerialParser(g, words),
-    new EarleySerialParser(g, words),
-    new EarleyParallelParser(g, words),
+    // new LateSerialParser(g, words),
+    // new EarleySerialParser(g, words),
+    // new EarleyParallelParser(g, words),
   };
 
   cout << "name,time,threads" << endl;
   for (IParser *parser : parsers) {
-    parser->reset();
-
     int n = parser->is_parallel() ? tbb::task_scheduler_init::default_num_threads() : 1;
     for (int p = 1; p <= n; ++p) {
       // Construct task scheduler with p threads
       tbb::task_scheduler_init init(p);
-      tbb::tick_count t0 = tbb::tick_count::now();
 
-      parser->parse();
+      double min = 1.0/0.0, tot = 0.0;
+      int r = 0;
+      while (r < max_repeats && tot < max_time) {
+        parser->reset();
+        tbb::tick_count t0 = tbb::tick_count::now();
+        parser->parse();
+        tbb::tick_count t1 = tbb::tick_count::now();
+        double t = (t1 - t0).seconds();
 
-      tbb::tick_count t1 = tbb::tick_count::now();
-      double t = (t1 - t0).seconds();
-      cout << parser->name() << "," << t << "," << p  << endl;
+        if (t < min) { min = t; }
+        tot += t;
+        r++;
+      }
+      cout << parser->name() << "," << min << "," << tot << "," << r << "," << p << endl;
 
       ostringstream out_fn;
       out_fn << parser->name() << "-" << p << ".txt";
