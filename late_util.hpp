@@ -50,12 +50,7 @@ template <> struct std::hash<struct msg> {
   size_t operator()(const struct msg& r) const { return r.hash(); }
 };
 
-size_t tbb_hasher(const struct word& x) {
-  return x.hash();
-}
-
-size_t tbb_hasher(const struct msg& x) {
-  return x.hash();
-}
+size_t tbb_hasher(const struct word& x);
+size_t tbb_hasher(const struct msg& x);
 
 #endif // LATE_UTIL

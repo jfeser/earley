@@ -1,3 +1,5 @@
+#include "late_parallel.hpp"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -11,27 +13,15 @@
 #include <utility>
 #include <vector>
 
-#include "tbb/task_scheduler_init.h"
 #include "tbb/concurrent_unordered_set.h"
 #include "tbb/concurrent_unordered_map.h"
 #include "tbb/parallel_do.h"
-#include "tbb/tick_count.h"
 
 #include "state.hpp"
 #include "grammar.hpp"
 #include "late_util.hpp"
 
-#define DEBUG(x) do { std::cerr << x << endl; } while (0)
-
 using namespace std;
-
-void print_chart(const Grammar &grammar, tbb::concurrent_unordered_set<State> &chart) {
-  for (const State &s : chart) {
-    cout << "(0, ";
-    s.print(cout, grammar);
-    cout << ")" << endl;
-  }
-}
 
 struct LoopBody {
   const Grammar &grammar;
@@ -97,9 +87,15 @@ struct LoopBody {
   }
 };
 
-bool parse(const Grammar &grammar, const vector<int> &sentence) {
-  tbb::concurrent_unordered_set<State> chart;
+string LateParallelParser::name() {
+  return "late_parallel";
+}
 
+void LateParallelParser::reset() {
+  chart.clear();
+}
+
+void LateParallelParser::parse() {
   // Insert rules of the form (START -> . a, 0) into C[0].
   vector<State> init;
   for (const rule &r : grammar[Grammar::START_SYMBOL]) {
@@ -109,44 +105,16 @@ bool parse(const Grammar &grammar, const vector<int> &sentence) {
   }
 
   tbb::parallel_do(init.begin(), init.end(), LoopBody(grammar, sentence, chart));
-
-  // print_chart(grammar, chart);
-  return false;
 }
 
-int main(int argc, char *argv[]) {
-  if (argc != 3) {
-    cout << "Usage: earley GRAMMAR FILE" << endl;
-    return 1;
+void LateParallelParser::print_chart(std::ostream &strm) {
+  for (const State &s : chart) {
+    strm << "(0, ";
+    s.print(strm, grammar);
+    strm << ")" << endl;
   }
+}
 
-  cout << "Loading grammar..." << endl;
-  ifstream grammar_f (argv[1]);
-  ifstream words_f (argv[2]);
-
-  Grammar g (grammar_f);
-
-  cout << "Lexing input string..." << endl;
-  words_f.seekg(0, std::ios::end);
-  size_t size = words_f.tellg();
-  std::string buffer(size, ' ');
-  words_f.seekg(0);
-  words_f.read(&buffer[0], size);
-  vector<int> words = g.tokenize(buffer);
-
-  cout << "Parsing..." << endl;
-  int n = tbb::task_scheduler_init::default_num_threads();
-  for (int p = 1; p <= n; ++p) {
-    // Construct task scheduler with p threads
-    tbb::task_scheduler_init init(p);
-    tbb::tick_count t0 = tbb::tick_count::now();
-
-    parse(g, words);
-
-    tbb::tick_count t1 = tbb::tick_count::now();
-    double t = (t1 - t0).seconds();
-    std::cout << "time = " << t << " with " << p << " threads" << std::endl;
-  }
-
-  return 0;
+bool LateParallelParser::is_parallel() {
+  return true;
 }

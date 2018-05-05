@@ -19,20 +19,20 @@ public:
   // The Earley set containing this state.
   int loc;
 
-  State(const ::rule *rule, int loc, int origin, unsigned long pos) :
+  inline State(const ::rule *rule, int loc, int origin, unsigned long pos) :
     rule(rule), pos(pos), origin(origin), loc(loc) {
     assert(pos <= Grammar::rhs_size(*rule));
     assert(origin >= 0);
     assert(loc >= origin);
   }
 
-  State(const ::rule *rule, int loc) : State(rule, loc, loc, 0) {}
+  inline State(const ::rule *rule, int loc) : State(rule, loc, loc, 0) {}
 
   // Copy constructor
-  State(const State &state) :
+  inline State(const State &state) :
     rule(state.rule), pos(state.pos), origin(state.origin), loc(state.loc) {}
 
-  bool operator==(const State &other) const {
+  inline bool operator==(const State &other) const {
     return (rule == other.rule
             && pos == other.pos
             && origin == other.origin
@@ -60,7 +60,7 @@ public:
     return State(rule, new_loc, origin, pos + 1);
   }
 
-  std::ostream& print(std::ostream& os, const Grammar &grammar) const {
+  inline std::ostream& print(std::ostream& os, const Grammar &grammar) const {
     os << "(" << loc << ", " << grammar.symbol_name(lhs()) << " -> ";
     for (auto i = 0ul; i < Grammar::rhs_size(*rule); i++) {
       if (pos == i) { os << "• "; }
@@ -90,8 +90,6 @@ template <> struct std::hash<State> {
   }
 };
 
-size_t tbb_hasher(const State& x) {
-  return x.hash();
-}
+size_t tbb_hasher(const State& x);
 
 #endif // STATE_H

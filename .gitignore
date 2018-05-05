@@ -138,3 +138,4 @@ ENV/
 *.app
 /late_serial
 /late_parallel
+/parse
