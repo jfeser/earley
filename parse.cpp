@@ -40,9 +40,8 @@ int main(int argc, char *argv[]) {
   cerr << "Parsing..." << endl;
   vector<IParser*> parsers = {
     new LateParallelParser(g, words),
-    // new LateSerialParser(g, words),
-    // new EarleySerialParser(g, words),
-    // new EarleyParallelParser(g, words),
+    new LateSerialParser(g, words),
+    new EarleySerialParser(g, words),
   };
 
   cout << "name,time,threads" << endl;
@@ -65,7 +64,13 @@ int main(int argc, char *argv[]) {
         tot += t;
         r++;
       }
-      cout << parser->name() << "," << min << "," << tot << "," << r << "," << p << endl;
+      cout << parser->name()
+           << "," << min
+           << "," << tot
+           << "," << r
+           << "," << p
+           << "," << parser->chart_size()
+           << endl;
 
       ostringstream out_fn;
       out_fn << parser->name() << "-" << p << ".txt";

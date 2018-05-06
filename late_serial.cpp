@@ -103,3 +103,7 @@ bool LateSerialParser::is_parallel() {
 void LateSerialParser::reset() {
   chart.clear();
 }
+
+int LateSerialParser::chart_size() {
+  return chart.size();
+}

@@ -118,3 +118,7 @@ void LateParallelParser::print_chart(std::ostream &strm) {
 bool LateParallelParser::is_parallel() {
   return true;
 }
+
+int LateParallelParser::chart_size() {
+  return chart.size();
+}
