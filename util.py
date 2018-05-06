@@ -66,7 +66,7 @@ class State(object):
 
     def __str__(self):
         rhs_dot = list(self.rhs)
-        rhs_dot.insert(self.pos, 'DOT')
+        rhs_dot.insert(self.pos, '•')
         rhs_str = ' '.join(rhs_dot)
         return '(%d, %s -> %s, %d)' % (self.loc, self.lhs, rhs_str, self.origin)
 

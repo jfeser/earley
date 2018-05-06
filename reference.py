@@ -95,7 +95,7 @@ def parse(grammar, words):
     def completer(state, k):
         assert state.origin != k
         for s in chart[state.origin]._states:
-            if s.rhs[s.pos] == state.lhs:
+            if not (s.finished()) and s.rhs[s.pos] == state.lhs:
                 chart[k].add(s.incr_pos())
 
     # Initialize.
