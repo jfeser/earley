@@ -1,0 +1,1037 @@
+30	START	S1
+
+16	START	S2
+
+60   S1  S1 S1
+65	S1	S_DECL
+20	S1	S_MDQ
+6	S1	S_WPQ
+7	S1	S_IMP
+
+
+100	S_DECL	S_DECL_BAR END
+
+1	S_DECL_BAR	ARB[phrase] , S_DECL_BAR
+53	S_DECL_BAR	S_DECL_BAR[singular]
+33	S_DECL_BAR	S_DECL_BAR[plural]
+87	S_DECL_BAR[singular]	NP[subject,singular] VP[singular]
+6	S_DECL_BAR[singular]	VBAR[pres-part] VP[singular,gerund]
+97	S_DECL_BAR[plural]	NP[subject,plural] VP[plural]
+
+1	S_DECL_BAR[plural]	S_DECL_BAR[plural] and S_DECL_BAR[plural]
+1 S_DECL_BAR[plural] S_DECL_BAR[plural] or S_DECL_BAR[plural]
+1	S_DECL_BAR[plural]	either S_DECL_BAR[plural] or S_DECL_BAR[plural]
+1 S_DECL_BAR[singular] S_DECL_BAR[singular] and S_DECL_BAR[singular]
+1 S_DECL_BAR[singular] S_DECL_BAR[singular] or S_DECL_BAR[singular]
+5	S_DECL_BAR[singular]	either S_DECL_BAR[singular] or S_DECL_BAR[singular]
+1	S_DECL_BAR	S_DECL_BAR PAS S_DECL_BAR
+0.01 S_DECL_BAR S_DECL_BAR CC #Lazy conjunction overgeneration
+1	S_DECL_BAR	CC S_DECL_BAR
+1	S_DECL_BAR	S_DECL_BAR IN
+1	S_DECL_BAR	IN S_DECL_BAR
+1	S_DECL_BAR	S_DECL_BAR S_DECL_BAR
+1	S_DECL_BAR	S_DECL_BAR CC S_DECL_BAR
+
+20 S_DECL_BAR[nodo] S_DECL_BAR[singular,nodo]
+100	S_DECL_BAR[nodo]	S_DECL_BAR[plural,nodo]
+20 S_DECL_BAR[singular,nodo] NP[subject,singular] VP[singular,nodo]
+100	S_DECL_BAR[plural,nodo]	NP[subject,plural] VP[plural,nodo]
+
+1 S_DECL_BAR[plural,nodo] S_DECL_BAR[plural,nodo] and S_DECL_BAR[plural,nodo]
+1 S_DECL_BAR[plural,nodo] S_DECL_BAR[plural,nodo] or S_DECL_BAR[plural,nodo]
+1 S_DECL_BAR[plural,nodo] either S_DECL_BAR[plural,nodo] or S_DECL_BAR[plural,nodo]
+1 S_DECL_BAR[singular,nodo] S_DECL_BAR[singular,nodo] and S_DECL_BAR[singular,nodo]
+1 S_DECL_BAR[singular,nodo] S_DECL_BAR[singular,nodo] or S_DECL_BAR[singular,nodo]
+1 S_DECL_BAR[singular,nodo] either S_DECL_BAR[singular,nodo] or S_DECL_BAR[singular,nodo]
+
+#Imperative Sentence
+
+100	S_IMP	S_IMP_BAR END
+
+35	S_IMP_BAR	VBAR[base]
+25	S_IMP_BAR	do VBAR[base]
+39	S_IMP_BAR	do not VBAR[base]
+
+1 S_IMP_BAR S_IMP_BAR and S_IMP_BAR
+1 S_IMP_BAR S_IMP_BAR or S_IMP_BAR
+1 S_IMP_BAR either S_IMP_BAR or S_IMP_BAR
+1 S_IMP_BAR neither S_IMP_BAR nor S_IMP_BAR
+0.01 S_IMP_BAR S_IMP_BAR PAS S_IMP_BAR #Lazy punctuation overgeneration
+0.01 S_IMP_BAR S_IMP_BAR CC #Lazy conjunction overgeneration
+0.01 S_IMP_BAR CC S_IMP_BAR #Lazy conjunction overgeneration
+0.01 S_IMP_BAR S_IMP_BAR IN #Lazy conjunction overgeneration
+0.01 S_IMP_BAR IN S_IMP_BAR #Lazy conjunction overgeneration
+0.01 S_IMP_BAR S_IMP_BAR S_IMP_BAR #Lazy conjunction overgeneration
+
+#MODAL questions
+69	S_MDQ	S_MDQ_BAR ?
+30	S_MDQ	WRB S_MDQ_BAR ?
+39	S_MDQ_BAR	do NP[subject,plural] VBAR[base]
+2	S_MDQ_BAR	MD_D NP[subject,plural] VBAR[base]
+35	S_MDQ_BAR	does NP[subject,singular] VBAR[base]
+2	S_MDQ_BAR	MD_D NP[subject,singular] VBAR[base]
+6	S_MDQ_BAR	is NP[subject,singular] VBAR[pres-part]
+13	S_MDQ_BAR	are NP[subject,plural] VBAR[pres-part]
+1	S_MDQ_BAR	has NP[subject,singular] VBAR[past-part]
+1	S_MDQ_BAR	have NP[subject,plural] VBAR[past-part]
+
+#Wh-Subjects
+97	NP[wh,singular]	WP
+2	NP[wh,singular]	QWDT NBAR[subject,singular]
+100	NP[wh,plural]	QWDT NBAR[subject,plural]
+
+#wh-Subject questions
+100	S_WPQ	S_WPQ_BAR ?
+10 S_WPQ_BAR NP[wh,plural] do NP[subject,plural] VBAR[base,nodo]
+2	S_WPQ_BAR	NP[wh,plural] MD_D NP[subject,plural] VBAR[base,nodo]
+86	S_WPQ_BAR	NP[wh,singular] does NP[subject,singular] VBAR[base,nodo]
+2	S_WPQ_BAR	NP[wh,singular] MD_D NP[subject,singular] VBAR[base,nodo]
+
+6	S_WPQ_BAR	NP[wh,singular] VP[singular]
+2	S_WPQ_BAR	NP[wh,plural] VP[plural]
+
+#Preposition Phrases.
+
+100	PP[phrase,singular]	WPP VP[singular]
+1 PP[phrase,singular] whose NP[subject] VBAR[base]
+1 PP[phrase,singular] whose NP[subject,singular] VP[singular]
+1 PP[phrase,singular] whose NP[subject,plural] VP[plural]
+
+100	PP[phrase,plural]	WPP VP[plural]
+1 PP[phrase,plural] whose NP[subject] VBAR[base]
+1 PP[phrase,plural] whose NP[subject,singular] VP[singular]
+1 PP[phrase,plural] whose NP[subject,plural] VP[plural]
+
+#Adverb Phrases.
+100	ARB[phrase]	ARB[phrase,singular]
+1 ARB[phrase] ARB[phrase,plural]
+
+100	ARB[phrase,singular]	SneakyPeteWRB S_DECL_BAR[singular]
+
+1 ARB[phrase,plural] SneakyPeteWRB S_DECL_BAR[plural]
+
+#Complementized phrases
+16	NP[report]	S_DECL_BAR
+10	NP[report]	WDT S_DECL_BAR
+18	NP[report]	WDT NP[subject] VBAR[base]
+54	NP[report]	NP[subject] VBAR[base]
+1 NP[report] VBAR[pres-part]
+
+7	NP[report,nodo]	S_DECL_BAR[nodo]
+1 NP[report,nodo] WDT S_DECL_BAR[nodo]
+1 NP[report,nodo] WDT NP[subject] VBAR[base,nodo]
+92	NP[report,nodo]	NP[subject] VBAR[base,nodo]
+
+# Auxiliaries
+92	AUX[base]	MD_D
+7	AUX[base]	MD_D not
+
+1 AUX[3p,singular] MD_D
+1 AUX[3p,singular] MD_D NOT
+1 AUX[3p,plural] MD_D
+1 AUX[3p,plural] MD_D NOT
+
+25	AUX[past-part,singular]	has
+25	AUX[past-part,singular]	has
+6	AUX[past-part,singular]	had
+6	AUX[past-part,singular]	had
+68	AUX[past-part,singular]	MD_D have
+1 AUX[past-part,singular] MD_D NOT have
+
+56	AUX[past-part,plural]	have
+44	AUX[past-part,plural]	MD_D have
+1 AUX[past-part,plural] MD_D NOT have
+
+19	AUX[pres-part,singular]	is
+57	AUX[pres-part,singular]	MD_D be
+1 AUX[pres-part,singular] MD_D NOT be
+23	AUX[pres-part,singular]	MD_D have been
+1 AUX[pres-part,singular] MD_D NOT have been
+
+30	AUX[pres-part,plural]	are
+60	AUX[pres-part,plural]	MD_D be
+10	AUX[pres-part,plural]	MD_D NOT be
+1 AUX[pres-part,plural] MD_D have been
+1 AUX[pres-part,plural] MD_D NOT have been
+
+# Adjectives
+8	ADJ	JJR
+8	ADJ	JJS
+83	ADJ	JJ
+1 ADJ ADJ and ADJ
+1 ADJ ADJ or ADJ
+1 ADJ either ADJ or ADJ
+1 ADJ neither ADJ nor ADJ
+
+# Verb phrases
+1 VP VP[singular]
+1 VP VP[plural]
+10 VP VP[base]
+
+1 VBAR[base] VBAR[base]
+1 VBAR[base] not VBAR[base]
+
+100	VP[base]	AUX[base] VBAR[base]
+100	VP[past,singular]	VBAR[past,singular]
+100	VP[past-part,singular]	AUX[past-part,singular] VBAR[past-part]
+100	VP[pres-part,singular]	AUX[pres-part,singular] VBAR[pres-part]
+1 VP[3p,singular] VBAR[3p,singular]
+1 VP[3p,singular] AUX[3p,singular] VBAR[3p,singular]
+
+100	VP[past,plural]	VBAR[past,plural]
+100	VP[past-part,plural]	AUX[past-part,plural] VBAR[past-part]
+100	VP[pres-part,plural]	AUX[pres-part,plural] VBAR[pres-part]
+100	VP[3p,plural]	VBAR[3p,plural]
+1 VP[3p,plural] AUX[3p,plural] VBAR[3p,plural]
+
+#1 VP[singular] VBAR[pres-part] #This is not a valid verb phrase on its own
+#1 VP[singular] VBAR[past-part] #This is not a valid verb phrase on its own
+#1 VP[plural] VBAR[past-part] #This is not a valid verb phrase on its own
+#1 VP[plural] VBAR[pres-part] #This is not a valid verb phrase on its own
+
+11	VP[singular]	VP[base]
+14	VP[singular]	VP[past,singular]
+13	VP[singular]	VP[past-part,singular]
+7	VP[singular]	VP[pres-part,singular]
+52	VP[singular]	VBAR[3p,singular]
+
+13	VP[plural]	VP[base]
+9	VP[plural]	VP[past,plural]
+12	VP[plural]	VP[past-part,plural]
+4	VP[plural]	VP[pres-part,plural]
+60	VP[plural]	VP[3p,plural]
+
+1 VBAR VBAR[base]
+1 VBAR VBAR[past,singular]
+1 VBAR VBAR[past,plural]
+1 VBAR VBAR[past-part]
+1 VBAR VBAR[pres-part]
+1 VBAR VBAR[3p,singular]
+1 VBAR VBAR[3p,plural]
+
+4	VBAR[base]	be ADJ
+11	VBAR[3p,singular]	is ADJ
+4	VBAR[3p,plural]	are ADJ
+18	VBAR[past,singular]	was ADJ
+21	VBAR[past,plural]	were ADJ
+19	VBAR[past-part]	been ADJ
+1 VBAR[pres-part] being ADJ
+
+56	VBAR[base]	VB[base,intrans]
+34	VBAR[past,singular]	VB[past,singular,intrans]
+21	VBAR[past,plural]	VB[past,plural,intrans]
+40	VBAR[past-part]	VB[past-part,intrans]
+48	VBAR[pres-part]	VB[pres-part,intrans]
+49	VBAR[3p,singular]	VB[3p,singular,intrans]
+51	VBAR[3p,plural]	VB[3p,plural,intrans]
+
+21	VBAR[base]	VB[base,trans] NP[object]
+47	VBAR[past,plural]	VB[past,plural,trans] NP[object]
+14	VBAR[past,singular]	VB[past,singular,trans] NP[object]
+18	VBAR[past-part]	VB[past-part,trans] NP[object]
+11	VBAR[pres-part]	VB[pres-part,trans] NP[object]
+26	VBAR[3p,singular]	VB[3p,singular,trans] NP[object]
+6	VBAR[3p,plural]	VB[3p,plural,trans] NP[object]
+
+4	VBAR[base]	VB[base,report] NP[report]
+5	VBAR[past,plural]	VB[past,plural,report] NP[report]
+4	VBAR[past,singular]	VB[past,singular,report] NP[report]
+4	VBAR[past-part]	VB[past-part,report] NP[report]
+13	VBAR[pres-part]	VB[pres-part,report] NP[report]
+2	VBAR[3p,singular]	VB[3p,singular,report] NP[report]
+3	VBAR[3p,plural]	VB[3p,plural,report] NP[report]
+
+1	VBAR[base]	ADVP VBAR[base]
+5	VBAR[past,plural]	ADVP VBAR[past,plural]
+1	VBAR[past,singular]	VBAR[past,singular] ADVP
+1 VBAR[past-part] ADVP VBAR[past-part]
+1 VBAR[pres-part] ADVP VBAR[pres-part]
+1	VBAR[3p,singular]	ADVP VBAR[3p,singular]
+1	VBAR[3p,plural]	ADVP VBAR[3p,plural]
+
+3	VBAR[base]	VBAR[base] ADVP
+1 VBAR[past,plural] VBAR[past,plural] ADVP
+1	VBAR[past,singular]	VBAR[past,singular] ADVP
+1 VBAR[past-part] VBAR[past-part] ADVP
+1 VBAR[pres-part] VBAR[pres-part] ADVP
+3	VBAR[3p,singular]	VBAR[3p,singular] ADVP
+6	VBAR[3p,plural]	VBAR[3p,plural] ADVP
+
+8	VBAR[base]	VBAR[base] PP
+1 VBAR[past,plural] VBAR[past,plural] PP
+21	VBAR[past,singular]	VBAR[past,singular] PP
+15	VBAR[past-part]	VBAR[past-part] PP
+26	VBAR[pres-part]	VBAR[pres-part] PP
+4	VBAR[3p,singular]	VBAR[3p,singular] PP
+27	VBAR[3p,plural]	VBAR[3p,plural] PP
+
+1	VBAR[base]	VBAR[base] and VBAR[base]
+1 VBAR[past,plural] VBAR[past,plural] and VBAR[past,plural]
+5	VBAR[past,singular]	VBAR[past,singular] and VBAR[past,singular]
+1 VBAR[past-part] VBAR[past-part] and VBAR[past-part]
+1 VBAR[pres-part] VBAR[pres-part] and VBAR[pres-part]
+1	VBAR[3p,singular]	VBAR[3p,singular] and VBAR[3p,singular]
+1 VBAR[3p,plural] VBAR[3p,plural] and VBAR[3p,plural]
+
+1	VBAR[base]	either VBAR[base] or VBAR[base]
+1 VBAR[past,plural] either VBAR[past,plural] or VBAR[past,plural]
+1 VBAR[past,singular] either VBAR[past,singular] or VBAR[past,singular]
+1 VBAR[past-part] either VBAR[past-part] or VBAR[past-part]
+1 VBAR[pres-part] either VBAR[pres-part] or VBAR[pres-part]
+1 VBAR[3p,singular] either VBAR[3p,singular] or VBAR[3p,singular]
+1 VBAR[3p,plural] either VBAR[3p,plural] or VBAR[3p,plural]
+
+1 VBAR[base] neither VBAR[base] nor VBAR[base]
+1 VBAR[past,plural] neither VBAR[past,plural] nor VBAR[past,plural]
+1 VBAR[past,singular] neither VBAR[past,singular] nor VBAR[past,singular]
+1	VBAR[past-part]	neither VBAR[past-part] nor VBAR[past-part]
+1 VBAR[pres-part] neither VBAR[pres-part] nor VBAR[pres-part]
+1	VBAR[3p,singular]	neither VBAR[3p,singular] nor VBAR[3p,singular]
+1 VBAR[3p,plural] neither VBAR[3p,plural] nor VBAR[3p,plural]
+
+# Verb phrases without direct objects
+1 VBAR[base,nodo] VBAR[base,nodo]
+1 VBAR[base,nodo] not VBAR[base,nodo]
+
+1 VP[base,nodo] AUX[base] VBAR[base,nodo]
+1 VP[past,singular,nodo] VBAR[past,singular,nodo]
+1 VP[past-part,singular,nodo] AUX[past-part,singular] VBAR[past-part,nodo]
+1 VP[pres-part,singular,nodo] AUX[pres-part,singular] VBAR[pres-part,nodo]
+1 VP[3p,singular,nodo] VBAR[3p,singular,nodo]
+1 VP[3p,singular,nodo] AUX[3p,singular] VBAR[3p,singular,nodo]
+
+1 VP[past,plural,nodo] VBAR[past,plural,nodo]
+1 VP[past-part,plural,nodo] AUX[past-part,plural] VBAR[past-part,nodo]
+100	VP[pres-part,plural,nodo]	AUX[pres-part,plural] VBAR[pres-part,nodo]
+1 VP[3p,plural,nodo] VBAR[3p,plural,nodo]
+1 VP[3p,plural,nodo] AUX[3p,plural] VBAR[3p,plural,nodo]
+
+1 VP[singular,nodo] VP[base,nodo]
+1 VP[singular,nodo] VP[past,singular,nodo]
+1 VP[singular,nodo] VP[past-part,singular,nodo]
+1 VP[singular,nodo] VP[pres-part,singular,nodo]
+1 VP[singular,nodo] VBAR[3p,singular,nodo]
+
+1 VP[plural,nodo] VP[base,nodo]
+1 VP[plural,nodo] VP[past,plural,nodo]
+1 VP[plural,nodo] VP[past-part,plural,nodo]
+100	VP[plural,nodo]	VP[pres-part,plural,nodo]
+1 VP[plural,nodo] VP[3p,plural,nodo]
+
+74	VBAR[base,nodo]	VB[base,trans]
+40 VBAR[past,plural,nodo] VB[past,plural,trans] #NP
+40 VBAR[past,singular,nodo] VB[past,singular,trans] #NP
+40 VBAR[past-part,nodo] VB[past-part,trans] #NP
+100	VBAR[pres-part,nodo]	VB[pres-part,trans]
+40 VBAR[3p,singular,nodo] VB[3p,singular,trans] #NP
+40 VBAR[3p,plural,nodo] VB[3p,plural,trans] #NP
+
+25	VBAR[base,nodo]	VB[base,report] NP[report,nodo]
+9 VBAR[past,plural,nodo] VB[past,plural,report] NP[report,nodo]
+9 VBAR[past,singular,nodo] VB[past,singular,report] NP[report,nodo]
+9 VBAR[past-part,nodo] VB[past-part,report] NP[report,nodo]
+9 VBAR[pres-part,nodo] VB[pres-part,report] NP[report,nodo]
+9 VBAR[3p,singular,nodo] VB[3p,singular,report] NP[report,nodo]
+9 VBAR[3p,plural,nodo] VB[3p,plural,report] NP[report,nodo]
+
+1 VBAR[base,nodo] ADVP VBAR[base,nodo]
+1 VBAR[past,plural,nodo] ADVP VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] ADVP VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] ADVP VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] ADVP VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] ADVP VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] ADVP VBAR[3p,plural,nodo]
+
+1 VBAR[base,nodo] , ARB[phrase] , VBAR[base,nodo]
+1 VBAR[past,plural,nodo] , ARB[phrase] , VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] , ARB[phrase] , VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] , ARB[phrase] , VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] , ARB[phrase] , VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] , ARB[phrase] , VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] , ARB[phrase] , VBAR[3p,plural,nodo]
+
+1 VBAR[base,nodo] VBAR[base,nodo] ADVP
+1 VBAR[past,plural,nodo] VBAR[past,plural,nodo] ADVP
+1 VBAR[past,singular,nodo] VBAR[past,singular,nodo] ADVP
+1 VBAR[past-part,nodo] VBAR[past-part,nodo] ADVP
+1 VBAR[pres-part,nodo] VBAR[pres-part,nodo] ADVP
+1 VBAR[3p,singular,nodo] VBAR[3p,singular,nodo] ADVP
+1 VBAR[3p,plural,nodo] VBAR[3p,plural,nodo] ADVP
+
+1 VBAR[base,nodo] VBAR[base] PP[nodo]
+1 VBAR[past,plural,nodo] VBAR[past,plural] PP[nodo]
+1 VBAR[past,singular,nodo] VBAR[past,singular] PP[nodo]
+1 VBAR[past-part,nodo] VBAR[past-part] PP[nodo]
+1 VBAR[pres-part,nodo] VBAR[pres-part] PP[nodo]
+1 VBAR[3p,singular,nodo] VBAR[3p,singular] PP[nodo]
+1 VBAR[3p,plural,nodo] VBAR[3p,plural] PP[nodo]
+
+1 VBAR[base,nodo] VBAR[base,nodo] and VBAR[base,nodo]
+1 VBAR[past,plural,nodo] VBAR[past,plural,nodo] and VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] VBAR[past,singular,nodo] and VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] VBAR[past-part,nodo] and VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] VBAR[pres-part,nodo] and VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] VBAR[3p,singular,nodo] and VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] VBAR[3p,plural,nodo] and VBAR[3p,plural,nodo]
+
+1 VBAR[base,nodo] VBAR[base,nodo] or VBAR[base,nodo]
+1 VBAR[past,plural,nodo] VBAR[past,plural,nodo] or VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] VBAR[past,singular,nodo] or VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] VBAR[past-part,nodo] or VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] VBAR[pres-part,nodo] or VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] VBAR[3p,singular,nodo] or VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] VBAR[3p,plural,nodo] or VBAR[3p,plural,nodo]
+
+1 VBAR[base,nodo] either VBAR[base,nodo] or VBAR[base,nodo]
+1 VBAR[past,plural,nodo] either VBAR[past,plural,nodo] or VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] either VBAR[past,singular,nodo] or VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] either VBAR[past-part,nodo] or VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] either VBAR[pres-part,nodo] or VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] either VBAR[3p,singular,nodo] or VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] either VBAR[3p,plural,nodo] or VBAR[3p,plural,nodo]
+
+1 VBAR[base,nodo] neither VBAR[base,nodo] nor VBAR[base,nodo]
+1 VBAR[past,plural,nodo] neither VBAR[past,plural,nodo] nor VBAR[past,plural,nodo]
+1 VBAR[past,singular,nodo] neither VBAR[past,singular,nodo] nor VBAR[past,singular,nodo]
+1 VBAR[past-part,nodo] neither VBAR[past-part,nodo] nor VBAR[past-part,nodo]
+1 VBAR[pres-part,nodo] neither VBAR[pres-part,nodo] nor VBAR[pres-part,nodo]
+1 VBAR[3p,singular,nodo] neither VBAR[3p,singular,nodo] nor VBAR[3p,singular,nodo]
+1 VBAR[3p,plural,nodo] neither VBAR[3p,plural,nodo] nor VBAR[3p,plural,nodo]
+
+#Verb phrases that take a gerund as a subject
+
+1 VBAR[base,gerund] VBAR[base,gerund]
+1 VBAR[base,gerund] not VBAR[base,gerund]
+
+100	VP[base,gerund]	AUX[base] VBAR[base,gerund]
+100	VP[past,singular,gerund]	VBAR[past,singular,gerund]
+100	VP[past-part,singular,gerund]	AUX[past-part,singular] VBAR[past-part,gerund]
+100	VP[pres-part,singular,gerund]	AUX[pres-part,singular] VBAR[pres-part,gerund]
+1 VP[3p,singular,gerund] VBAR[3p,singular,gerund]
+1 VP[3p,singular,gerund] AUX[3p,singular] VBAR[3p,singular,gerund]
+
+1 VP[past,plural,gerund] VBAR[past,plural,gerund]
+1 VP[past-part,plural,gerund] AUX[past-part,plural] VBAR[past-part,gerund]
+1 VP[pres-part,plural,gerund] AUX[pres-part,plural] VBAR[pres-part,gerund]
+1 VP[3p,plural,gerund] VBAR[3p,plural,gerund]
+1 VP[3p,plural,gerund] AUX[3p,plural] VBAR[3p,plural,gerund]
+
+26	VP[singular,gerund]	VP[base,gerund]
+8	VP[singular,gerund]	VP[past,singular,gerund]
+17	VP[singular,gerund]	VP[past-part,singular,gerund]
+4	VP[singular,gerund]	VP[pres-part,singular,gerund]
+43	VP[singular,gerund]	VBAR[3p,singular,gerund]
+
+1 VP[plural,gerund] VP[base,gerund]
+1 VP[plural,gerund] VP[past,plural,gerund]
+1 VP[plural,gerund] VP[past-part,plural,gerund]
+1 VP[plural,gerund] VP[pres-part,plural,gerund]
+1 VP[plural,gerund] VP[3p,plural,gerund]
+
+85	VBAR[base,gerund]	be ADJ
+100	VBAR[3p,singular,gerund]	is ADJ
+20 VBAR[3p,plural,gerund] are ADJ
+66	VBAR[past,singular,gerund]	was ADJ
+20 VBAR[past,plural,gerund] were ADJ
+80	VBAR[past-part,gerund]	been ADJ
+100	VBAR[pres-part,gerund]	being ADJ
+
+1 VBAR[base,gerund] ADVP VBAR[base,gerund]
+1 VBAR[past,plural,gerund] ADVP VBAR[past,plural,gerund]
+1 VBAR[past,singular,gerund] VBAR[past,singular,gerund] ADVP
+1 VBAR[past-part,gerund] ADVP VBAR[past-part,gerund]
+1 VBAR[pres-part,gerund] ADVP VBAR[pres-part,gerund]
+1 VBAR[3p,singular,gerund] ADVP VBAR[3p,singular,gerund]
+1 VBAR[3p,plural,gerund] ADVP VBAR[3p,plural,gerund]
+
+1 VBAR[base,gerund] VBAR[base,gerund] ADVP
+1 VBAR[past,plural,gerund] VBAR[past,plural,gerund] ADVP
+1 VBAR[past,singular,gerund] VBAR[past,singular,gerund] ADVP
+1 VBAR[past-part,gerund] VBAR[past-part,gerund] ADVP
+1 VBAR[pres-part,gerund] VBAR[pres-part,gerund] ADVP
+1 VBAR[3p,singular,gerund] VBAR[3p,singular,gerund] ADVP
+1 VBAR[3p,plural,gerund] VBAR[3p,plural,gerund] ADVP
+
+14	VBAR[base,gerund]	VBAR[base,gerund] PP
+1 VBAR[past,plural,gerund] VBAR[past,plural,gerund] PP
+33	VBAR[past,singular,gerund]	VBAR[past,singular,gerund] PP
+20	VBAR[past-part,gerund]	VBAR[past-part,gerund] PP
+1 VBAR[pres-part,gerund] VBAR[pres-part,gerund] PP
+1 VBAR[3p,singular,gerund] VBAR[3p,singular,gerund] PP
+1 VBAR[3p,plural,gerund] VBAR[3p,plural,gerund] PP
+
+1 VBAR[base,gerund] VBAR[base,gerund] and VBAR[base,gerund]
+1 VBAR[past,plural,gerund] VBAR[past,plural,gerund] and VBAR[past,plural,gerund]
+1 VBAR[past,singular,gerund] VBAR[past,singular,gerund] and VBAR[past,singular,gerund]
+1 VBAR[past-part,gerund] VBAR[past-part,gerund] and VBAR[past-part,gerund]
+1 VBAR[pres-part,gerund] VBAR[pres-part,gerund] and VBAR[pres-part,gerund]
+1 VBAR[3p,singular,gerund] VBAR[3p,singular,gerund] and VBAR[3p,singular,gerund]
+1 VBAR[3p,plural,gerund] VBAR[3p,plural,gerund] and VBAR[3p,plural,gerund]
+
+1 VBAR[base,gerund] VBAR[base,gerund] or VBAR[base,gerund]
+1 VBAR[past,plural,gerund] VBAR[past,plural,gerund] or VBAR[past,plural,gerund]
+1 VBAR[past,singular,gerund] VBAR[past,singular,gerund] or VBAR[past,singular,gerund]
+1 VBAR[past-part,gerund] VBAR[past-part,gerund] or VBAR[past-part,gerund]
+1 VBAR[pres-part,gerund] VBAR[pres-part,gerund] or VBAR[pres-part,gerund]
+1 VBAR[3p,singular,gerund] VBAR[3p,singular,gerund] or VBAR[3p,singular,gerund]
+1 VBAR[3p,plural,gerund] VBAR[3p,plural,gerund] or VBAR[3p,plural,gerund]
+
+1 VBAR[base,gerund] either VBAR[base,gerund] or VBAR[base,gerund]
+1 VBAR[past,plural,gerund] either VBAR[past,plural,gerund] or VBAR[past,plural,gerund]
+1 VBAR[past,singular,gerund] either VBAR[past,singular,gerund] or VBAR[past,singular,gerund]
+1 VBAR[past-part,gerund] either VBAR[past-part,gerund] or VBAR[past-part,gerund]
+1 VBAR[pres-part,gerund] either VBAR[pres-part,gerund] or VBAR[pres-part,gerund]
+1 VBAR[3p,singular,gerund] either VBAR[3p,singular,gerund] or VBAR[3p,singular,gerund]
+1 VBAR[3p,plural,gerund] either VBAR[3p,plural,gerund] or VBAR[3p,plural,gerund]
+
+1 VBAR[base,gerund] neither VBAR[base,gerund] nor VBAR[base,gerund]
+1 VBAR[past,plural,gerund] neither VBAR[past,plural,gerund] nor VBAR[past,plural,gerund]
+1 VBAR[past,singular,gerund] neither VBAR[past,singular,gerund] nor VBAR[past,singular,gerund]
+1 VBAR[past-part,gerund] neither VBAR[past-part,gerund] nor VBAR[past-part,gerund]
+1 VBAR[pres-part,gerund] neither VBAR[pres-part,gerund] nor VBAR[pres-part,gerund]
+1 VBAR[3p,singular,gerund] neither VBAR[3p,singular,gerund] nor VBAR[3p,singular,gerund]
+1 VBAR[3p,plural,gerund] neither VBAR[3p,plural,gerund] nor VBAR[3p,plural,gerund]
+
+# Adverb phrases.
+100	ADVP	RB
+1 ADVP _ADVP and _ADVP
+1 ADVP ADVP but _ADVP
+1 ADVP neither _ADVP nor _ADVP
+1 ADVP either _ADVP or _ADVP
+10 _ADVP RB
+1 _ADVP ADVP #discourages nesting.
+
+# Determiner phrases (not really. see https://en.wikipedia.org/wiki/Determiner_phrase)
+87	DP[singular]	DT[singular]
+83	DP[plural]	DT[plural]
+12	DP[singular]	PRP$
+16	DP[plural]	PRP$
+
+# Noun phrases (subjects)
+87	NP[subject]	NP[subject,singular]
+12	NP[subject]	NP[subject,plural]
+52	NP[subject,singular]	DP[singular] NBAR[subject,singular]
+40	NP[subject,singular]	NBAR[subject,singular,proper]
+16	NP[subject,plural]	DP[plural] NBAR[subject,plural]
+26	NP[subject,plural]	NBAR[subject,plural,proper]
+43	NP[subject,plural]	NBAR[subject,plural]
+
+0.1	NP[subject,singular]	NP[subject] , NP[subject]
+
+1	NP[subject,plural]	neither NP[subject,plural] nor NP[subject]
+1	NP[subject,plural]	neither NP[subject] nor NP[subject,plural]
+2	NP[subject,singular]	neither NP[subject,singular] nor NP[subject,singular]
+
+1 NP[subject,plural] either NP[subject,plural] or NP[subject]
+1	NP[subject,plural]	either NP[subject] or NP[subject,plural]
+1	NP[subject,singular]	either NP[subject,singular] or NP[subject,singular]
+
+1	NP[subject,plural]	NP[subject,plural] or NP[subject]
+1 NP[subject,plural] NP[subject] or NP[subject,plural]
+1	NP[subject,singular]	NP[subject,singular] or NP[subject,singular]
+
+5	NP[subject,plural]	NP[subject] and NP[subject]
+
+1	NP[subject,singular]	NP[subject,singular] POS NBAR[subject,singular]
+1	NP[subject,plural]	NP[subject,singular] POS NBAR[subject,plural]
+
+1 NBAR[subject] NBAR[subject,singular]
+1 NBAR[subject] NBAR[subject,plural]
+53	NBAR[subject,singular,proper]	Proper
+10	NBAR[subject,singular,proper]	NNP
+21	NBAR[subject,plural,proper]	NNPS
+36	NBAR[subject,singular,proper]	PRP[subject,singular]
+78	NBAR[subject,plural,proper]	PRP[subject,plural]
+93	NBAR[subject,singular]	NN
+70	NBAR[subject,plural]	NNS
+1	NP[subject,singular]	NP[subject,singular] PP
+2	NP[subject,plural]	NP[subject,plural] PP
+1	NP[subject,singular]	NP[subject,singular] PP[phrase,singular]
+1	NP[subject,plural]	NP[subject,plural] PP[phrase,plural]
+5	NBAR[subject,singular]	ADJ NBAR[subject,singular]
+6	NBAR[subject,plural]	ADJ NBAR[subject,plural]
+0.1	NP[subject,singular]	NP[subject,singular] , NP[subject] ,
+0.1	NP[subject,plural]	NP[subject,plural] , NP[subject] ,
+1	NBAR[subject,singular]	CD[singular] NBAR[subject,singular]
+1	NBAR[subject,plural]	CD[plural] NBAR[subject,plural]
+
+# Noun phrases (objects)
+72	NP[object]	NP[object,singular]
+27	NP[object]	NP[object,plural]
+62	NP[object,singular]	DP[singular] NBAR[object,singular]
+20	NP[object,singular]	NBAR[object,singular,proper]
+25	NP[object,plural]	DP[plural] NBAR[object,plural]
+26	NP[object,plural]	NBAR[object,plural,proper]
+37	NP[object,plural]	NBAR[object,plural]
+
+0.1	NP[object,singular]	NP[object] , NP[object]
+
+1	NP[object,plural]	neither NP[object,plural] nor NP[object]
+1 NP[object,plural] neither NP[object] nor NP[object,plural]
+2	NP[object,singular]	neither NP[object,singular] nor NP[object,singular]
+
+1	NP[object,plural]	either NP[object,plural] or NP[object]
+1 NP[object,plural] either NP[object] or NP[object,plural]
+1	NP[object,singular]	either NP[object,singular] or NP[object,singular]
+
+1	NP[object,plural]	NP[object,plural] or NP[object]
+1 NP[object,plural] NP[object] or NP[object,plural]
+1	NP[object,singular]	NP[object,singular] or NP[object,singular]
+
+3	NP[object,plural]	NP[object] and NP[object]
+
+1	NP[object,singular]	NP[object,singular] POS NBAR[object,singular]
+1	NP[object,plural]	NP[object,singular] POS NBAR[object,plural]
+
+1 NBAR[object] NBAR[object,singular]
+1 NBAR[object] NBAR[object,plural]
+46	NBAR[object,singular,proper]	Proper
+21	NBAR[object,singular,proper]	NNP
+37	NBAR[object,plural,proper]	NNPS
+31	NBAR[object,singular,proper]	PRP[object,singular]
+62	NBAR[object,plural,proper]	PRP[object,plural]
+89	NBAR[object,singular]	NN
+66	NBAR[object,plural]	NNS
+9	NP[object,singular]	NP[object,singular] PP
+1 NP[object,plural] NP[object,plural] PP
+3	NP[object,singular]	NP[subject,singular] PP[phrase,singular]
+2	NP[object,plural]	NP[subject,plural] PP[phrase,plural]
+8	NBAR[object,singular]	ADJ NBAR[object,singular]
+10	NBAR[object,plural]	ADJ NBAR[object,plural]
+0.1	NP[object,singular]	NP[object,singular] , NP[object] ,
+0.1 NP[object,plural] NP[object,plural] , NP[object] , #TODO base set hack
+1	NBAR[object,singular]	CD[singular] NBAR[object,singular]
+22	NBAR[object,plural]	CD[plural] NBAR[object,plural]
+
+# Prepositional Phrases
+99	PP	Prep NP[object]
+1 PP there
+1 PP Prep there
+1 PP PP and PP
+1 PP PP or PP
+1	PP	either PP or PP
+1 PP neither PP nor PP
+
+15 PP[nodo] Prep
+1 PP[nodo] PP[nodo] and PP[nodo]
+1 PP[nodo] PP[nodo] or PP[nodo]
+1 PP[nodo] either PP[nodo] or PP[nodo]
+1 PP[nodo] neither PP[nodo] nor PP[nodo]
+
+# Punctuation
+79	END	.
+20	END	!
+# This is a hand-generated set of preterminal rules.
+# It specifies a simple tag set which will be handled by the S2
+# grammar and which can (though doesn't necessarily need to be)
+# handled by the S1 grammar.
+#
+# The weights given here may be changed, but no new vocabulary
+# items are to be added.
+
+# Miscellaneous items that don't fit into any of our simple tags are
+# given to Misc.  You will want to develop your own tags for these!
+
+
+# Singular and mass nouns.  Notice that only the
+# ones that start with consonants get our Noun tag.
+1       NN      castle
+1       NN      king
+1       NN      defeater
+1       NN      sovereign
+1       NN      servant
+1       NN      corner
+1       NN      land
+1       NN      quest
+1       NN      chalice
+1       NN      master
+1       NN      horse
+1       NN      fruit
+1       NN      swallow
+1       NN      sun
+1       NN      winter
+1       NN      coconut
+1       NN      pound
+1       NN      husk
+1       NN      home
+1       NN      weight
+1       NN      story
+1       NN      Holy Grail
+1       NN      Round Table
+
+# Determiners.
+1       DT      DT[singular]
+1       DT      DT[plural]
+1       DT[singular]      a
+1       DT[singular]      another
+1       DT[singular]      any
+1       DT[plural]      any
+1       DT[singular]      each
+1       DT[singular]      every
+1       DT[singular]      no
+1       DT[plural]      no
+1       DT[singular]      that
+1       DT[singular]      the
+1       DT[plural]      the
+1       DT[singular]      this
+
+# Prepositions.
+1       Prep    above
+1       Prep    across
+1       Prep    at
+1       Prep    below
+1       Prep    by
+1       Prep    for
+1       Prep    from
+1       Prep    into
+1       Prep    near
+1       Prep    of
+1       Prep    on
+1       Prep    over
+1       Prep    through
+1       Prep    with
+1       Prep    to #TODO this is right, right?
+
+# Proper nouns.  Note that our Proper tag is just for people.
+1       Proper  Arthur
+1       Proper  Guinevere
+1       Proper  Sir Lancelot
+1       Proper  Sir Bedevere
+1       Proper  Zoot
+1       Proper  Dingo
+1       Proper  Patsy
+1       Proper  Uther Pendragon
+
+1       IS   is
+
+# Pauses.
+1       PAS    ,
+1       PAS    ...
+1       PAS    --
+1       PAS    ;
+1       PAS    :
+
+# Coordinating conjunctions.
+1       CC      and
+1       CC      but
+1       CC      or
+1       CC      either
+1       CC      nor
+1       CC      neither
+1       CC      so
+
+# Numbers.
+1       CD[singular]      one
+1       CD[plural]    eight
+1       CD[plural]    five
+1       CD[plural]    5.5
+1       CD[plural]    sixty
+1       CD[plural]    5,000
+
+# Expletive.
+1       Misc    there
+
+# Subordinating conjunctions.
+1       IN      that
+1       IN      so
+1       IN      while
+1       IN      because
+1       IN      if
+
+# Modals minus DO.
+1       MD_D    can
+1       MD_D    could
+1       MD_D    may
+1       MD_D    might
+1       MD_D    must
+1       MD_D    ought to
+1       MD_D    shall
+1       MD_D    should
+1       MD_D    will
+1       MD_D    would
+
+# Adjectives.
+1       JJ      bloody
+1       JJ      weary
+1       JJ      unable
+1       JJ      trusty
+1       JJ      further
+1       JJ      sacred
+1       JJ      tropical
+1       JJ      indigenous
+1       JJ      temperate
+1       JJ      hot
+1       JJ      lucky
+1       JJ      simple
+1       JJ      tiny
+1       JJ      hard
+1       JJ      sensational
+1       JJ      comparable
+1       JJ      angolian
+1       JJ      yellow
+1       JJ      plodding
+1       JJ      had
+1       JJ      covered
+1       JJ      ridden
+1       JJ      drunk
+1       JJ      grown
+1       JJ      carried
+1       JJ      suggested
+1       JJ      known
+1       JJ      migrated
+1       JJ      spoken
+
+# Comparative adjectives.
+1       JJR     bloodier
+1       JJR     wearier
+1       JJR     trustier
+1       JJR     hotter
+1       JJR     simpler
+1       JJR     tinier
+1       JJR     harder
+
+# Superlative adjectives.
+1       JJS     bloodiest
+1       JJS     weariest
+1       JJS     trustiest
+1       JJS     hottest
+1       JJS     simplest
+1       JJS     tiniest
+1       JJS     hardest
+
+# Plural nouns.
+1       NNS     coconuts
+1       NNS     halves
+1       NNS     snows
+1       NNS     mountains
+1       NNS     areas
+1       NNS     strangers
+1       NNS     inches
+1       NNS     snakes
+1       NNS     ants
+1       NNS     nights
+
+# More proper nouns, not people.
+1       NNP     Camelot
+1       NNP     England
+
+# Plural proper nouns.
+1       NNPS    Britons
+1       NNPS    Saxons
+
+# Personal pronouns.
+1       PRP[subject,singular]     he
+1       PRP[subject,singular]     she
+1       PRP[subject,singular]     it
+1       PRP[subject,singular]     one
+1       PRP[subject,plural]     they
+
+# Personal pronouns (objects).
+1       PRP[object,singular]     her
+1       PRP[object,singular]     him
+1       PRP[object,singular]     it
+1       PRP[object,singular]     one
+1       PRP[object,plural]     them
+
+
+# Possessive personal pronouns
+1       PRP$    her
+1       PRP$    his
+1       PRP$    its
+1       PRP$    their
+
+# Adverbs.
+1       RB      harder
+1       RB      hardest
+1       RB      again
+1       RB      already
+1       RB      currently
+1       RB      frequently
+1       RB      precisely
+1       RB      south
+1       RB      successfully
+1       RB      unfortunately
+1       RB      hard
+
+# 'do'/'does'
+1       DO    do
+1       DO    does
+
+# 'to'
+1       TO      to
+
+# 'not'
+1       NOT    not
+
+# BE, a special verb
+1       BE      be
+
+# Verbs (past tense).
+1 VB[past] VB[past,singular]
+1 VB[past] VB[past,plural]
+1 VB[past,singular] VB[past,singular,trans]
+1 VB[past,singular] VB[past,singular,intrans]
+1 VB[past,singular,intrans] VB[past,singular,trans]
+1       VB[past,singular,trans]     had
+1       VB[past,singular,trans]     covered
+1       VB[past,singular,trans]     was
+1       VB[past,singular,trans]     rode
+1       VB[past,singular,trans]     drank
+1       VB[past,singular,trans]     grew
+1       VB[past,singular,trans]     carried
+1       VB[past,singular,trans]     suggested
+1       VB[past,singular,trans]     knew
+1       VB[past,singular,trans]     ate
+1       VB[past,singular,intrans]     spoke
+1       VB[past,singular,intrans]     migrated
+1       VB[past,singular,report]     suggested
+1       VB[past,singular,report]     knew
+
+1 VB[past,plural] VB[past,plural,trans]
+1 VB[past,plural] VB[past,plural,intrans]
+1 VB[past,plural,intrans] VB[past,plural,trans]
+1       VB[past,plural,trans]     had
+1       VB[past,plural,trans]     covered
+1       VB[past,plural,trans]     were
+1       VB[past,plural,trans]     rode
+1       VB[past,plural,trans]     drank
+1       VB[past,plural,trans]     grew
+1       VB[past,plural,trans]     carried
+1       VB[past,plural,trans]     suggested
+1       VB[past,plural,trans]     knew
+1       VB[past,plural,trans]     ate
+1       VB[past,plural,intrans]     spoke
+1       VB[past,plural,intrans]     migrated
+1       VB[past,plural,report]     suggested
+1       VB[past,plural,report]     knew
+
+# Verbs (present participles).
+1 VB[pres-part] VB[pres-part,trans]
+1 VB[pres-part] VB[pres-part,intrans]
+1 VB[pres-part,intrans] VB[pres-part,trans]
+1       VB[pres-part,trans]     having
+1       VB[pres-part,trans]     covering
+1       VB[pres-part,trans]     being
+1       VB[pres-part,trans]     riding
+1       VB[pres-part,trans]     drinking
+1       VB[pres-part,trans]     growing
+1       VB[pres-part,trans]     carrying
+1       VB[pres-part,trans]     suggesting
+1       VB[pres-part,trans]     knowing
+1       VB[pres-part,intrans]     speaking
+1       VB[pres-part,intrans]     migrating
+1       VB[pres-part,report]     suggesting
+1       VB[pres-part,report]     knowing
+
+# Verbs (past participle).
+1 VB[past-part] VB[past-part,trans]
+1 VB[past-part] VB[past-part,intrans]
+1 VB[past-part,intrans] VB[past-part,trans]
+1       VB[past-part,trans]   had
+1       VB[past-part,trans]   covered
+1       VB[past-part,trans]   ridden
+1       VB[past-part,trans]   drunk
+1       VB[past-part,trans]   grown
+1       VB[past-part,trans]   carried
+1       VB[past-part,trans]   been
+1       VB[past-part,trans]   suggested
+1       VB[past-part,trans]   known
+1       VB[past-part,intrans]   migrated
+1       VB[past-part,intrans]   spoken
+1       VB[past-part,report]   suggested
+1       VB[past-part,report]   known
+
+# More third person singular verbs.
+1 VB[3p,singular] VB[3p,singular,trans]
+1 VB[3p,singular] VB[3p,singular,intrans]
+1 VB[3p,singular,intrans] VB[3p,singular,trans]
+1       VB[3p,singular,trans]     grows
+1       VB[3p,singular,trans]     suggests
+1       VB[3p,singular,trans]     knows
+1       VB[3p,singular,trans]     drinks
+1       VB[3p,singular,trans]   has
+1       VB[3p,singular,trans]   covers
+1       VB[3p,singular,trans]   carries
+1       VB[3p,singular,trans]   rides
+1       VB[3p,singular,trans]   IS
+1       VB[3p,singular,trans]   does
+1       VB[3p,singular,intrans]     goes
+1       VB[3p,singular,intrans]     migrates
+1       VB[3p,singular,intrans]     speaks
+1       VB[3p,singular,report]     suggests
+1       VB[3p,singular,report]     knows
+
+# Verbs (present, plural, third person).
+1 VB[3p,plural] VB[3p,plural,trans]
+1 VB[3p,plural] VB[3p,plural,intrans]
+1 VB[3p,plural,intrans] VB[3p,plural,trans]
+1       VB[3p,plural,trans]     have
+1       VB[3p,plural,trans]     cover
+1       VB[3p,plural,trans]     are
+1       VB[3p,plural,trans]     ride
+1       VB[3p,plural,trans]     drink
+1       VB[3p,plural,trans]     grow
+1       VB[3p,plural,trans]     carry
+1       VB[3p,plural,trans]     suggest
+1       VB[3p,plural,trans]     know
+1       VB[3p,plural,trans]     do
+1       VB[3p,plural,intrans]     speak
+1       VB[3p,plural,intrans]     migrate
+1       VB[3p,plural,report]     suggest
+1       VB[3p,plural,report]     know
+
+# Verbs (base).
+1 VB[base] VB[base,trans]
+1 VB[base] VB[base,intrans]
+1 VB[base,intrans] VB[base,trans]
+1       VB[base,trans]     have
+1       VB[base,trans]     cover
+0.1       VB[base,trans]     be 
+1       VB[base,trans]     ride
+1       VB[base,trans]     drink
+1       VB[base,trans]     grow
+1       VB[base,trans]     carry
+1       VB[base,trans]     suggest
+1       VB[base,trans]     know
+1       VB[base,trans]     do
+1       VB[base,intrans]     speak
+1       VB[base,intrans]     migrate
+1       VB[base,report]     suggest
+1       VB[base,report]     know
+
+# Wh-determiners.
+1       WDT     that
+1       WDT     what
+1       WDT     which
+
+# Wh-pronouns.
+1       WP      what
+1       WP      who
+
+# Wh possessive pronoun.
+1       WP$     whose
+
+# Question Wh-Determininers
+1       QWDT     what
+1       QWDT     which
+1       QWDT     whose
+
+# Wh-adverbs
+1       WRB     how
+1       WRB     when
+1       WRB     where
+1       WRB     why
+
+1       SneakyPeteWRB     how
+1       SneakyPeteWRB     when
+1       SneakyPeteWRB     where
+
+# Wh-Prepositions
+1       WPP that
+1       WPP which
+1       WPP who
+
+
+# Possessive marker.
+1       POS     's
+
