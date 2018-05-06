@@ -47,7 +47,7 @@ def terminals(g):
 
 def main(grammar_fn, n):
     grammar = parse_grammar(grammar_fn)
-    for i in range(n):
+    for i in range(n-1):
         mapping = { sym : '%s_%d' % (sym, i) for sym in nonterminals(grammar) }
         for (lhs, rhs) in list(grammar.items()):
             new_lhs = mapping[lhs]
