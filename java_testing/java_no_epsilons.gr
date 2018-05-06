@@ -1,0 +1,647 @@
+START                                                                           CompilationUnit
+Identifier                                                                      IDENTIFIER
+Many.Identifier60                                                               . Identifier Many.Identifier60
+Many.Identifier60                                                               . Identifier
+QualifiedIdentifier                                                             Identifier Many.Identifier60
+QualifiedIdentifier                                                             Identifier
+Many,QualifiedIdentifier35                                                      , QualifiedIdentifier Many,QualifiedIdentifier35
+Many,QualifiedIdentifier35                                                      , QualifiedIdentifier
+QualifiedIdentifierList                                                         QualifiedIdentifier Many,QualifiedIdentifier35
+QualifiedIdentifierList                                                         QualifiedIdentifier
+MaybeAnnotations56                                                              Annotations
+MaybeMaybeAnnotations56packageQualifiedIdentifier;72                            MaybeAnnotations56 package QualifiedIdentifier ;
+MaybeMaybeAnnotations56packageQualifiedIdentifier;72                            package QualifiedIdentifier ;
+ManyImportDeclaration88                                                         ImportDeclaration ManyImportDeclaration88
+ManyImportDeclaration88                                                         ImportDeclaration
+ManyTypeDeclaration19                                                           TypeDeclaration ManyTypeDeclaration19
+ManyTypeDeclaration19                                                           TypeDeclaration
+CompilationUnit                                                                 MaybeMaybeAnnotations56packageQualifiedIdentifier;72 ManyImportDeclaration88 ManyTypeDeclaration19
+CompilationUnit                                                                 ManyImportDeclaration88 ManyTypeDeclaration19
+CompilationUnit                                                                 MaybeMaybeAnnotations56packageQualifiedIdentifier;72 ManyTypeDeclaration19
+CompilationUnit                                                                 ManyTypeDeclaration19
+CompilationUnit                                                                 MaybeMaybeAnnotations56packageQualifiedIdentifier;72 ManyImportDeclaration88
+CompilationUnit                                                                 ManyImportDeclaration88
+CompilationUnit                                                                 MaybeMaybeAnnotations56packageQualifiedIdentifier;72
+Maybestatic71                                                                   static
+Many.QualifiedIdentifier1                                                       . QualifiedIdentifier Many.QualifiedIdentifier1
+Many.QualifiedIdentifier1                                                       . QualifiedIdentifier
+Maybe.*55                                                                       . *
+ImportDeclaration                                                               import Maybestatic71 QualifiedIdentifier Many.QualifiedIdentifier1 Maybe.*55 ;
+ImportDeclaration                                                               import QualifiedIdentifier Many.QualifiedIdentifier1 Maybe.*55 ;
+ImportDeclaration                                                               import Maybestatic71 QualifiedIdentifier Maybe.*55 ;
+ImportDeclaration                                                               import QualifiedIdentifier Maybe.*55 ;
+ImportDeclaration                                                               import Maybestatic71 QualifiedIdentifier Many.QualifiedIdentifier1 ;
+ImportDeclaration                                                               import QualifiedIdentifier Many.QualifiedIdentifier1 ;
+ImportDeclaration                                                               import Maybestatic71 QualifiedIdentifier ;
+ImportDeclaration                                                               import QualifiedIdentifier ;
+TypeDeclaration                                                                 ClassOrInterfaceDeclaration
+TypeDeclaration                                                                 ;
+ManyModifier65                                                                  Modifier ManyModifier65
+ManyModifier65                                                                  Modifier
+ClassOrInterfaceDeclaration                                                     ManyModifier65 ClassDeclaration
+ClassOrInterfaceDeclaration                                                     ClassDeclaration
+ManyModifier93                                                                  Modifier ManyModifier93
+ManyModifier93                                                                  Modifier
+ClassOrInterfaceDeclaration                                                     ManyModifier93 InterfaceDeclaration
+ClassOrInterfaceDeclaration                                                     InterfaceDeclaration
+ClassDeclaration                                                                NormalClassDeclaration
+ClassDeclaration                                                                EnumDeclaration
+InterfaceDeclaration                                                            NormalInterfaceDeclaration
+InterfaceDeclaration                                                            AnnotationTypeDeclaration
+MaybeTypeParameters93                                                           TypeParameters
+MaybeextendsType41                                                              extends Type
+MaybeimplementsTypeList52                                                       implements TypeList
+NormalClassDeclaration                                                          class Identifier MaybeTypeParameters93 MaybeextendsType41 MaybeimplementsTypeList52 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeextendsType41 MaybeimplementsTypeList52 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeTypeParameters93 MaybeimplementsTypeList52 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeimplementsTypeList52 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeTypeParameters93 MaybeextendsType41 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeextendsType41 ClassBody
+NormalClassDeclaration                                                          class Identifier MaybeTypeParameters93 ClassBody
+NormalClassDeclaration                                                          class Identifier ClassBody
+MaybeimplementsTypeList57                                                       implements TypeList
+EnumDeclaration                                                                 enum Identifier MaybeimplementsTypeList57 EnumBody
+EnumDeclaration                                                                 enum Identifier EnumBody
+EnumDeclaration                                                                 enum Identifier MaybeimplementsTypeList57
+EnumDeclaration                                                                 enum Identifier
+MaybeTypeParameters32                                                           TypeParameters
+MaybeextendsTypeList23                                                          extends TypeList
+NormalInterfaceDeclaration                                                      interface Identifier MaybeTypeParameters32 MaybeextendsTypeList23 InterfaceBody
+NormalInterfaceDeclaration                                                      interface Identifier MaybeextendsTypeList23 InterfaceBody
+NormalInterfaceDeclaration                                                      interface Identifier MaybeTypeParameters32 InterfaceBody
+NormalInterfaceDeclaration                                                      interface Identifier InterfaceBody
+NormalInterfaceDeclaration                                                      interface Identifier MaybeTypeParameters32 MaybeextendsTypeList23
+NormalInterfaceDeclaration                                                      interface Identifier MaybeextendsTypeList23
+NormalInterfaceDeclaration                                                      interface Identifier MaybeTypeParameters32
+NormalInterfaceDeclaration                                                      interface Identifier
+AnnotationTypeDeclaration                                                       @ interface Identifier AnnotationTypeBody
+AnnotationTypeDeclaration                                                       @ interface Identifier
+ManyOPEN_BRACKETCLOSE_BRACKET62                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET62
+ManyOPEN_BRACKETCLOSE_BRACKET62                                                 OPEN_BRACKET CLOSE_BRACKET
+Type                                                                            BasicType ManyOPEN_BRACKETCLOSE_BRACKET62
+Type                                                                            BasicType
+ManyOPEN_BRACKETCLOSE_BRACKET90                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET90
+ManyOPEN_BRACKETCLOSE_BRACKET90                                                 OPEN_BRACKET CLOSE_BRACKET
+Type                                                                            ReferenceType ManyOPEN_BRACKETCLOSE_BRACKET90
+Type                                                                            ReferenceType
+BasicType                                                                       byte
+BasicType                                                                       short
+BasicType                                                                       char
+BasicType                                                                       int
+BasicType                                                                       long
+BasicType                                                                       float
+BasicType                                                                       double
+BasicType                                                                       boolean
+MaybeTypeArguments5                                                             TypeArguments
+MaybeTypeArguments92                                                            TypeArguments
+Many.IdentifierMaybeTypeArguments9257                                           . Identifier MaybeTypeArguments92 Many.IdentifierMaybeTypeArguments9257
+Many.IdentifierMaybeTypeArguments9257                                           . Identifier Many.IdentifierMaybeTypeArguments9257
+Many.IdentifierMaybeTypeArguments9257                                           . Identifier MaybeTypeArguments92
+Many.IdentifierMaybeTypeArguments9257                                           . Identifier
+ReferenceType                                                                   Identifier MaybeTypeArguments5 Many.IdentifierMaybeTypeArguments9257
+ReferenceType                                                                   Identifier Many.IdentifierMaybeTypeArguments9257
+ReferenceType                                                                   Identifier MaybeTypeArguments5
+ReferenceType                                                                   Identifier
+Many,TypeArgument29                                                             , TypeArgument Many,TypeArgument29
+Many,TypeArgument29                                                             , TypeArgument
+TypeArguments                                                                   < TypeArgument Many,TypeArgument29 >
+TypeArguments                                                                   < TypeArgument >
+TypeArgument                                                                    ReferenceType
+MaybeExtendsSuperReferenceType96                                                ExtendsSuper ReferenceType
+TypeArgument                                                                    ? MaybeExtendsSuperReferenceType96
+TypeArgument                                                                    ?
+ExtendsSuper                                                                    extends
+ExtendsSuper                                                                    super
+NonWildcardTypeArguments                                                        < TypeList >
+Many,ReferenceType57                                                            , ReferenceType Many,ReferenceType57
+Many,ReferenceType57                                                            , ReferenceType
+TypeList                                                                        ReferenceType Many,ReferenceType57
+TypeList                                                                        ReferenceType
+TypeArgumentsOrDiamond                                                          < >
+TypeArgumentsOrDiamond                                                          TypeArguments
+NonWildcardTypeArgumentsOrDiamond                                               < >
+NonWildcardTypeArgumentsOrDiamond                                               NonWildcardTypeArguments
+Many,TypeParameter36                                                            , TypeParameter Many,TypeParameter36
+Many,TypeParameter36                                                            , TypeParameter
+TypeParameters                                                                  < TypeParameter Many,TypeParameter36 >
+TypeParameters                                                                  < TypeParameter >
+MaybeextendsBound56                                                             extends Bound
+TypeParameter                                                                   Identifier MaybeextendsBound56
+TypeParameter                                                                   Identifier
+Many&ReferenceType34                                                            & ReferenceType Many&ReferenceType34
+Many&ReferenceType34                                                            & ReferenceType
+Bound                                                                           ReferenceType Many&ReferenceType34
+Bound                                                                           ReferenceType
+Modifier                                                                        Annotation
+Modifier                                                                        public
+Modifier                                                                        protected
+Modifier                                                                        private
+Modifier                                                                        static
+Modifier                                                                        abstract
+Modifier                                                                        final
+Modifier                                                                        native
+Modifier                                                                        synchronized
+Modifier                                                                        transient
+Modifier                                                                        volatile
+Modifier                                                                        strictfp
+ManyAnnotation69                                                                Annotation ManyAnnotation69
+ManyAnnotation69                                                                Annotation
+Annotations                                                                     Annotation ManyAnnotation69
+Annotations                                                                     Annotation
+MaybeAnnotationElement72                                                        AnnotationElement
+MaybeOPEN_PARENMaybeAnnotationElement72CLOSE_PAREN67                            OPEN_PAREN MaybeAnnotationElement72 CLOSE_PAREN
+MaybeOPEN_PARENMaybeAnnotationElement72CLOSE_PAREN67                            OPEN_PAREN CLOSE_PAREN
+Annotation                                                                      @ QualifiedIdentifier MaybeOPEN_PARENMaybeAnnotationElement72CLOSE_PAREN67
+Annotation                                                                      @ QualifiedIdentifier
+AnnotationElement                                                               ElementValuePairs
+AnnotationElement                                                               ElementValue
+Many,ElementValuePair29                                                         , ElementValuePair Many,ElementValuePair29
+Many,ElementValuePair29                                                         , ElementValuePair
+ElementValuePairs                                                               ElementValuePair Many,ElementValuePair29
+ElementValuePairs                                                               ElementValuePair
+ElementValuePair                                                                Identifier = ElementValue
+ElementValuePair                                                                Identifier =
+ElementValue                                                                    Annotation
+ElementValue                                                                    Expression1
+ElementValue                                                                    ElementValueArrayInitializer
+MaybeElementValues5                                                             ElementValues
+Maybe,96                                                                        ,
+ManyMaybeElementValues5Maybe,9621                                               MaybeElementValues5 Maybe,96 ManyMaybeElementValues5Maybe,9621
+ManyMaybeElementValues5Maybe,9621                                               Maybe,96 ManyMaybeElementValues5Maybe,9621
+ManyMaybeElementValues5Maybe,9621                                               MaybeElementValues5 ManyMaybeElementValues5Maybe,9621
+ManyMaybeElementValues5Maybe,9621                                               ManyMaybeElementValues5Maybe,9621
+ManyMaybeElementValues5Maybe,9621                                               MaybeElementValues5 Maybe,96
+ManyMaybeElementValues5Maybe,9621                                               Maybe,96
+ManyMaybeElementValues5Maybe,9621                                               MaybeElementValues5
+ElementValueArrayInitializer                                                    ManyMaybeElementValues5Maybe,9621
+Many,ElementValue4                                                              , ElementValue Many,ElementValue4
+Many,ElementValue4                                                              , Many,ElementValue4
+Many,ElementValue4                                                              , ElementValue
+Many,ElementValue4                                                              ,
+ElementValues                                                                   ElementValue Many,ElementValue4
+ElementValues                                                                   Many,ElementValue4
+ElementValues                                                                   ElementValue
+ManyClassBodyDeclaration43                                                      ClassBodyDeclaration ManyClassBodyDeclaration43
+ManyClassBodyDeclaration43                                                      ClassBodyDeclaration
+ClassBody                                                                       OPEN_BRACE ManyClassBodyDeclaration43 CLOSE_BRACE
+ClassBody                                                                       OPEN_BRACE CLOSE_BRACE
+ClassBodyDeclaration                                                            ;
+ManyModifier59                                                                  Modifier ManyModifier59
+ManyModifier59                                                                  Modifier
+ClassBodyDeclaration                                                            ManyModifier59 MemberDecl
+ClassBodyDeclaration                                                            MemberDecl
+Maybestatic0                                                                    static
+ClassBodyDeclaration                                                            Maybestatic0 Block
+ClassBodyDeclaration                                                            Block
+MemberDecl                                                                      MethodOrFieldDecl
+MemberDecl                                                                      void Identifier VoidMethodDeclaratorRest
+MemberDecl                                                                      Identifier ConstructorDeclaratorRest
+MemberDecl                                                                      GenericMethodOrConstructorDecl
+MemberDecl                                                                      ClassDeclaration
+MemberDecl                                                                      InterfaceDeclaration
+MethodOrFieldDecl                                                               Type Identifier MethodOrFieldRest
+MethodOrFieldRest                                                               FieldDeclaratorsRest ;
+MethodOrFieldRest                                                               ;
+MethodOrFieldRest                                                               MethodDeclaratorRest
+Many,VariableDeclarator57                                                       , VariableDeclarator Many,VariableDeclarator57
+Many,VariableDeclarator57                                                       , VariableDeclarator
+FieldDeclaratorsRest                                                            VariableDeclaratorRest Many,VariableDeclarator57
+FieldDeclaratorsRest                                                            Many,VariableDeclarator57
+FieldDeclaratorsRest                                                            VariableDeclaratorRest
+ManyOPEN_BRACKETCLOSE_BRACKET75                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET75
+ManyOPEN_BRACKETCLOSE_BRACKET75                                                 OPEN_BRACKET CLOSE_BRACKET
+MaybethrowsQualifiedIdentifierList71                                            throws QualifiedIdentifierList
+MethodDeclaratorRest                                                            FormalParameters ManyOPEN_BRACKETCLOSE_BRACKET75 MaybethrowsQualifiedIdentifierList71 BlockSemi
+MethodDeclaratorRest                                                            FormalParameters MaybethrowsQualifiedIdentifierList71 BlockSemi
+MethodDeclaratorRest                                                            FormalParameters ManyOPEN_BRACKETCLOSE_BRACKET75 BlockSemi
+MethodDeclaratorRest                                                            FormalParameters BlockSemi
+BlockSemi                                                                       Block
+BlockSemi                                                                       ;
+MaybethrowsQualifiedIdentifierList32                                            throws QualifiedIdentifierList
+VoidMethodDeclaratorRest                                                        FormalParameters MaybethrowsQualifiedIdentifierList32 BlockSemi
+VoidMethodDeclaratorRest                                                        FormalParameters BlockSemi
+MaybethrowsQualifiedIdentifierList7                                             throws QualifiedIdentifierList
+ConstructorDeclaratorRest                                                       FormalParameters MaybethrowsQualifiedIdentifierList7 Block
+ConstructorDeclaratorRest                                                       FormalParameters Block
+GenericMethodOrConstructorDecl                                                  TypeParameters GenericMethodOrConstructorRest
+GenericMethodOrConstructorRest                                                  TypeVoid Identifier MethodDeclaratorRest
+GenericMethodOrConstructorRest                                                  Identifier ConstructorDeclaratorRest
+ManyOPEN_BRACEInterfaceBodyDeclarationCLOSE_BRACE27                             OPEN_BRACE InterfaceBodyDeclaration CLOSE_BRACE ManyOPEN_BRACEInterfaceBodyDeclarationCLOSE_BRACE27
+ManyOPEN_BRACEInterfaceBodyDeclarationCLOSE_BRACE27                             OPEN_BRACE InterfaceBodyDeclaration CLOSE_BRACE
+InterfaceBody                                                                   ManyOPEN_BRACEInterfaceBodyDeclarationCLOSE_BRACE27
+InterfaceBodyDeclaration                                                        ;
+ManyModifier94                                                                  Modifier ManyModifier94
+ManyModifier94                                                                  Modifier
+InterfaceBodyDeclaration                                                        ManyModifier94 InterfaceMemberDecl
+InterfaceBodyDeclaration                                                        InterfaceMemberDecl
+InterfaceMemberDecl                                                             InterfaceMethodOrFieldDecl
+InterfaceMemberDecl                                                             void Identifier VoidInterfaceMethodDeclaratorRest
+InterfaceMemberDecl                                                             InterfaceGenericMethodDecl
+InterfaceMemberDecl                                                             ClassDeclaration
+InterfaceMemberDecl                                                             InterfaceDeclaration
+InterfaceMethodOrFieldDecl                                                      Type Identifier InterfaceMethodOrFieldRest
+InterfaceMethodOrFieldRest                                                      ConstantDeclaratorsRest ;
+InterfaceMethodOrFieldRest                                                      InterfaceMethodDeclaratorRest
+Many,ConstantDeclarator28                                                       , ConstantDeclarator Many,ConstantDeclarator28
+Many,ConstantDeclarator28                                                       , ConstantDeclarator
+ConstantDeclaratorsRest                                                         ConstantDeclaratorRest Many,ConstantDeclarator28
+ConstantDeclaratorsRest                                                         ConstantDeclaratorRest
+ManyOPEN_BRACKETCLOSE_BRACKET20                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET20
+ManyOPEN_BRACKETCLOSE_BRACKET20                                                 OPEN_BRACKET CLOSE_BRACKET
+ConstantDeclaratorRest                                                          ManyOPEN_BRACKETCLOSE_BRACKET20 = VariableInitializer
+ConstantDeclaratorRest                                                          = VariableInitializer
+ConstantDeclarator                                                              Identifier ConstantDeclaratorRest
+ManyOPEN_BRACKETCLOSE_BRACKET47                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET47
+ManyOPEN_BRACKETCLOSE_BRACKET47                                                 OPEN_BRACKET CLOSE_BRACKET
+MaybethrowsQualifiedIdentifierList58                                            throws QualifiedIdentifierList
+InterfaceMethodDeclaratorRest                                                   FormalParameters ManyOPEN_BRACKETCLOSE_BRACKET47 MaybethrowsQualifiedIdentifierList58 ;
+InterfaceMethodDeclaratorRest                                                   FormalParameters MaybethrowsQualifiedIdentifierList58 ;
+InterfaceMethodDeclaratorRest                                                   FormalParameters ManyOPEN_BRACKETCLOSE_BRACKET47 ;
+InterfaceMethodDeclaratorRest                                                   FormalParameters ;
+MaybethrowsQualifiedIdentifierList71                                            throws QualifiedIdentifierList
+VoidInterfaceMethodDeclaratorRest                                               FormalParameters MaybethrowsQualifiedIdentifierList71 ;
+VoidInterfaceMethodDeclaratorRest                                               FormalParameters ;
+InterfaceGenericMethodDecl                                                      TypeParameters TypeVoid Identifier InterfaceMethodDeclaratorRest
+TypeVoid                                                                        Type
+TypeVoid                                                                        void
+MaybeFormalParameterDecls79                                                     FormalParameterDecls
+FormalParameters                                                                OPEN_PAREN MaybeFormalParameterDecls79 CLOSE_PAREN
+FormalParameters                                                                OPEN_PAREN CLOSE_PAREN
+ManyVariableModifier69                                                          VariableModifier ManyVariableModifier69
+ManyVariableModifier69                                                          VariableModifier
+FormalParameterDecls                                                            ManyVariableModifier69 Type FormalParameterDeclsRest
+FormalParameterDecls                                                            Type FormalParameterDeclsRest
+VariableModifier                                                                final
+VariableModifier                                                                Annotation
+Maybe,FormalParameterDecls40                                                    , FormalParameterDecls
+FormalParameterDeclsRest                                                        VariableDeclaratorId Maybe,FormalParameterDecls40
+FormalParameterDeclsRest                                                        VariableDeclaratorId
+FormalParameterDeclsRest                                                        ... VariableDeclaratorId
+ManyOPEN_BRACKETCLOSE_BRACKET64                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET64
+ManyOPEN_BRACKETCLOSE_BRACKET64                                                 OPEN_BRACKET CLOSE_BRACKET
+VariableDeclaratorId                                                            Identifier ManyOPEN_BRACKETCLOSE_BRACKET64
+VariableDeclaratorId                                                            Identifier
+Many,VariableDeclarator84                                                       , VariableDeclarator Many,VariableDeclarator84
+Many,VariableDeclarator84                                                       , VariableDeclarator
+VariableDeclarators                                                             VariableDeclarator Many,VariableDeclarator84
+VariableDeclarators                                                             VariableDeclarator
+VariableDeclarator                                                              Identifier VariableDeclaratorRest
+VariableDeclarator                                                              Identifier
+ManyOPEN_BRACKETCLOSE_BRACKET16                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET16
+ManyOPEN_BRACKETCLOSE_BRACKET16                                                 OPEN_BRACKET CLOSE_BRACKET
+Maybe=VariableInitializer68                                                     = VariableInitializer
+VariableDeclaratorRest                                                          ManyOPEN_BRACKETCLOSE_BRACKET16 Maybe=VariableInitializer68
+VariableDeclaratorRest                                                          Maybe=VariableInitializer68
+VariableDeclaratorRest                                                          ManyOPEN_BRACKETCLOSE_BRACKET16
+VariableInitializer                                                             ArrayInitializer
+VariableInitializer                                                             Expression
+Many,VariableInitializer63                                                      , VariableInitializer Many,VariableInitializer63
+Many,VariableInitializer63                                                      , VariableInitializer
+Maybe,79                                                                        ,
+MaybeVariableInitializerMany,VariableInitializer63Maybe,7990                    VariableInitializer Many,VariableInitializer63 Maybe,79
+MaybeVariableInitializerMany,VariableInitializer63Maybe,7990                    VariableInitializer Maybe,79
+MaybeVariableInitializerMany,VariableInitializer63Maybe,7990                    VariableInitializer Many,VariableInitializer63
+MaybeVariableInitializerMany,VariableInitializer63Maybe,7990                    VariableInitializer
+ArrayInitializer                                                                OPEN_BRACE MaybeVariableInitializerMany,VariableInitializer63Maybe,7990 CLOSE_BRACE
+ArrayInitializer                                                                OPEN_BRACE CLOSE_BRACE
+Block                                                                           OPEN_BRACE BlockStatements CLOSE_BRACE
+Block                                                                           OPEN_BRACE CLOSE_BRACE
+ManyBlockStatement58                                                            BlockStatement ManyBlockStatement58
+ManyBlockStatement58                                                            BlockStatement
+BlockStatements                                                                 ManyBlockStatement58
+BlockStatement                                                                  LocalVariableDeclarationStatement
+BlockStatement                                                                  ClassOrInterfaceDeclaration
+MaybeIdentifierCOLON4                                                           Identifier COLON
+BlockStatement                                                                  MaybeIdentifierCOLON4 Statement
+BlockStatement                                                                  Statement
+ManyVariableModifier18                                                          VariableModifier ManyVariableModifier18
+ManyVariableModifier18                                                          VariableModifier
+LocalVariableDeclarationStatement                                               ManyVariableModifier18 Type VariableDeclarators ;
+LocalVariableDeclarationStatement                                               Type VariableDeclarators ;
+Statement                                                                       Block
+Statement                                                                       ;
+Statement                                                                       Identifier COLON Statement
+Statement                                                                       StatementExpression ;
+MaybeelseStatement49                                                            else Statement
+Statement                                                                       if ParExpression Statement MaybeelseStatement49
+Statement                                                                       if ParExpression Statement
+MaybeCOLONExpression61                                                          COLON Expression
+Statement                                                                       assert Expression MaybeCOLONExpression61 ;
+Statement                                                                       assert Expression ;
+Statement                                                                       switch ParExpression OPEN_BRACE SwitchBlockStatementGroups CLOSE_BRACE
+Statement                                                                       switch ParExpression OPEN_BRACE CLOSE_BRACE
+Statement                                                                       while ParExpression Statement
+Statement                                                                       do Statement while ParExpression ;
+Statement                                                                       for OPEN_PAREN ForControl CLOSE_PAREN Statement
+MaybeIdentifier31                                                               Identifier
+Statement                                                                       break MaybeIdentifier31 ;
+Statement                                                                       break ;
+MaybeIdentifier91                                                               Identifier
+Statement                                                                       continue MaybeIdentifier91 ;
+Statement                                                                       continue ;
+MaybeExpression24                                                               Expression
+Statement                                                                       return MaybeExpression24 ;
+Statement                                                                       return ;
+Statement                                                                       throw Expression ;
+Statement                                                                       synchronized ParExpression Block
+Statement                                                                       try Block Catches
+MaybeCatches15                                                                  Catches
+Statement                                                                       try Block MaybeCatches15 Finally
+Statement                                                                       try Block Finally
+MaybeCatches2                                                                   Catches
+MaybeFinally70                                                                  Finally
+Statement                                                                       try ResourceSpecification Block MaybeCatches2 MaybeFinally70
+Statement                                                                       try ResourceSpecification Block MaybeFinally70
+Statement                                                                       try ResourceSpecification Block MaybeCatches2
+Statement                                                                       try ResourceSpecification Block
+StatementExpression                                                             Expression
+ManyCatchClause6                                                                CatchClause ManyCatchClause6
+ManyCatchClause6                                                                CatchClause
+Catches                                                                         CatchClause ManyCatchClause6
+Catches                                                                         CatchClause
+ManyVariableModifier16                                                          VariableModifier ManyVariableModifier16
+ManyVariableModifier16                                                          VariableModifier
+CatchClause                                                                     catch OPEN_PAREN ManyVariableModifier16 CatchType Identifier CLOSE_PAREN Block
+CatchClause                                                                     catch OPEN_PAREN CatchType Identifier CLOSE_PAREN Block
+Many|QualifiedIdentifier96                                                      | QualifiedIdentifier Many|QualifiedIdentifier96
+Many|QualifiedIdentifier96                                                      | QualifiedIdentifier
+CatchType                                                                       QualifiedIdentifier Many|QualifiedIdentifier96
+CatchType                                                                       QualifiedIdentifier
+Finally                                                                         finally Block
+Maybe;65                                                                        ;
+ResourceSpecification                                                           OPEN_PAREN Resources Maybe;65 CLOSE_PAREN
+ResourceSpecification                                                           OPEN_PAREN Resources CLOSE_PAREN
+Many;Resource7                                                                  ; Resource Many;Resource7
+Many;Resource7                                                                  ; Resource
+Resources                                                                       Resource Many;Resource7
+Resources                                                                       Resource
+ManyVariableModifier73                                                          VariableModifier ManyVariableModifier73
+ManyVariableModifier73                                                          VariableModifier
+Resource                                                                        ManyVariableModifier73 ReferenceType VariableDeclaratorId = Expression
+Resource                                                                        ReferenceType VariableDeclaratorId = Expression
+ManySwitchBlockStatementGroup10                                                 SwitchBlockStatementGroup ManySwitchBlockStatementGroup10
+ManySwitchBlockStatementGroup10                                                 SwitchBlockStatementGroup
+SwitchBlockStatementGroups                                                      ManySwitchBlockStatementGroup10
+SwitchBlockStatementGroup                                                       SwitchLabels BlockStatements
+SwitchBlockStatementGroup                                                       SwitchLabels
+ManySwitchLabel99                                                               SwitchLabel ManySwitchLabel99
+ManySwitchLabel99                                                               SwitchLabel
+SwitchLabels                                                                    SwitchLabel ManySwitchLabel99
+SwitchLabels                                                                    SwitchLabel
+SwitchLabel                                                                     case Expression COLON
+SwitchLabel                                                                     case EnumConstantName COLON
+SwitchLabel                                                                     default COLON
+EnumConstantName                                                                Identifier
+ForControl                                                                      ForVarControl
+MaybeExpression74                                                               Expression
+MaybeForUpdate50                                                                ForUpdate
+ForControl                                                                      ForInit ; MaybeExpression74 ; MaybeForUpdate50
+ForControl                                                                      ForInit ; ; MaybeForUpdate50
+ForControl                                                                      ForInit ; MaybeExpression74 ;
+ForControl                                                                      ForInit ; ;
+ManyVariableModifier26                                                          VariableModifier ManyVariableModifier26
+ManyVariableModifier26                                                          VariableModifier
+ForVarControl                                                                   ManyVariableModifier26 Type VariableDeclaratorId ForVarControlRest
+ForVarControl                                                                   Type VariableDeclaratorId ForVarControlRest
+MaybeExpression26                                                               Expression
+MaybeForUpdate67                                                                ForUpdate
+ForVarControlRest                                                               ForVariableDeclaratorsRest ; MaybeExpression26 ; MaybeForUpdate67
+ForVarControlRest                                                               ; MaybeExpression26 ; MaybeForUpdate67
+ForVarControlRest                                                               ForVariableDeclaratorsRest ; ; MaybeForUpdate67
+ForVarControlRest                                                               ; ; MaybeForUpdate67
+ForVarControlRest                                                               ForVariableDeclaratorsRest ; MaybeExpression26 ;
+ForVarControlRest                                                               ; MaybeExpression26 ;
+ForVarControlRest                                                               ForVariableDeclaratorsRest ; ;
+ForVarControlRest                                                               ; ;
+ForVarControlRest                                                               COLON Expression
+Maybe=VariableInitializer29                                                     = VariableInitializer
+Many,VariableDeclarator72                                                       , VariableDeclarator Many,VariableDeclarator72
+Many,VariableDeclarator72                                                       , VariableDeclarator
+ForVariableDeclaratorsRest                                                      Maybe=VariableInitializer29 Many,VariableDeclarator72
+ForVariableDeclaratorsRest                                                      Many,VariableDeclarator72
+ForVariableDeclaratorsRest                                                      Maybe=VariableInitializer29
+Many,StatementExpression22                                                      , StatementExpression Many,StatementExpression22
+Many,StatementExpression22                                                      , StatementExpression
+ForUpdate                                                                       StatementExpression Many,StatementExpression22
+ForUpdate                                                                       StatementExpression
+MaybeAssignmentOperatorExpression126                                            AssignmentOperator Expression1
+Expression                                                                      Expression1 MaybeAssignmentOperatorExpression126
+Expression                                                                      Expression1
+AssignmentOperator                                                              =
+AssignmentOperator                                                              +=
+AssignmentOperator                                                              -=
+AssignmentOperator                                                              *=
+AssignmentOperator                                                              /=
+AssignmentOperator                                                              &=
+AssignmentOperator                                                              |=
+AssignmentOperator                                                              ^=
+AssignmentOperator                                                              %=
+AssignmentOperator                                                              <<=
+AssignmentOperator                                                              >>=
+AssignmentOperator                                                              >>>=
+MaybeExpression1Rest53                                                          Expression1Rest
+Expression1                                                                     Expression2 MaybeExpression1Rest53
+Expression1                                                                     Expression2
+Expression1Rest                                                                 ? Expression COLON Expression1
+MaybeExpression2Rest63                                                          Expression2Rest
+Expression2                                                                     Expression3 MaybeExpression2Rest63
+Expression2                                                                     Expression3
+ManyInfixOpExpression363                                                        InfixOp Expression3 ManyInfixOpExpression363
+ManyInfixOpExpression363                                                        InfixOp Expression3
+Expression2Rest                                                                 ManyInfixOpExpression363
+Expression2Rest                                                                 instanceof Type
+InfixOp                                                                         ||
+InfixOp                                                                         &&
+InfixOp                                                                         |
+InfixOp                                                                         ^
+InfixOp                                                                         &
+InfixOp                                                                         ==
+InfixOp                                                                         !=
+InfixOp                                                                         <
+InfixOp                                                                         >
+InfixOp                                                                         <=
+InfixOp                                                                         >=
+InfixOp                                                                         <<
+InfixOp                                                                         >>
+InfixOp                                                                         >>>
+InfixOp                                                                         +
+InfixOp                                                                         -
+InfixOp                                                                         *
+InfixOp                                                                         /
+InfixOp                                                                         %
+Expression3                                                                     PrefixOp Expression3
+Expression3                                                                     OPEN_PAREN ExpressionType CLOSE_PAREN Expression3
+ManySelector89                                                                  Selector ManySelector89
+ManySelector89                                                                  Selector
+ManyPostfixOp56                                                                 PostfixOp ManyPostfixOp56
+ManyPostfixOp56                                                                 PostfixOp
+Expression3                                                                     Primary ManySelector89 ManyPostfixOp56
+Expression3                                                                     Primary ManyPostfixOp56
+Expression3                                                                     Primary ManySelector89
+Expression3                                                                     Primary
+ExpressionType                                                                  Expression
+ExpressionType                                                                  Type
+PrefixOp                                                                        ++
+PrefixOp                                                                        --
+PrefixOp                                                                        !
+PrefixOp                                                                        ~
+PrefixOp                                                                        +
+PrefixOp                                                                        -
+PostfixOp                                                                       ++
+PostfixOp                                                                       --
+Primary                                                                         Literal
+Primary                                                                         ParExpression
+MaybeArguments83                                                                Arguments
+Primary                                                                         this MaybeArguments83
+Primary                                                                         this
+Primary                                                                         super SuperSuffix
+Primary                                                                         new Creator
+Primary                                                                         NonWildcardTypeArguments ExplicitGenericInvocationSuffix
+Primary                                                                         NonWildcardTypeArguments this Arguments
+Many.Identifier13                                                               . Identifier Many.Identifier13
+Many.Identifier13                                                               . Identifier
+MaybeIdentifierSuffix5                                                          IdentifierSuffix
+Primary                                                                         Identifier Many.Identifier13 MaybeIdentifierSuffix5
+Primary                                                                         Identifier MaybeIdentifierSuffix5
+Primary                                                                         Identifier Many.Identifier13
+Primary                                                                         Identifier
+ManyOPEN_BRACKETCLOSE_BRACKET10                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET10
+ManyOPEN_BRACKETCLOSE_BRACKET10                                                 OPEN_BRACKET CLOSE_BRACKET
+Primary                                                                         BasicType ManyOPEN_BRACKETCLOSE_BRACKET10 . class
+Primary                                                                         BasicType . class
+Primary                                                                         void . class
+Literal                                                                         IntegerLiteral
+Literal                                                                         FloatingPointLiteral
+Literal                                                                         CharacterLiteral
+Literal                                                                         StringLiteral
+Literal                                                                         BooleanLiteral
+Literal                                                                         NullLiteral
+ParExpression                                                                   OPEN_PAREN Expression CLOSE_PAREN
+Many,Expression7                                                                , Expression Many,Expression7
+Many,Expression7                                                                , Expression
+MaybeExpressionMany,Expression743                                               Expression Many,Expression7
+MaybeExpressionMany,Expression743                                               Expression
+Arguments                                                                       OPEN_PAREN MaybeExpressionMany,Expression743 CLOSE_PAREN
+Arguments                                                                       OPEN_PAREN CLOSE_PAREN
+SuperSuffix                                                                     Arguments
+MaybeArguments73                                                                Arguments
+SuperSuffix                                                                     . Identifier MaybeArguments73
+SuperSuffix                                                                     . Identifier
+ExplicitGenericInvocationSuffix                                                 super SuperSuffix
+ExplicitGenericInvocationSuffix                                                 Identifier Arguments
+Creator                                                                         NonWildcardTypeArguments CreatedName ClassCreatorRest
+Creator                                                                         CreatedName ClassCreatorRest
+Creator                                                                         CreatedName ArrayCreatorRest
+MaybeTypeArgumentsOrDiamond6                                                    TypeArgumentsOrDiamond
+MaybeTypeArgumentsOrDiamond32                                                   TypeArgumentsOrDiamond
+Many.IdentifierMaybeTypeArgumentsOrDiamond3215                                  . Identifier MaybeTypeArgumentsOrDiamond32 Many.IdentifierMaybeTypeArgumentsOrDiamond3215
+Many.IdentifierMaybeTypeArgumentsOrDiamond3215                                  . Identifier Many.IdentifierMaybeTypeArgumentsOrDiamond3215
+Many.IdentifierMaybeTypeArgumentsOrDiamond3215                                  . Identifier MaybeTypeArgumentsOrDiamond32
+Many.IdentifierMaybeTypeArgumentsOrDiamond3215                                  . Identifier
+CreatedName                                                                     Identifier MaybeTypeArgumentsOrDiamond6 Many.IdentifierMaybeTypeArgumentsOrDiamond3215
+CreatedName                                                                     Identifier Many.IdentifierMaybeTypeArgumentsOrDiamond3215
+CreatedName                                                                     Identifier MaybeTypeArgumentsOrDiamond6
+CreatedName                                                                     Identifier
+MaybeClassBody66                                                                ClassBody
+ClassCreatorRest                                                                Arguments MaybeClassBody66
+ClassCreatorRest                                                                Arguments
+ManyOPEN_BRACKETCLOSE_BRACKET27                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET27
+ManyOPEN_BRACKETCLOSE_BRACKET27                                                 OPEN_BRACKET CLOSE_BRACKET
+ArrayCreatorRest                                                                OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET27 ArrayInitializer
+ArrayCreatorRest                                                                OPEN_BRACKET CLOSE_BRACKET ArrayInitializer
+ManyOPEN_BRACKETExpressionCLOSE_BRACKET10                                       OPEN_BRACKET Expression CLOSE_BRACKET ManyOPEN_BRACKETExpressionCLOSE_BRACKET10
+ManyOPEN_BRACKETExpressionCLOSE_BRACKET10                                       OPEN_BRACKET Expression CLOSE_BRACKET
+ManyOPEN_BRACKETCLOSE_BRACKET27                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET27
+ManyOPEN_BRACKETCLOSE_BRACKET27                                                 OPEN_BRACKET CLOSE_BRACKET
+ArrayCreatorRest                                                                OPEN_BRACKET Expression CLOSE_BRACKET ManyOPEN_BRACKETExpressionCLOSE_BRACKET10 ManyOPEN_BRACKETCLOSE_BRACKET27
+ArrayCreatorRest                                                                OPEN_BRACKET Expression CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET27
+ArrayCreatorRest                                                                OPEN_BRACKET Expression CLOSE_BRACKET ManyOPEN_BRACKETExpressionCLOSE_BRACKET10
+ArrayCreatorRest                                                                OPEN_BRACKET Expression CLOSE_BRACKET
+ManyOPEN_BRACKETCLOSE_BRACKET39                                                 OPEN_BRACKET CLOSE_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET39
+ManyOPEN_BRACKETCLOSE_BRACKET39                                                 OPEN_BRACKET CLOSE_BRACKET
+IdentifierSuffix                                                                OPEN_BRACKET ManyOPEN_BRACKETCLOSE_BRACKET39 . class
+IdentifierSuffix                                                                OPEN_BRACKET . class
+IdentifierSuffix                                                                OPEN_BRACKET Expression CLOSE_BRACKET
+IdentifierSuffix                                                                Arguments
+IdentifierSuffix                                                                . class
+IdentifierSuffix                                                                . ExplicitGenericInvocation
+IdentifierSuffix                                                                . this
+IdentifierSuffix                                                                . super Arguments
+MaybeNonWildcardTypeArguments63                                                 NonWildcardTypeArguments
+IdentifierSuffix                                                                . new MaybeNonWildcardTypeArguments63 InnerCreator
+IdentifierSuffix                                                                . new InnerCreator
+ExplicitGenericInvocation                                                       NonWildcardTypeArguments ExplicitGenericInvocationSuffix
+MaybeNonWildcardTypeArgumentsOrDiamond4                                         NonWildcardTypeArgumentsOrDiamond
+InnerCreator                                                                    Identifier MaybeNonWildcardTypeArgumentsOrDiamond4 ClassCreatorRest
+InnerCreator                                                                    Identifier ClassCreatorRest
+MaybeArguments19                                                                Arguments
+Selector                                                                        . Identifier MaybeArguments19
+Selector                                                                        . Identifier
+Selector                                                                        . ExplicitGenericInvocation
+Selector                                                                        . this
+Selector                                                                        . super SuperSuffix
+MaybeNonWildcardTypeArguments58                                                 NonWildcardTypeArguments
+Selector                                                                        . new MaybeNonWildcardTypeArguments58 InnerCreator
+Selector                                                                        . new InnerCreator
+Selector                                                                        OPEN_BRACKET Expression CLOSE_BRACKET
+MaybeEnumConstants63                                                            EnumConstants
+Maybe,45                                                                        ,
+MaybeEnumBodyDeclarations17                                                     EnumBodyDeclarations
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 Maybe,45 MaybeEnumBodyDeclarations17 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   Maybe,45 MaybeEnumBodyDeclarations17 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 MaybeEnumBodyDeclarations17 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumBodyDeclarations17 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 Maybe,45 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   Maybe,45 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 Maybe,45 MaybeEnumBodyDeclarations17
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   Maybe,45 MaybeEnumBodyDeclarations17
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 MaybeEnumBodyDeclarations17
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumBodyDeclarations17
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63 Maybe,45
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   Maybe,45
+ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795                   MaybeEnumConstants63
+EnumBody                                                                        ManyMaybeEnumConstants63Maybe,45MaybeEnumBodyDeclarations1795
+EnumConstants                                                                   EnumConstant
+EnumConstants                                                                   EnumConstants , EnumConstant
+MaybeAnnotations66                                                              Annotations
+MaybeArguments82                                                                Arguments
+MaybeClassBody55                                                                ClassBody
+EnumConstant                                                                    MaybeAnnotations66 Identifier MaybeArguments82 MaybeClassBody55
+EnumConstant                                                                    Identifier MaybeArguments82 MaybeClassBody55
+EnumConstant                                                                    MaybeAnnotations66 Identifier MaybeClassBody55
+EnumConstant                                                                    Identifier MaybeClassBody55
+EnumConstant                                                                    MaybeAnnotations66 Identifier MaybeArguments82
+EnumConstant                                                                    Identifier MaybeArguments82
+EnumConstant                                                                    MaybeAnnotations66 Identifier
+EnumConstant                                                                    Identifier
+ManyClassBodyDeclaration54                                                      ClassBodyDeclaration ManyClassBodyDeclaration54
+ManyClassBodyDeclaration54                                                      ClassBodyDeclaration
+EnumBodyDeclarations                                                            ; ManyClassBodyDeclaration54
+EnumBodyDeclarations                                                            ;
+MaybeAnnotationTypeElementDeclarations80                                        AnnotationTypeElementDeclarations
+ManyMaybeAnnotationTypeElementDeclarations8094                                  MaybeAnnotationTypeElementDeclarations80 ManyMaybeAnnotationTypeElementDeclarations8094
+ManyMaybeAnnotationTypeElementDeclarations8094                                  ManyMaybeAnnotationTypeElementDeclarations8094
+ManyMaybeAnnotationTypeElementDeclarations8094                                  MaybeAnnotationTypeElementDeclarations80
+AnnotationTypeBody                                                              ManyMaybeAnnotationTypeElementDeclarations8094
+AnnotationTypeElementDeclarations                                               AnnotationTypeElementDeclaration
+AnnotationTypeElementDeclarations                                               AnnotationTypeElementDeclarations AnnotationTypeElementDeclaration
+ManyModifier14                                                                  Modifier ManyModifier14
+ManyModifier14                                                                  Modifier
+AnnotationTypeElementDeclaration                                                ManyModifier14 AnnotationTypeElementRest
+AnnotationTypeElementDeclaration                                                AnnotationTypeElementRest
+AnnotationTypeElementRest                                                       Type Identifier AnnotationMethodOrConstantRest ;
+AnnotationTypeElementRest                                                       ClassDeclaration
+AnnotationTypeElementRest                                                       InterfaceDeclaration
+AnnotationTypeElementRest                                                       EnumDeclaration
+AnnotationTypeElementRest                                                       AnnotationTypeDeclaration
+AnnotationMethodOrConstantRest                                                  AnnotationMethodRest
+AnnotationMethodOrConstantRest                                                  ConstantDeclaratorsRest
+MaybeOPEN_BRACKETCLOSE_BRACKET59                                                OPEN_BRACKET CLOSE_BRACKET
+MaybedefaultElementValue28                                                      default ElementValue
+MaybedefaultElementValue28                                                      default
+AnnotationMethodRest                                                            OPEN_PAREN CLOSE_PAREN MaybeOPEN_BRACKETCLOSE_BRACKET59 MaybedefaultElementValue28
+AnnotationMethodRest                                                            OPEN_PAREN CLOSE_PAREN MaybedefaultElementValue28
+AnnotationMethodRest                                                            OPEN_PAREN CLOSE_PAREN MaybeOPEN_BRACKETCLOSE_BRACKET59
+AnnotationMethodRest                                                            OPEN_PAREN CLOSE_PAREN

@@ -14,6 +14,8 @@ parser.add_argument("grammar", help="path to grammar file")
 parser.add_argument("count", type=int, help="number of sentences to generate", nargs='?', default=1)
 parser.add_argument("-t", "--tree", action='store_true', help="pretty-print tree form instead of printing sentence")
 parser.add_argument("--seed", type=int, default=0, help="RNG seed")
+parser.add_argument("--min-size", type=int)
+parser.add_argument("--max-size", type=int)
 args = parser.parse_args()
 
 # Create a random generator.
@@ -55,10 +57,12 @@ with open(args.grammar, 'r') as grammar_file:
   grammar = parse_grammar(grammar_file)
 
 for _ in xrange(args.count):
-  if args.tree:
-    print(str(generate_tree(grammar)))
-  else:
-    print(' '.join(generate_sentence(grammar)))
+  while True:
+    sent = list(generate_sentence(grammar))
+    if (args.min_size is None or len(sent) >= args.min_size) and \
+       (args.max_size is None or len(sent) <= args.max_size):
+      break
+  print(' '.join(sent))
 
 # Local Variables:
 # mode: python
