@@ -26,6 +26,7 @@ public:
   void reset() override;
   void parse() override;
   void print_chart(std::ostream &strm) override;
+  int chart_size() override;
 };
 
 #endif // EARLEY_PARALLEL_H

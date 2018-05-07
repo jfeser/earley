@@ -11,6 +11,7 @@ public:
   virtual void reset() = 0;
   virtual void parse() = 0;
   virtual void print_chart(std::ostream &s) = 0;
+  virtual int chart_size() = 0;
 };
 
 #endif // IPARSER_H

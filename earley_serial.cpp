@@ -20,6 +20,14 @@ void EarleySerialParser::print_chart(ostream &strm) {
   }
 }
 
+int EarleySerialParser::chart_size() {
+  int size = 0;
+  for (int i = 0; i < chart.size(); i++) {
+    size += chart[i].size();
+  }
+  return size;
+}
+
 inline void EarleySerialParser::insert(int k, State new_state) {
   bool did_insert = chart[k].insert(new_state).second;
   if (did_insert) {

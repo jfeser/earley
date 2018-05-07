@@ -83,3 +83,11 @@ void EarleyParallelParser::print_chart(ostream &strm) {
     }
   }
 }
+
+int EarleyParallelParser::chart_size() {
+  int size = 0;
+  for (int i = 0; i < chart.size(); i++) {
+    size += chart[i].size();
+  }
+  return size;
+}
