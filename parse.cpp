@@ -15,7 +15,7 @@
 using namespace std;
 
 const int max_repeats = 100;
-const double max_time = 30.0;
+const double max_time = 1.0;
 
 int main(int argc, char *argv[]) {
   if (argc != 3) {
