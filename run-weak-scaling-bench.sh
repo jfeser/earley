@@ -1,6 +1,6 @@
 #!/bin/sh
 
-weak-scaling-bench () {
+weak_scaling_bench () {
     GRAMMAR=$1
     OUT_FILE=$2
     BENCH_DIR=$3
@@ -12,8 +12,8 @@ weak-scaling-bench () {
 }
 
 echo "Running arith bench..."
-weak-scaling-bench arith_testing/arith-10.gr arith-weak-scaling.csv arith_testing/weak-scaling;
+weak_scaling_bench arith_testing/arith-10.gr arith-weak-scaling.csv arith_testing/weak-scaling;
 echo "Running java bench..."
-weak-scaling-bench java_testing/java_no_epsilons.gr java-weak-scaling.csv java_testing/weak-scaling;
+weak_scaling_bench java_testing/java_no_epsilons.gr java-weak-scaling.csv java_testing/weak-scaling;
 echo "Running cgw bench..."
-weak-scaling-bench cgw_testing/search.gr cgw-weak-scaling.csv cgw_testing/weak-scaling;
+weak_scaling_bench cgw_testing/search.gr cgw-weak-scaling.csv cgw_testing/weak-scaling;
