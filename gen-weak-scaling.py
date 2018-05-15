@@ -4,7 +4,7 @@ import subprocess
 import sys
 import tempfile
 
-MAX_THREADS=20
+MAX_THREADS=10
 
 def chart_size(grammar, corpus):
     with tempfile.NamedTemporaryFile(mode='w') as f:
@@ -33,12 +33,13 @@ with open(corpus, 'r') as f:
 
 full_size = chart_size(grammar, ' '.join(full_words))
 for i in range(1, MAX_THREADS + 1):
-    target_size = int(full_size * (i / 20))
+    target_size = int(full_size * (i / MAX_THREADS))
     num_words = binary_search(grammar, full_words, target_size, 0, len(full_words))
 
     out_corpus = ' '.join(full_words[:num_words])
     actual_size = chart_size(grammar, out_corpus)
-    print('Target: %d  Got: %d  Error: %d' % (target_size, actual_size, actual_size - target_size))
+    err_perc = (actual_size - target_size) / target_size
+    print('Target: %d  Got: %d  Error: %d%' % (target_size, actual_size, err_perc))
     with open(out_dir + '/good-%d.corpus' % i, 'w') as f:
         f.write(out_corpus)
 
