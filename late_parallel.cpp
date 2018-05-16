@@ -70,8 +70,12 @@ struct LoopBody {
         // DEBUG("PREDICT");
         // Predict
         struct msg m (state.next_symbol(), state.loc);
-        bool did_insert = requests.insert(make_pair(m, state)).second;
-        if (did_insert) {
+
+        // TODO: This should be done with an atomic check that the map is empty
+        // before adding. The loop only needs to run if the map is empty.
+        bool should_add = request.count(m) == 0;
+        requests.insert(make_pair(m, state));
+        if (should_add) {
           for (const rule &r : grammar[state.next_symbol()]) {
             insert(State(&r, state.loc), feeder); // OK
           }
