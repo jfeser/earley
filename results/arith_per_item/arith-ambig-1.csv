@@ -1,2 +1,2 @@
 name,avg_time,tot_time,repeats,threads,chart_size
-late_parallel,0.0199868,1.0014,42,20,30108
+late_parallel,0.0321715,1.02376,28,20,30108
