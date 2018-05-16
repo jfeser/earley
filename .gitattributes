@@ -1,1 +1,3 @@
 *.ipynb linguist-detectable=false
+cgw_testing/elasticsearch.java linguist-detectable=false
+cgw_testing/test.java linguist-detectable=false
