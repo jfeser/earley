@@ -2,6 +2,7 @@
 #include <sstream>
 #include <fstream>
 
+#include <getopt.h>
 #include <stdlib.h>
 
 #include "tbb/task_scheduler_init.h"

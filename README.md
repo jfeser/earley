@@ -36,7 +36,7 @@ Usage: ambiguate.py GRAMMAR N
 
 Arguments:
   GRAMMAR     The grammar to transform.
-  N           The nunber of times to replicate each nonterminal.
+  N           The number of times to replicate each nonterminal.
 ```
 
 # Running benchmarks
