@@ -109,11 +109,11 @@ int main(int argc, char *argv[]) {
            << "," << parser->chart_size()
            << endl;
 
-      ostringstream out_fn;
+      /*ostringstream out_fn;
       out_fn << parser->name() << "-" << p << ".txt";
       ofstream out_f (out_fn.str());
       parser->print_chart(out_f);
-      out_f.flush();
+      out_f.flush();*/
     }
   }
 
