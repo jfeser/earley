@@ -73,7 +73,7 @@ struct LoopBody {
 
         // TODO: This should be done with an atomic check that the map is empty
         // before adding. The loop only needs to run if the map is empty.
-        bool should_add = request.count(m) == 0;
+        bool should_add = requests.find(m) == requests.end();
         requests.insert(make_pair(m, state));
         if (should_add) {
           for (const rule &r : grammar[state.next_symbol()]) {
