@@ -5,7 +5,7 @@ OBJS = $(SRCS:.cpp=.o)
 TBB_PREFIX=/opt/intel/tbb
 
 CXX = g++
-CXXFLAGS=-std=c++11 -Wall -Wextra -O3 -I$(TBB_PREFIX)/include -L$(TBB_PREFIX)/lib -DNDEBUG -fpermissive
+CXXFLAGS=-std=c++11 -Wall -Wextra -O3 -I$(TBB_PREFIX)/include -L$(TBB_PREFIX)/lib -DNDEBUG -fpermissive -Wl,-rpath,$(TBB_PREFIX)/lib
 LIBS=-ltbb -ltbbmalloc
 
 ifeq ($(CXX),icc)
