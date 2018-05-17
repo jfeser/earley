@@ -31,7 +31,7 @@ weak_scaling_bench () {
         numactl -N 1 ./parse -n $i -p late_parallel $GRAMMAR $BENCH_DIR/good-10.corpus | tail -n +2 >> $OUT_FILE
     done;
 
-    rm "serial-$OUT_FILE";
+    rm -f "serial-$OUT_FILE";
     for i in `seq 1 10`; do
         ./parse -n $i -p late_serial $GRAMMAR $BENCH_DIR/good-$i.corpus | tail -n +2 >> $OUT_FILE-serial
     done;
