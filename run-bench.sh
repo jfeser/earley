@@ -1,11 +1,13 @@
 #!/bin/sh
 
+set -x
+
 # Per-item efficiency for arith grammar.
 for i in `seq 1 10`; do
     echo "Arith grammar ambiguity $i";
     ./ambiguate.py arith_testing/arith.gr $i > /tmp/arith-$i.gr;
     numactl -N 1 ./parse -n 20 -p late_parallel /tmp/arith-$i.gr arith_testing/good2.corpus > results/arith_per_item/arith-ambig-$i.csv
-    numactl -N 1 ./parse -n 20 -p late_parallel arith-10.gr arith_testing/weak_scaling/good-$i.corpus > results/arith_per_item/arith-length-$i.csv
+    numactl -N 1 ./parse -n 20 -p late_parallel arith_testing/arith-10.gr arith_testing/weak-scaling/good-$i.corpus > results/arith_per_item/arith-length-$i.csv
 done
 
 # Strong scaling.
@@ -31,7 +33,7 @@ weak_scaling_bench () {
 
     rm "serial-$OUT_FILE";
     for i in `seq 1 10`; do
-        ./parse -n $i -p late_serial $GRAMMAR $BENCH_DIR/good-$i.corpus | tail -n +2 >> serial-$OUT_FILE
+        ./parse -n $i -p late_serial $GRAMMAR $BENCH_DIR/good-$i.corpus | tail -n +2 >> $OUT_FILE-serial
     done;
 }
 
