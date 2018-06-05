@@ -50,7 +50,8 @@ struct LoopBody {
   const vector<symbol> &sentence;
   tbb::concurrent_unordered_set<State> &chart;
 
-  mutable tbb::concurrent_unordered_set<struct word> words;
+  mutable tbb::concurrent_unordered_set<struct word> completed;
+  mutable tbb::concurrent_unordered_set<struct msg> started;
   mutable tbb::concurrent_unordered_multimap<struct msg, int> replies;
   mutable tbb::concurrent_unordered_multimap<struct msg, State> requests;
 
@@ -71,11 +72,9 @@ struct LoopBody {
         // Predict
         struct msg m (state.next_symbol(), state.loc);
 
-        // TODO: This should be done with an atomic check that the map is empty
-        // before adding. The loop only needs to run if the map is empty.
-        bool should_add = requests.find(m) == requests.end();
+        bool did_insert = started.insert(m).second;
         requests.insert(make_pair(m, state));
-        if (should_add) {
+        if (did_insert) {
           for (const rule &r : grammar[state.next_symbol()]) {
             insert(State(&r, state.loc), feeder); // OK
           }
@@ -99,7 +98,7 @@ struct LoopBody {
       // DEBUG("COMPLETE");
       struct word w (state.lhs(), state.origin, state.loc);
       struct msg m (state.lhs(), state.origin);
-      bool did_insert = words.insert(w).second;
+      bool did_insert = completed.insert(w).second;
       if (did_insert) {
         replies.insert(make_pair(m, state.loc));
 
