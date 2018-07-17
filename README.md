@@ -2,7 +2,7 @@
 
 > We present the LATE algorithm, an asynchronous variant of the Earley algorithm for parsing context free grammars. The Earley algorithm is naturally task based, but is difficult to parallelize because of dependencies between the tasks. We present the LATE algorithm, which uses additional datastructures to maintain information about the state of the parse so that work items may be processed in any order. This property allows the LATE algorithm to be sped up using task parallelism. We show that the LATE algorithm can achieve a 120x speedup over the Earley algorithm on a natural language task.
 
-Read the paper [here](https://github.com/jfeser/earley/blob/master/main.pdf).
+https://arxiv.org/abs/1807.05642
 
 # Building
 
